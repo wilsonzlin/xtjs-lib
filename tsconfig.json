@@ -2,10 +2,10 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
+    "declaration": true,
     "allowJs": false,
     "outDir": "dist",
     "removeComments": true,
-
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -13,12 +13,10 @@
     "strictPropertyInitialization": true,
     "noImplicitThis": true,
     "alwaysStrict": true,
-
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-
     "esModuleInterop": true
   }
 }

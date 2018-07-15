@@ -1,4 +1,4 @@
-class Countdown {
+export class Countdown {
   started: number;
   paused?: number = undefined;
   duration: number;

@@ -1,0 +1,36 @@
+{
+  "name": "@wzlin/timer",
+  "version": "0.0.1",
+  "description": "Utilities for simplifying time-based functionality ",
+  "main": "dist/main.ts",
+  "files": [
+    "dist/**"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilsonzlin/timer.git"
+  },
+  "keywords": [
+    "timer",
+    "time",
+    "loop",
+    "interval",
+    "settimeout",
+    "setinterval",
+    "clock",
+    "stopwatch",
+    "countdown",
+    "repeat",
+    "repeater"
+  ],
+  "author": {
+    "email": "contact@wilsonl.in",
+    "name": "Wilson Lin",
+    "url": "https://wilsonl.in/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wilsonzlin/timer/issues"
+  },
+  "homepage": "https://github.com/wilsonzlin/timer#readme"
+}
