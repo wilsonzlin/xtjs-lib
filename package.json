@@ -1,5 +1,5 @@
 {
-  "name": "nullify",
+  "name": "nullwrap",
   "version": "0.0.1",
   "description": "Wrap a function to make it return null instead of throwing an error",
   "main": "dist/main.js",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wilsonzlin/nullify.git"
+    "url": "git+https://github.com/wilsonzlin/nullwrap.git"
   },
   "keywords": [
     "null",
@@ -37,9 +37,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wilsonzlin/nullify/issues"
+    "url": "https://github.com/wilsonzlin/nullwrap/issues"
   },
-  "homepage": "https://github.com/wilsonzlin/nullify#readme",
+  "homepage": "https://github.com/wilsonzlin/nullwrap#readme",
   "dependencies": {},
   "devDependencies": {
     "chai": "^4.1.2",
