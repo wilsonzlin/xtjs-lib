@@ -7,8 +7,8 @@
     "dist/**"
   ],
   "scripts": {
-    "build": "npm run clean && ./generateFunctions && tsc",
-    "test": "npm run build && mocha -r ts-node/register src/test/**/*.spec.ts",
+    "build": "npm run clean && tsc && ./generateNullwrapDeclarations",
+    "test": "mocha -r ts-node/register src/test/**/*.spec.ts",
     "prepublishOnly": "npm run test && npm run build",
     "clean": "rm -rf dist"
   },

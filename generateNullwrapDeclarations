@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+
+const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+
+function generateNullwrapFunctionDeclaration (n) {
+  if (!Number.isSafeInteger(n) || n < 1) {
+    throw new SyntaxError(`Invalid amount`);
+  }
+
+  if (n > 26) {
+    throw new ReferenceError(`Amount exceeds alphabet capacity`);
+  }
+
+  let typeParams = Array(n).fill(0).map((_, i) => `T${i + 1}`).join(", ");
+  let newFnParams = Array(n).fill(0).map((_, i) => `${ALPHABET[i]}: T${i + 1}`).join(", ");
+
+  return `// This declaration was automatically generated
+export declare function nullwrap<${typeParams}, R>(realFn: (${newFnParams}) => R, errorMatch?: ErrorMatch): (${newFnParams}) => R | null;`;
+}
+
+function generateNullwrapFunctionDeclarations(highest) {
+  let generated = [];
+
+  for (let n = 1; n <= highest; n++) {
+    generated.push(generateNullwrapFunctionDeclaration(n));
+  }
+
+  return `import { ErrorMatch, errorMatches } from "./errorMatches";
+
+${generated.join("\n\n")}
+
+export declare function nullwrap<R>(realFn: (...args: any[]) => R, errorMatch?: ErrorMatch): (...args: any[]) => R | null;
+
+export declare function nullwrap(realFn: Function, errorMatch?: ErrorMatch): Function;
+`;
+}
+
+fs.writeFileSync(__dirname + "/dist/nullwrap.d.ts", generateNullwrapFunctionDeclarations(26));
