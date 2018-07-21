@@ -47,4 +47,21 @@ describe("jogTree", () => {
   it("should traverse tree recursively and completely", () => {
     return expect(jogTree({dir: TREE_DIR})).to.eventually.deep.equal(TREE);
   });
+
+  it("should use null as tips for folders when depth is non-infinite", () => {
+    return expect(jogTree({dir: TREE_DIR, depth: 2})).to.eventually.deep.equal({
+      a: {
+        aa: null,
+        ab: null,
+      },
+      b: fs.lstatSync(TREE_DIR + "/b"),
+      c: {
+        ca: fs.lstatSync(TREE_DIR + "/c/ca"),
+        cb: null,
+      },
+      d: {
+        da: null,
+      },
+    });
+  });
 });
