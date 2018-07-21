@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+
+const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+
+function generateNullifyFunction (n) {
+  if (!Number.isSafeInteger(n) || n < 1) {
+    throw new SyntaxError(`Invalid amount`);
+  }
+
+  if (n > 26) {
+    throw new ReferenceError(`Amount exceeds alphabet capacity`);
+  }
+
+  let nameSuffix = n > 1 ? `${n}` : "";
+  let typeParams = Array(n).fill(0).map((_, i) => `T${i + 1}`).join(", ");
+  let newFnParams = Array(n).fill(0).map((_, i) => `${ALPHABET[i]}: T${i + 1}`).join(", ");
+  let oldFnArgs = ALPHABET.slice(0, n).split("").join(", ");
+
+  return `// This function was automatically generated
+export function nullify${nameSuffix}<${typeParams}, R>(realFn: (${newFnParams}) => R, errorMatch?: ErrorMatch): (${newFnParams}) => R | null {
+  return function (${newFnParams}): R | null {
+    try {
+      return realFn(${oldFnArgs});
+    } catch (error) {
+      if (errorMatches(error, errorMatch)) {
+        return null;
+      }
+      throw error;
+    }
+  }
+}`;
+}
+
+function generateNullifyFunctions(highest) {
+  let generated = [];
+
+  for (let n = 1; n <= highest; n++) {
+    generated.push(generateNullifyFunction(n));
+  }
+
+  return `import { ErrorMatch, errorMatches } from "./errorMatches";\n\n${generated.join("\n\n")}`;
+}
+
+fs.writeFileSync(__dirname + "/src/main/ts/nullify.ts", generateNullifyFunctions(25));

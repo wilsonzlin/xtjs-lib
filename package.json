@@ -1,0 +1,52 @@
+{
+  "name": "nullify",
+  "version": "0.0.1",
+  "description": "Wrap a function to make it return null instead of throwing an error",
+  "main": "dist/main.js",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "npm run clean && ./generateFunctions && tsc",
+    "test": "npm run build && mocha -r ts-node/register src/test/**/*.spec.ts",
+    "prepublishOnly": "npm run test && npm run build",
+    "clean": "rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilsonzlin/nullify.git"
+  },
+  "keywords": [
+    "null",
+    "nullify",
+    "nullable",
+    "wrap",
+    "wrapper",
+    "exception",
+    "exceptions",
+    "error",
+    "errors",
+    "handle",
+    "handler",
+    "handling"
+  ],
+  "author": {
+    "email": "contact@wilsonl.in",
+    "name": "Wilson Lin",
+    "url": "https://wilsonl.in/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wilsonzlin/nullify/issues"
+  },
+  "homepage": "https://github.com/wilsonzlin/nullify#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "@types/chai": "^4.1.3",
+    "mocha": "^5.2.0",
+    "@types/mocha": "^5.2.1",
+    "ts-node": "^6.1.0",
+    "typescript": "^2.9.1"
+  }
+}
