@@ -7,6 +7,7 @@ export default interface IStats {
   characterDevice: boolean;
   FIFO: boolean;
   socket: boolean;
+  symbolicLink: boolean;
 
   container: number;
   inode: number;
@@ -34,6 +35,7 @@ export function convertFromFS(stats: fs.Stats): IStats {
   normStats.characterDevice = stats.isCharacterDevice();
   normStats.FIFO = stats.isFIFO();
   normStats.socket = stats.isSocket();
+  normStats.symbolicLink = stats.isSymbolicLink();
 
   normStats.container = stats.dev;
   normStats.inode = stats.ino;
