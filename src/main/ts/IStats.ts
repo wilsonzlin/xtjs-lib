@@ -18,6 +18,7 @@ export default interface IStats {
   device: number;
 
   size: number;
+  blockSize: number;
   blocks: number;
 
   accessed: number;
@@ -46,7 +47,8 @@ export function convertFromFS(stats: fs.Stats): IStats {
   normStats.device = stats.rdev;
 
   normStats.size = stats.size;
-  normStats.blocks = stats.blksize;
+  normStats.blockSize = stats.blksize;
+  normStats.blocks = stats.blocks;
 
   normStats.accessed = stats.atimeMs;
   normStats.modified = stats.mtimeMs;
