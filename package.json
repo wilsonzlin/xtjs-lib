@@ -43,7 +43,8 @@
   },
   "homepage": "https://github.com/wilsonzlin/jogger#readme",
   "dependencies": {
-    "fs-extra": "^7.0.0"
+    "fs-extra": "^7.0.0",
+    "normstat": "^0.0.1"
   },
   "devDependencies": {
     "@types/chai": "^4.1.3",

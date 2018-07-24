@@ -3,6 +3,7 @@
     "src/main/ts/**/*.ts"
   ],
   "compilerOptions": {
+    "noErrorTruncation": true,
     "target": "es6",
     "lib": [
       "es5",
