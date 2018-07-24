@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-export default interface IStats {
+export interface IStats {
   directory: boolean;
   file: boolean;
   blockDevice: boolean;

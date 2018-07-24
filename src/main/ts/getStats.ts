@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import IStats, { convertFromFS } from "./IStats";
+import { IStats, convertFromFS } from "./IStats";
 
 export interface IGetStatsOptions {
   path: string;
