@@ -1,5 +1,5 @@
 {
-  "name": "jogger",
+  "name": "fs-jogger",
   "version": "0.0.1",
   "description": "Advanced fs.readdir",
   "main": "dist/main.js",
