@@ -1,11 +1,20 @@
 {
+  "include": [
+    "src/main/ts/**/*.ts"
+  ],
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
+    "lib": [
+      "es5",
+      "es6",
+      "dom"
+    ],
     "module": "commonjs",
-    "declaration": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "allowJs": false,
+    "declaration": true,
     "outDir": "dist",
-    "removeComments": true,
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -13,10 +22,9 @@
     "strictPropertyInitialization": true,
     "noImplicitThis": true,
     "alwaysStrict": true,
-    "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true
+    "noFallthroughCasesInSwitch": true
   }
 }
+
