@@ -1,14 +1,14 @@
 {
-  "name": "@wzlin/timer",
+  "name": "mglass",
   "version": "0.0.1",
-  "description": "Utilities for simplifying time-based functionality ",
+  "description": "Utilities for simplifying time-based functionality",
   "main": "dist/main.ts",
   "files": [
     "dist/**"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wilsonzlin/timer.git"
+    "url": "git+https://github.com/wilsonzlin/mglass.git"
   },
   "keywords": [
     "timer",
@@ -30,7 +30,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wilsonzlin/timer/issues"
+    "url": "https://github.com/wilsonzlin/mglass/issues"
   },
-  "homepage": "https://github.com/wilsonzlin/timer#readme"
+  "homepage": "https://github.com/wilsonzlin/mglass#readme",
 }
