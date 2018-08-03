@@ -1,0 +1,55 @@
+{
+  "name": "crng",
+  "version": "0.0.1",
+  "description": "Generate random values from a crypto RNG source",
+  "main": "dist/main.js",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "test": "mocha -r ts-node/register src/test/**/*.spec.ts",
+    "prepublishOnly": "npm run test && npm run build",
+    "clean": "rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilsonzlin/crng.git"
+  },
+  "keywords": [
+    "crypto",
+    "cryptographic",
+    "double",
+    "float",
+    "generate",
+    "generator",
+    "hex",
+    "hexadecimal",
+    "number",
+    "numbers",
+    "random",
+    "rng",
+    "string",
+    "strings"
+  ],
+  "author": {
+    "email": "contact@wilsonl.in",
+    "name": "Wilson Lin",
+    "url": "https://wilsonl.in/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wilsonzlin/crng/issues"
+  },
+  "homepage": "https://github.com/wilsonzlin/crng#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "@types/chai": "^4.1.3",
+    "mocha": "^5.2.0",
+    "@types/mocha": "^5.2.1",
+    "ts-node": "^6.1.0",
+    "typescript": "^2.9.1",
+    "@types/node": "^10.5.2"
+  }
+}
