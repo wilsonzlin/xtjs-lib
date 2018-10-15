@@ -1,1 +1,1 @@
-export * from "./OrderedMap"
+export * from "./OrdMap"

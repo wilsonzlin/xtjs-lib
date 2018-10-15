@@ -1,8 +1,8 @@
 import {expect} from "chai";
 import "mocha";
-import {OrderedMap} from "../../main/ts/OrderedMap";
+import {OrdMap} from "../../main/ts/OrdMap";
 
-describe("OrderedMap", () => {
+describe("OrdMap", () => {
   it("should iterate entries in the order they were added", () => {
     let expected = [
       ["b", 3],
@@ -17,7 +17,7 @@ describe("OrderedMap", () => {
       [3.14, Number.MAX_SAFE_INTEGER],
     ];
 
-    let map = new OrderedMap();
+    let map = new OrdMap();
     for (let pair of expected) {
       map.set(pair[0], pair[1]);
     }
@@ -39,7 +39,7 @@ describe("OrderedMap", () => {
       [3.14, Number.MAX_SAFE_INTEGER],
     ];
 
-    let map = new OrderedMap<any, any>(expected);
+    let map = new OrdMap<any, any>(expected);
 
     expect(Array.from(map.entries())).to.deep.equal(expected);
   });
@@ -56,7 +56,7 @@ describe("OrderedMap", () => {
       ["a", 1],
     ];
 
-    let map = new OrderedMap();
+    let map = new OrdMap();
     for (let pair of values) {
       map.set(pair[0], pair[1]);
     }
@@ -65,7 +65,7 @@ describe("OrderedMap", () => {
   });
 
   it("should be a subtype of Map", () => {
-    let map = new OrderedMap();
+    let map = new OrdMap();
     expect(map).to.be.an.instanceOf(Map);
   });
 });

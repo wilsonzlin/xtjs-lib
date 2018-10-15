@@ -1,5 +1,5 @@
 {
-  "name": "ordered-map",
+  "name": "ord-map",
   "version": "0.0.1",
   "description": "Ordered map data structure",
   "main": "dist/main.js",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wilsonzllin/ordered-map.git"
+    "url": "git+https://github.com/wilsonzllin/ord-map.git"
   },
   "keywords": [
     "dict",
@@ -32,9 +32,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wilsonzllin/ordered-map/issues"
+    "url": "https://github.com/wilsonzllin/ord-map/issues"
   },
-  "homepage": "https://github.com/wilsonzllin/ordered-map#readme",
+  "homepage": "https://github.com/wilsonzllin/ord-map#readme",
   "dependencies": {
     "transform-iterator": "0.0.1"
   },

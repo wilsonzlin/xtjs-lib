@@ -1,6 +1,6 @@
 import {transformIterator} from "transform-iterator";
 
-export class OrderedMap<K, V> extends Map<K, V> {
+export class OrdMap<K, V> extends Map<K, V> {
   // Cannot initialise here or in constructor, because native constructor (`super`)
   // calls `.set` if initial entries provided; `.set` depends on `.order` but `.order`
   // can't be created before or even in `super` call, and initialising here does

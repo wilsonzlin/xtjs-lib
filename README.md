@@ -1,25 +1,25 @@
-# OrderedMap
+# OrdMap
 
 Map data structure that remembers the order keys/values are set. Allows for easy access of first and last keys/values and iteration in order of insertion. Comes with type declarations for TypeScript and extends native Map class.
 
 ## npm
 
 ```bash
-npm i --save ordered-map
+npm i --save ord-map
 ```
 
 ## yarn
 
 ```bash
-yarn add ordered-map
+yarn add ord-map
 ```
 
 ## Usage
 
 ```typescript
-import {OrderedMap} from "ordered-map";
+import {OrdMap} from "ord-map";
 
-const map = new OrderedMap();
+const map = new OrdMap();
 
 // The order of keys set are remembered
 map.set("b", 3);
@@ -43,7 +43,7 @@ for (const [key, value] of map.entries()) {
 }
 ```
 
-For full API reference, see [OrderedMap.ts](src/main/ts/OrderedMap.ts).
+For full API reference, see [OrdMap.ts](src/main/ts/OrdMap.ts).
 
 ## Testing
 
