@@ -1,6 +1,5 @@
-export * from "./compare";
-export * from "./compareKeys";
 export * from "./concat";
+export * from "./create";
 export * from "./find";
 export * from "./forEach";
 export * from "./get";
@@ -11,4 +10,5 @@ export * from "./pairs";
 export * from "./reduce";
 export * from "./set";
 export * from "./slice";
+export * from "./type";
 export * from "./values";
