@@ -1,7 +1,7 @@
 {
   "name": "oppose",
   "version": "0.0.1",
-  "description": "Array.prototype-like functions for plain JavaScript objects",
+  "description": "Functions for objects",
   "main": "dist/main.js",
   "files": [
     "dist/**"
