@@ -1,3 +1,3 @@
-export type Obj<V> = {
-  [key: string]: V;
+export type Obj = {
+  [key: string]: any;
 };

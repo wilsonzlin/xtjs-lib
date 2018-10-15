@@ -1,15 +1,15 @@
 import { keys, Key } from "./keys";
 import { Obj } from "./obj";
 
-export type Partial<T extends Obj<any>> = {
+export type Partial<T extends Obj> = {
   [P in keyof T]?: T[P];
 }
 
-export function slice<T extends Obj<any>>(obj: T): T;
-export function slice<T extends Obj<any>>(obj: T, from: Key<T>): Partial<T>;
-export function slice<T extends Obj<any>>(obj: T, from: Key<T>, to: Key<T>): Partial<T>;
-export function slice<T extends Obj<any>>(obj: T, from: Key<T>, to: Key<T>, inclusive: boolean): Partial<T>;
-export function slice<T extends Obj<any>>(obj: T, from?: Key<T>, to?: Key<T>, inclusive: boolean = true): Partial<T> {
+export function slice<T extends Obj>(obj: T): T;
+export function slice<T extends Obj>(obj: T, from: Key<T>): Partial<T>;
+export function slice<T extends Obj>(obj: T, from: Key<T>, to: Key<T>): Partial<T>;
+export function slice<T extends Obj>(obj: T, from: Key<T>, to: Key<T>, inclusive: boolean): Partial<T>;
+export function slice<T extends Obj>(obj: T, from?: Key<T>, to?: Key<T>, inclusive: boolean = true): Partial<T> {
   let k = keys(obj).sort();
   let start = from && k.indexOf(from);
   let end = to && (k.indexOf(to) + (inclusive ? 1 : 0));
