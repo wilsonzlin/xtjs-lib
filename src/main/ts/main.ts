@@ -7,6 +7,7 @@ export * from "./forEach";
 export * from "./get";
 export * from "./has";
 export * from "./keys";
+export * from "./map";
 export * from "./obj";
 export * from "./pairs";
 export * from "./reduce";
