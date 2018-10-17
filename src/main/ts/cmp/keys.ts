@@ -1,24 +1,25 @@
-import { stringsArrayEquals } from "../eq/array";
+import {stringsArrayEquals} from "../eq/array";
+import {subsetArray, supersetArray} from "./array";
 
 // Can't create compareKeys function as keys may not be
 // direct subsets/supersets of each other
-export function sameKeys(a: any, b: any): boolean {
+export function sameKeys (a: any, b: any): boolean {
   let A = Object.keys(a);
   let B = Object.keys(b);
 
   return stringsArrayEquals(A, B);
 }
 
-export function subsetKeys(a: any, b: any): boolean {
+export function subsetKeys (a: any, b: any): boolean {
   let A = Object.keys(a);
   let B = Object.keys(b);
 
-  return A.every(ka => B.indexOf(ka) > -1);
+  return subsetArray(A, B);
 }
 
-export function supersetKeys(a: any, b: any): boolean {
+export function supersetKeys (a: any, b: any): boolean {
   let A = Object.keys(a);
   let B = Object.keys(b);
 
-  return B.every(kb => A.indexOf(kb) > -1);
+  return supersetArray(A, B);
 }
