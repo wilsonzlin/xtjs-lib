@@ -1,5 +1,6 @@
 export * from "./concat";
 export * from "./create";
+export * from "./delete";
 export * from "./find";
 export * from "./forEach";
 export * from "./get";
