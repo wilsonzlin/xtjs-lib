@@ -1,11 +1,9 @@
-import { Value } from "./values";
-import { Key } from "./keys";
-import { pairs } from "./pairs";
-import { Obj } from "./obj";
+import {pairs} from "./pairs";
+import {Callback, Obj} from "./obj";
 
-export type Iterator<T extends Obj> = (val: Value<T>, key: Key<T>, obj: T) => void;
+export type Iterator<T extends Obj> = Callback<T, void>;
 
-export function forEach<T extends Obj>(obj: T, iterator: Iterator<T>): void {
+export function forEach<T extends Obj> (obj: T, iterator: Iterator<T>): void {
   pairs(obj).forEach(([key, value]) => {
     iterator(value, key, obj);
   });

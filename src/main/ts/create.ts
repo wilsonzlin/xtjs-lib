@@ -1,9 +1,9 @@
-import { Obj } from "./obj";
+import {Obj} from "./obj";
 
-export function clean(): Obj {
+export function clean (): Obj {
   return Object.create(null);
 }
 
-export function regular(): Obj {
+export function regular (): Obj {
   return {};
 }
