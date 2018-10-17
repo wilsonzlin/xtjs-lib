@@ -2,7 +2,7 @@ export function shallowArrayEquals (a: ArrayLike<any>, b: ArrayLike<any>): boole
   return a.length === b.length && Array.prototype.every.call(a, (v: any, i: number) => v === b[i]);
 }
 
-export function stringsArrayEquals(a: ArrayLike<string>, b: ArrayLike<string>): boolean {
+export function stringsArrayEquals (a: ArrayLike<string>, b: ArrayLike<string>): boolean {
   if (a.length !== b.length) {
     return false;
   }
