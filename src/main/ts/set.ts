@@ -14,6 +14,10 @@ export function update<T extends Obj, U extends Obj> (obj: T, upd: U): T & U {
   return obj as (T & U);
 }
 
+export function set<T extends Obj> (obj: T, key: Key<T>, value: any): void {
+  obj[key] = value;
+}
+
 export function setIfExists<T extends Obj> (obj: T, key: Key<T>, value: any): boolean {
   if (hasKey(obj, key)) {
     obj[key] = value;
