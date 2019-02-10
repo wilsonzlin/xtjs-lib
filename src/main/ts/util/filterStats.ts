@@ -35,10 +35,10 @@ export type PartialStats<F extends StatsFields> = {
   [P in F]: normstat.IStats[P];
 }
 
-export function filterStats<F extends StatsFields> (stats: normstat.IStats, fields: ReadonlyArray<F>): PartialStats<F> {
+export const filterStats = <F extends StatsFields> (stats: normstat.IStats, fields: ReadonlyArray<F>): PartialStats<F> => {
   let partial = Object.create(null);
   for (let field of fields) {
     partial[field] = stats[field];
   }
   return partial;
-}
+};

@@ -5,13 +5,17 @@ import {jogTable} from "./jogTable";
 
 export type JoggerMap<F extends StatsFields> = Map<string[], PartialStats<F>>;
 
-export function jogMap<F extends StatsFields> ({dir, depth = Number.POSITIVE_INFINITY, fields = STATS_FIELDS}: IJoggerOptions<F>): Promise<JoggerMap<F>> {
-  return jogTable<F>({dir, depth, fields})
-    .then(table => {
-      let map: JoggerMap<F> = new Map();
-      Object.keys(table).forEach(path => {
-        map.set(splitPathIntoComponents(path), table[path]);
-      });
-      return map;
-    });
-}
+export const jogMap = async <F extends StatsFields> (
+  {
+    dir,
+    depth = Number.POSITIVE_INFINITY,
+    fields = STATS_FIELDS
+  }: IJoggerOptions<F>
+): Promise<JoggerMap<F>> => {
+  const table = await jogTable<F>({dir, depth, fields});
+  const map: JoggerMap<F> = new Map();
+  Object.keys(table).forEach(path => {
+    map.set(splitPathIntoComponents(path), table[path]);
+  });
+  return map;
+};

@@ -3,10 +3,13 @@ import {jogTable} from "./jogTable";
 
 export type JoggerList = string[];
 
-export function jogList ({dir, depth = Number.POSITIVE_INFINITY}: IJoggerOptions<any>): Promise<JoggerList> {
-  return jogTable({dir, depth})
-    .then(table => {
-      // Sort for deterministic results
-      return Object.keys(table).sort();
-    });
-}
+export const jogList = async (
+  {
+    dir,
+    depth = Number.POSITIVE_INFINITY
+  }: IJoggerOptions<any>
+): Promise<JoggerList> => {
+  const table = await jogTable({dir, depth});
+  // Sort for deterministic results
+  return Object.keys(table).sort();
+};

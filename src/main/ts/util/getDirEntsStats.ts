@@ -7,21 +7,11 @@ export interface IDirectoryEntry {
   stats: normstat.IStats;
 }
 
-export function getDirEntsStats(path: string): Promise<IDirectoryEntry[]> {
-  return new Promise((resolve, reject) => {
-    let ents: string[];
-
-    fs.readdir(path)
-      .then(_ents => {
-        ents = _ents;
-        return Promise.all(ents.map(e => normstat.getStats({ path: Path.join(path, e) })));
-      })
-      .then(stats => {
-        resolve(ents.map((e, i) => ({
-          name: e,
-          stats: stats[i],
-        })));
-      })
-      .catch(reject);
-  });
-}
+export const getDirEntsStats = async (path: string): Promise<IDirectoryEntry[]> => {
+  const ents = await fs.readdir(path);
+  const stats = await Promise.all(ents.map(e => normstat.getStats({path: Path.join(path, e)})));
+  return ents.map((e, i) => ({
+    name: e,
+    stats: stats[i],
+  }));
+};
