@@ -78,7 +78,14 @@
     "scan",
     "read",
     "readdir",
-    "recursive"
+    "recursive",
+    "dict",
+    "dictionary",
+    "hash",
+    "hashmap",
+    "map",
+    "order",
+    "ordered"
   ],
   "author": {
     "email": "contact@wilsonl.in",

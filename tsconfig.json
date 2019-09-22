@@ -1,6 +1,7 @@
 {
   "include": [
-    "src/main/ts/**/*.ts"
+    "src/main/ts/**/*.ts",
+    "src/test/ts/OrdMap.spec.ts"
   ],
   "compilerOptions": {
     "target": "es6",
