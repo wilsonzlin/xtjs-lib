@@ -96,7 +96,12 @@
     "stopwatch",
     "countdown",
     "repeat",
-    "repeater"
+    "repeater",
+    "map",
+    "transform",
+    "transformer",
+    "iterator",
+    "iterable"
   ],
   "author": {
     "email": "contact@wilsonl.in",
