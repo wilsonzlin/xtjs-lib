@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+"use strict";
+
+const fs = require("fs");
+
+const ALPHABET = 'abcdefghijklmnopqrstuvwxyz';
+
+let dec = `import { Obj } from "./obj";\n`;
+
+for (let i = 1; i <= 26; i++) {
+  let nums = Array(i).fill(0).map((_, i) => i + 1);
+  let typeParams = nums.map(n => `T${n}`).join(', ');
+  let params = nums.map(n => `${ALPHABET[n - 1]}: T${n}`).join(', ');
+  let returnType = nums.map(n => `T${n}`).join(' & ');
+  dec += `export declare function concat<${typeParams}>(${params}): ${returnType};\n`;
+}
+
+dec += `export declare function concat(...objs: Obj[]): Obj[];\n`;
+
+fs.writeFileSync(__dirname + "/dist/concat.d.ts", dec);

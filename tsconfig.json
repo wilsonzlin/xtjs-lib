@@ -6,13 +6,9 @@
     "target": "es6",
     "lib": [
       "es5",
-<<<<<<< HEAD
-      "es6"
-=======
       "es6",
       "es7",
       "es2017"
->>>>>>> _other_project_to_merge/master
     ],
     "module": "commonjs",
     "esModuleInterop": true,
@@ -25,10 +21,7 @@
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
-<<<<<<< HEAD
-=======
     "suppressImplicitAnyIndexErrors": true,
->>>>>>> _other_project_to_merge/master
     "noImplicitThis": true,
     "alwaysStrict": true,
     "noUnusedParameters": true,
@@ -36,7 +29,3 @@
     "noFallthroughCasesInSwitch": true
   }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> _other_project_to_merge/master
