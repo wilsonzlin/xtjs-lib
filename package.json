@@ -85,7 +85,18 @@
     "hashmap",
     "map",
     "order",
-    "ordered"
+    "ordered",
+    "timer",
+    "time",
+    "loop",
+    "interval",
+    "settimeout",
+    "setinterval",
+    "clock",
+    "stopwatch",
+    "countdown",
+    "repeat",
+    "repeater"
   ],
   "author": {
     "email": "contact@wilsonl.in",
