@@ -10,6 +10,7 @@
       "es7",
       "es2017"
     ],
+    "noErrorTruncation": true,
     "module": "commonjs",
     "esModuleInterop": true,
     "skipLibCheck": true,

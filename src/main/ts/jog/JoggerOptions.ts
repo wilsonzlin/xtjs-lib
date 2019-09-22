@@ -1,0 +1,7 @@
+import {StatsFields} from "../util/filterStats";
+
+export interface IJoggerOptions<F extends StatsFields> {
+  dir: string;
+  depth?: number;
+  fields?: ReadonlyArray<F>;
+}
