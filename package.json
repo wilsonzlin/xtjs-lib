@@ -1,20 +1,16 @@
 {
-  "name": "nullwrap",
-  "version": "0.0.1",
-  "description": "Wrap a function to make it return null instead of throwing an error",
   "main": "dist/main.js",
   "files": [
     "dist/**"
   ],
   "scripts": {
-    "build": "npm run clean && tsc && ./generateNullwrapDeclarations",
     "test": "mocha -r ts-node/register src/test/**/*.spec.ts",
     "prepublishOnly": "npm run test && npm run build",
     "clean": "rm -rf dist"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wilsonzlin/nullwrap.git"
+    "url": "git+https://github.com/wilsonzlin/extlib.git"
   },
   "keywords": [
     "null",
@@ -28,7 +24,21 @@
     "errors",
     "handle",
     "handler",
-    "handling"
+    "handling",
+    "crypto",
+    "cryptographic",
+    "double",
+    "float",
+    "generate",
+    "generator",
+    "hex",
+    "hexadecimal",
+    "number",
+    "numbers",
+    "random",
+    "rng",
+    "string",
+    "strings"
   ],
   "author": {
     "email": "contact@wilsonl.in",
@@ -37,9 +47,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wilsonzlin/nullwrap/issues"
+    "url": "https://github.com/wilsonzlin/extlib/issues"
   },
-  "homepage": "https://github.com/wilsonzlin/nullwrap#readme",
+  "homepage": "https://github.com/wilsonzlin/extlib#readme",
   "dependencies": {},
   "devDependencies": {
     "chai": "^4.1.2",
@@ -47,6 +57,7 @@
     "mocha": "^5.2.0",
     "@types/mocha": "^5.2.1",
     "ts-node": "^6.1.0",
-    "typescript": "^2.9.1"
+    "typescript": "^2.9.1",
+    "@types/node": "^10.5.2"
   }
 }
