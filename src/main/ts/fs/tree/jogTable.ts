@@ -1,6 +1,6 @@
 import * as Path from "path";
-import {getDirEntsStats} from "../util/getDirEntsStats";
-import {filterStats, PartialStats, STATS_FIELDS, StatsFields} from "../util/filterStats";
+import {getDirEntsStats} from "../stats/getDirEntsStats";
+import {filterStats, PartialStats, STATS_FIELDS, StatsFields} from "../stats/filterStats";
 import {IJoggerOptions} from "./JoggerOptions";
 
 export type JoggerTable<F extends StatsFields> = {

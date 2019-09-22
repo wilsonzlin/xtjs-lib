@@ -1,11 +1,11 @@
-import {Duration} from "./common";
+import { Duration } from "./Duration";
 
 export class Countdown {
   private started: number;
   private paused?: number = undefined;
   private readonly duration: number;
   private complete: boolean = false;
-  private timeoutID?: number = undefined;
+  private timeoutID?: any = undefined;
   private readonly callbackQueue: Function[] = [];
 
   constructor (duration: Duration) {

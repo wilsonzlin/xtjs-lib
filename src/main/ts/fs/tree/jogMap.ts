@@ -1,5 +1,5 @@
-import {splitPathIntoComponents} from "../util/splitPathIntoComponents";
-import {PartialStats, STATS_FIELDS, StatsFields} from "../util/filterStats";
+import {splitPathIntoComponents} from "../path/splitPathIntoComponents";
+import {PartialStats, STATS_FIELDS, StatsFields} from "../stats/filterStats";
 import {IJoggerOptions} from "./JoggerOptions";
 import {jogTable} from "./jogTable";
 

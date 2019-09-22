@@ -1,15 +1,16 @@
 import chai, {expect} from "chai";
 import "mocha";
-import {jogTree} from "../../main/ts/jog/jogTree";
-import {jogList} from "../../main/ts/jog/jogList";
-import {jogPaths} from "../../main/ts/jog/jogPaths";
-import * as normstat from "normstat";
+import {jogTree} from "../../main/ts/fs/tree/jogTree";
+import {jogList} from "../../main/ts/fs/tree/jogList";
+import {jogPaths} from "../../main/ts/fs/tree/jogPaths";
 import chaiAsPromised = require("chai-as-promised");
+import { IStats } from "../../main/ts/fs/IStats";
+import { getStatsSync } from "../../main/ts/fs/stats/getStats";
 
 chai.use(chaiAsPromised);
 
-function getStatsSync (path: string): normstat.IStats {
-  return normstat.getStatsSync({path});
+function getStatsOfPath (path: string): IStats {
+  return getStatsSync({path});
 }
 
 const TEST_DIR = __dirname + "/../resources/tree";
@@ -17,60 +18,60 @@ const TEST_DIR = __dirname + "/../resources/tree";
 const TREE = {
   a: {
     aa: {
-      aaa: getStatsSync(TEST_DIR + "/a/aa/aaa"),
-      aab: getStatsSync(TEST_DIR + "/a/aa/aab"),
+      aaa: getStatsOfPath(TEST_DIR + "/a/aa/aaa"),
+      aab: getStatsOfPath(TEST_DIR + "/a/aa/aab"),
       aac: {
-        aaca: getStatsSync(TEST_DIR + "/a/aa/aac/aaca"),
+        aaca: getStatsOfPath(TEST_DIR + "/a/aa/aac/aaca"),
       },
     },
     ab: {
-      aba: getStatsSync(TEST_DIR + "/a/ab/aba"),
+      aba: getStatsOfPath(TEST_DIR + "/a/ab/aba"),
       abb: {
         abba: {
-          abbaa: getStatsSync(TEST_DIR + "/a/ab/abb/abba/abbaa"),
+          abbaa: getStatsOfPath(TEST_DIR + "/a/ab/abb/abba/abbaa"),
         },
       },
     },
   },
-  b: getStatsSync(TEST_DIR + "/b"),
+  b: getStatsOfPath(TEST_DIR + "/b"),
   c: {
-    ca: getStatsSync(TEST_DIR + "/c/ca"),
+    ca: getStatsOfPath(TEST_DIR + "/c/ca"),
     cb: {
       cba: {
-        cbaa: getStatsSync(TEST_DIR + "/c/cb/cba/cbaa"),
+        cbaa: getStatsOfPath(TEST_DIR + "/c/cb/cba/cbaa"),
       },
-      cbb: getStatsSync(TEST_DIR + "/c/cb/cbb"),
+      cbb: getStatsOfPath(TEST_DIR + "/c/cb/cbb"),
     },
   },
   d: {
     da: {
-      daa: getStatsSync(TEST_DIR + "/d/da/daa"),
+      daa: getStatsOfPath(TEST_DIR + "/d/da/daa"),
     },
   },
 };
 
 const FLAT = {
-  "a": getStatsSync(TEST_DIR + "/a"),
-  "a/aa": getStatsSync(TEST_DIR + "/a/aa"),
-  "a/aa/aaa": getStatsSync(TEST_DIR + "/a/aa/aaa"),
-  "a/aa/aab": getStatsSync(TEST_DIR + "/a/aa/aab"),
-  "a/aa/aac": getStatsSync(TEST_DIR + "/a/aa/aac"),
-  "a/aa/aac/aaca": getStatsSync(TEST_DIR + "/a/aa/aac/aaca"),
-  "a/ab": getStatsSync(TEST_DIR + "/a/ab"),
-  "a/ab/aba": getStatsSync(TEST_DIR + "/a/ab/aba"),
-  "a/ab/abb": getStatsSync(TEST_DIR + "/a/ab/abb"),
-  "a/ab/abb/abba": getStatsSync(TEST_DIR + "/a/ab/abb/abba"),
-  "a/ab/abb/abba/abbaa": getStatsSync(TEST_DIR + "/a/ab/abb/abba/abbaa"),
-  "b": getStatsSync(TEST_DIR + "/b"),
-  "c": getStatsSync(TEST_DIR + "/c"),
-  "c/ca": getStatsSync(TEST_DIR + "/c/ca"),
-  "c/cb": getStatsSync(TEST_DIR + "/c/cb"),
-  "c/cb/cba": getStatsSync(TEST_DIR + "/c/cb/cba"),
-  "c/cb/cba/cbaa": getStatsSync(TEST_DIR + "/c/cb/cba/cbaa"),
-  "c/cb/cbb": getStatsSync(TEST_DIR + "/c/cb/cbb"),
-  "d": getStatsSync(TEST_DIR + "/d"),
-  "d/da": getStatsSync(TEST_DIR + "/d/da"),
-  "d/da/daa": getStatsSync(TEST_DIR + "/d/da/daa"),
+  "a": getStatsOfPath(TEST_DIR + "/a"),
+  "a/aa": getStatsOfPath(TEST_DIR + "/a/aa"),
+  "a/aa/aaa": getStatsOfPath(TEST_DIR + "/a/aa/aaa"),
+  "a/aa/aab": getStatsOfPath(TEST_DIR + "/a/aa/aab"),
+  "a/aa/aac": getStatsOfPath(TEST_DIR + "/a/aa/aac"),
+  "a/aa/aac/aaca": getStatsOfPath(TEST_DIR + "/a/aa/aac/aaca"),
+  "a/ab": getStatsOfPath(TEST_DIR + "/a/ab"),
+  "a/ab/aba": getStatsOfPath(TEST_DIR + "/a/ab/aba"),
+  "a/ab/abb": getStatsOfPath(TEST_DIR + "/a/ab/abb"),
+  "a/ab/abb/abba": getStatsOfPath(TEST_DIR + "/a/ab/abb/abba"),
+  "a/ab/abb/abba/abbaa": getStatsOfPath(TEST_DIR + "/a/ab/abb/abba/abbaa"),
+  "b": getStatsOfPath(TEST_DIR + "/b"),
+  "c": getStatsOfPath(TEST_DIR + "/c"),
+  "c/ca": getStatsOfPath(TEST_DIR + "/c/ca"),
+  "c/cb": getStatsOfPath(TEST_DIR + "/c/cb"),
+  "c/cb/cba": getStatsOfPath(TEST_DIR + "/c/cb/cba"),
+  "c/cb/cba/cbaa": getStatsOfPath(TEST_DIR + "/c/cb/cba/cbaa"),
+  "c/cb/cbb": getStatsOfPath(TEST_DIR + "/c/cb/cbb"),
+  "d": getStatsOfPath(TEST_DIR + "/d"),
+  "d/da": getStatsOfPath(TEST_DIR + "/d/da"),
+  "d/da/daa": getStatsOfPath(TEST_DIR + "/d/da/daa"),
 };
 
 const LIST = Object.keys(FLAT).sort();
@@ -88,9 +89,9 @@ describe("jogTree", () => {
         aa: null,
         ab: null,
       },
-      b: getStatsSync(TEST_DIR + "/b"),
+      b: getStatsOfPath(TEST_DIR + "/b"),
       c: {
-        ca: getStatsSync(TEST_DIR + "/c/ca"),
+        ca: getStatsOfPath(TEST_DIR + "/c/ca"),
         cb: null,
       },
       d: {

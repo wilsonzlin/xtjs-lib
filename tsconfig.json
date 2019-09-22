@@ -1,9 +1,9 @@
 {
   "include": [
-    "src/main/ts/**/*.ts",
-    "src/test/ts/OrdMap.spec.ts"
+    "src/main/ts/**/*.ts"
   ],
   "compilerOptions": {
+    "baseUrl": "./src/main/ts",
     "target": "es6",
     "lib": [
       "es5",

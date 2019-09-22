@@ -4,7 +4,7 @@
     "dist/**"
   ],
   "scripts": {
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && tsc && find bin/postbuild -type f | parallel '{}' \"$(realpath dist)\"",
     "test": "mocha -r ts-node/register src/test/**/*.spec.ts",
     "prepublishOnly": "npm run test && npm run build",
     "clean": "rm -rf dist"

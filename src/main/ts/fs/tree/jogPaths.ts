@@ -1,4 +1,4 @@
-import {splitPathIntoComponents} from "../util/splitPathIntoComponents";
+import {splitPathIntoComponents} from "../path/splitPathIntoComponents";
 import {IJoggerOptions} from "./JoggerOptions";
 import {jogList} from "./jogList";
 

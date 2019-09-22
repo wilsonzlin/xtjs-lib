@@ -1,10 +1,14 @@
 #!/usr/bin/env node
 
+"use strict";
+
 const fs = require("fs");
+
+const DIST = process.argv[2];
 
 const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
-function generateNullwrapFunctionDeclaration (n) {
+function generateNullwrapFunctionDeclaration(n) {
   if (!Number.isSafeInteger(n) || n < 1) {
     throw new SyntaxError(`Invalid amount`);
   }
@@ -37,4 +41,4 @@ export declare function nullwrap(realFn: Function, errorMatch?: ErrorMatch): Fun
 `;
 }
 
-fs.writeFileSync(__dirname + "/dist/nullwrap.d.ts", generateNullwrapFunctionDeclarations(26));
+fs.writeFileSync(DIST + "/null/nullwrap.d.ts", generateNullwrapFunctionDeclarations(26));

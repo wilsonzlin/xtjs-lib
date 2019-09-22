@@ -21,6 +21,6 @@ export function deepEquals (a: any, b: any): boolean {
 
   // Plain object
   return Object.getPrototypeOf(a) === Object.getPrototypeOf(b) &&
-    Object.keys(a).every(k => Object.hasOwnProperty.call(k) && deepEquals(a[k], b[k])) &&
-    Object.keys(b).every(k => Object.hasOwnProperty.call(k));
+    Object.keys(a).every(k => Object.hasOwnProperty.call(a, k) && deepEquals(a[k], b[k])) &&
+    Object.keys(b).every(k => Object.hasOwnProperty.call(b, k));
 }

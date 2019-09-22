@@ -1,5 +1,5 @@
-import {sameKeys} from "../cmp/keys";
-import {subsetArray} from "../cmp/array";
+import {sameKeys} from "./compare";
+import {subsetArray} from "../array/compare";
 
 export function shallowObjectEquals (a: any, b: any): boolean {
   return sameKeys(a, b) &&

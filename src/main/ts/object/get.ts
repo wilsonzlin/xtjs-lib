@@ -3,11 +3,11 @@ import {hasKey} from "./has";
 import {Key} from "./keys";
 
 export function get<T extends Obj, K extends Key<T>> (obj: T, key: K): T[K];
-export function get<T extends Obj, K extends Key<T>, D = T[K]> (obj: T, key: K, def: D): T[K] | D;
-export function get<T extends Obj, K extends Key<T>, D = T[K]> (obj: T, key: K, def?: D): T[K] | D {
+export function get<T extends Obj, K extends Key<T>, D> (obj: T, key: K, def: D): T[K] | D;
+export function get<T extends Obj, K extends Key<T>, D> (obj: T, key: K, def?: D): T[K] | D {
   if (!hasKey(obj, key)) {
     if (arguments.length > 2) {
-      return def;
+      return def!;
     }
     throw new ReferenceError(`${key} does not exist`);
   }

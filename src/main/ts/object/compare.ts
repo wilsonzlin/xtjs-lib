@@ -1,5 +1,5 @@
-import {stringsArrayEquals} from "../eq/array";
-import {subsetArray, supersetArray} from "./array";
+import {stringsArrayEquals} from "../array/equals";
+import {subsetArray, supersetArray} from "../array/compare";
 
 // Can't create compareKeys function as keys may not be
 // direct subsets/supersets of each other

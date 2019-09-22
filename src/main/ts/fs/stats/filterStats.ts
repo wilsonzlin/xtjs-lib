@@ -1,6 +1,6 @@
-import * as normstat from "normstat";
+import { IStats } from "./IStats";
 
-export type StatsFields = keyof normstat.IStats;
+export type StatsFields = keyof IStats;
 
 export const STATS_FIELDS: ReadonlyArray<any> = [
   "directory",
@@ -32,10 +32,10 @@ export const STATS_FIELDS: ReadonlyArray<any> = [
 Object.freeze(STATS_FIELDS);
 
 export type PartialStats<F extends StatsFields> = {
-  [P in F]: normstat.IStats[P];
+  [P in F]: IStats[P];
 }
 
-export const filterStats = <F extends StatsFields> (stats: normstat.IStats, fields: ReadonlyArray<F>): PartialStats<F> => {
+export const filterStats = <F extends StatsFields> (stats: IStats, fields: ReadonlyArray<F>): PartialStats<F> => {
   let partial = Object.create(null);
   for (let field of fields) {
     partial[field] = stats[field];

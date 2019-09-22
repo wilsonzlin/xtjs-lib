@@ -1,4 +1,4 @@
-import { ErrorMatch, errorMatches } from "./errorMatches";
+import { ErrorMatch, errorMatches } from "../error/errorMatches";
 
 export function nullwrap(realFn: Function, errorMatch?: ErrorMatch): Function {
   return function (this: any) {
