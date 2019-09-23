@@ -1,6 +1,6 @@
-import {splitPathIntoComponents} from "../path/splitPathIntoComponents";
-import {IJoggerOptions} from "./JoggerOptions";
-import {jogList} from "./jogList";
+import {splitPathIntoComponents} from "fs/path/splitPathIntoComponents";
+import {IJoggerOptions} from "fs/tree/JoggerOptions";
+import {jogList} from "fs/tree/jogList";
 
 export type JoggerPaths = string[][];
 

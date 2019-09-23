@@ -1,4 +1,4 @@
-import {Obj} from "./obj";
+import {Obj} from "object/obj";
 
 export type Key<T extends Obj> = (keyof T) & string;
 

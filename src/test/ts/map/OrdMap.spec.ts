@@ -1,6 +1,6 @@
 import {expect} from "chai";
+import {OrdMap} from "map/OrdMap";
 import "mocha";
-import {OrdMap} from "../../../main/ts/map/OrdMap";
 
 describe("OrdMap", () => {
   it("should iterate entries in the order they were added", () => {

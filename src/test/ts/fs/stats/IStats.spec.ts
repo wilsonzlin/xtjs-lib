@@ -1,6 +1,6 @@
-import { expect } from "chai";
+import {expect} from "chai";
+import {convertFromFS} from "fs/stats/IStats";
 import "mocha";
-import { convertFromFS } from "../../../../main/ts/fs/stats/IStats";
 
 describe("convertFromFS", () => {
   it("should create an object of type IStats from an existing fs.Stats object with correctly copied values", () => {
@@ -57,7 +57,7 @@ describe("convertFromFS", () => {
       modified: 1532227615945.6343,
       changed: 1532227615945.6343,
       created: 1532227615945.6343,
-    }
+    };
 
     expect(convertFromFS(mockFS)).to.deep.equal(expected);
   });

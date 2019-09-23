@@ -1,6 +1,6 @@
+import {secureShuffle} from "array/shuffle";
 import {expect} from "chai";
 import "mocha";
-import {secureShuffle} from "array/shuffle";
 import {compareNatively} from "primitive/compareNatively";
 
 function shuffle<T> (a: Array<T>): Array<T> {

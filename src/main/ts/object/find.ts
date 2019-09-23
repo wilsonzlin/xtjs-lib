@@ -1,6 +1,6 @@
-import {Key, keys} from "./keys";
-import {Value} from "./values";
-import {Callback, Obj} from "./obj";
+import {Key, keys} from "object/keys";
+import {Callback, Obj} from "object/obj";
+import {Value} from "object/values";
 
 export type Finder<T extends Obj> = Callback<T, boolean>;
 

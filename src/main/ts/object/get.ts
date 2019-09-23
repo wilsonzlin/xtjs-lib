@@ -1,6 +1,6 @@
-import {Obj} from "./obj";
-import {hasKey} from "./has";
-import {Key} from "./keys";
+import {hasKey} from "object/has";
+import {Key} from "object/keys";
+import {Obj} from "object/obj";
 
 export function get<T extends Obj, K extends Key<T>> (obj: T, key: K): T[K];
 export function get<T extends Obj, K extends Key<T>, D> (obj: T, key: K, def: D): T[K] | D;

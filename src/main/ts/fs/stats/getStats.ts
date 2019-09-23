@@ -1,12 +1,12 @@
 import * as fs from "fs";
-import { IStats, convertFromFS } from "./IStats";
+import {convertFromFS, IStats} from "fs/stats/IStats";
 
 export interface IGetStatsOptions {
   path: string;
   resolve?: boolean;
 }
 
-export function getStats({ path, resolve: resolveSymlinks = false }: IGetStatsOptions): Promise<IStats> {
+export function getStats ({path, resolve: resolveSymlinks = false}: IGetStatsOptions): Promise<IStats> {
   return new Promise((resolve, reject) => {
     fs[resolveSymlinks ? "stat" : "lstat"](path, (err, stats) => {
       if (err) {
@@ -20,7 +20,7 @@ export function getStats({ path, resolve: resolveSymlinks = false }: IGetStatsOp
   });
 }
 
-export function getStatsSync({ path, resolve: resolveSymlinks = false }: IGetStatsOptions): IStats {
+export function getStatsSync ({path, resolve: resolveSymlinks = false}: IGetStatsOptions): IStats {
   let stats = fs[resolveSymlinks ? "statSync" : "lstatSync"](path);
 
   let normStats = convertFromFS(stats);

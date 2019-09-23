@@ -1,4 +1,4 @@
-import { transformIterator } from "../iterator/transformIterator";
+import {transformIterator} from "iterator/transformIterator";
 
 export class OrdMap<K, V> extends Map<K, V> {
   // Cannot initialise here or in constructor, because native constructor (`super`)

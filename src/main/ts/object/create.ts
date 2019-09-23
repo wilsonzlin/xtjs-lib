@@ -1,4 +1,4 @@
-import {Obj} from "./obj";
+import {Obj} from "object/obj";
 
 export function clean (): Obj {
   return Object.create(null);

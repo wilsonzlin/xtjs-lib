@@ -1,5 +1,5 @@
-import {keys} from "./keys";
-import {Callback, Obj} from "./obj";
+import {keys} from "object/keys";
+import {Callback, Obj} from "object/obj";
 
 export type Filter<T extends Obj> = Callback<T, boolean>;
 

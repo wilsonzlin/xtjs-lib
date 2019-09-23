@@ -1,7 +1,7 @@
+import {stringsArrayEquals} from "array/equals";
+import {secureShuffle} from "array/shuffle";
 import {expect} from "chai";
 import "mocha";
-import {stringsArrayEquals} from "../../../main/ts/array/equals";
-import {secureShuffle} from "../../../main/ts/array/shuffle";
 
 function shuffle<T> (a: Array<T>): Array<T> {
   return secureShuffle(a.slice());

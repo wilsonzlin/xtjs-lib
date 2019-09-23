@@ -1,6 +1,6 @@
 import {expect} from "chai";
+import {transformIterator} from "iterator/transformIterator";
 import "mocha";
-import {transformIterator} from "../../../main/ts/iterator/transformIterator";
 
 describe("transformIterator", () => {
   it(

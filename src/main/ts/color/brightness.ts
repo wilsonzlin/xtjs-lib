@@ -1,4 +1,4 @@
-import {normalize, RGB, RGBArray} from "./rgb";
+import {normalize, RGB, RGBArray} from "color/rgb";
 
 // Calculate the perceived brightness of an RGB colour on a scale from 0 (darkest) to 1 (brightest).
 export const perceivedBrightness = (rgb: RGB): number => {

@@ -1,7 +1,7 @@
+import {filterStats, PartialStats, STATS_FIELDS, StatsFields} from "fs/stats/filterStats";
+import {getDirEntsStats} from "fs/stats/getDirEntsStats";
+import {IJoggerOptions} from "fs/tree/JoggerOptions";
 import * as Path from "path";
-import {getDirEntsStats} from "../stats/getDirEntsStats";
-import {IJoggerOptions} from "./JoggerOptions";
-import {filterStats, PartialStats, STATS_FIELDS, StatsFields} from "../stats/filterStats";
 
 export type JoggerTree<F extends StatsFields> = {
   [ent: string]: PartialStats<F> | JoggerTree<F> | null;

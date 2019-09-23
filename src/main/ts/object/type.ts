@@ -1,4 +1,4 @@
-import {Obj} from "./obj";
+import {Obj} from "object/obj";
 
 export function isInstance<T extends Function> (type: T, obj: Obj): obj is T {
   return obj instanceof type;

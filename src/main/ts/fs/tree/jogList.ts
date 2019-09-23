@@ -1,5 +1,5 @@
-import {IJoggerOptions} from "./JoggerOptions";
-import {jogTable} from "./jogTable";
+import {IJoggerOptions} from "fs/tree/JoggerOptions";
+import {jogTable} from "fs/tree/jogTable";
 
 export type JoggerList = string[];
 

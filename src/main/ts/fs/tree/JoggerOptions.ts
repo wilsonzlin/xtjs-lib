@@ -1,4 +1,4 @@
-import { StatsFields } from "../stats/filterStats";
+import {StatsFields} from "fs/stats/filterStats";
 
 export interface IJoggerOptions<F extends StatsFields> {
   dir: string;

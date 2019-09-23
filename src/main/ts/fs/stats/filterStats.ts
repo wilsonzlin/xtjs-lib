@@ -1,4 +1,4 @@
-import { IStats } from "./IStats";
+import {IStats} from "fs/stats/IStats";
 
 export type StatsFields = keyof IStats;
 

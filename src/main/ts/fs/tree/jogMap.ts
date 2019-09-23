@@ -1,7 +1,7 @@
-import {splitPathIntoComponents} from "../path/splitPathIntoComponents";
-import {PartialStats, STATS_FIELDS, StatsFields} from "../stats/filterStats";
-import {IJoggerOptions} from "./JoggerOptions";
-import {jogTable} from "./jogTable";
+import {splitPathIntoComponents} from "fs/path/splitPathIntoComponents";
+import {PartialStats, STATS_FIELDS, StatsFields} from "fs/stats/filterStats";
+import {IJoggerOptions} from "fs/tree/JoggerOptions";
+import {jogTable} from "fs/tree/jogTable";
 
 export type JoggerMap<F extends StatsFields> = Map<string[], PartialStats<F>>;
 

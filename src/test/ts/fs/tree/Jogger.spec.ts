@@ -1,11 +1,11 @@
 import chai, {expect} from "chai";
+import {getStatsSync} from "fs/stats/getStats";
+import {IStats} from "fs/stats/IStats";
+import {jogList} from "fs/tree/jogList";
+import {jogPaths} from "fs/tree/jogPaths";
+import {jogTree} from "fs/tree/jogTree";
 import "mocha";
-import {jogTree} from "../../../../main/ts/fs/tree/jogTree";
-import {jogList} from "../../../../main/ts/fs/tree/jogList";
-import {jogPaths} from "../../../../main/ts/fs/tree/jogPaths";
 import chaiAsPromised = require("chai-as-promised");
-import { getStatsSync } from "../../../../main/ts/fs/stats/getStats";
-import { IStats } from "../../../../main/ts/fs/stats/IStats";
 
 chai.use(chaiAsPromised);
 

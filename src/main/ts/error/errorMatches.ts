@@ -1,6 +1,6 @@
 export type ErrorMatch = string | number | Function;
 
-export function errorMatches(error: any, errorMatch: ErrorMatch | undefined): boolean {
+export function errorMatches (error: any, errorMatch: ErrorMatch | undefined): boolean {
   if (errorMatch === undefined) {
     return true;
   }

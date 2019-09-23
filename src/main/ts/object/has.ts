@@ -1,5 +1,5 @@
-import {values} from "./values";
-import {Obj} from "./obj";
+import {Obj} from "object/obj";
+import {values} from "object/values";
 
 export function hasKey<T extends Obj> (obj: T, key: any): boolean {
   return Object.prototype.hasOwnProperty.call(obj, key);

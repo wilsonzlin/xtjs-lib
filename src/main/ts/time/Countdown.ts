@@ -1,4 +1,4 @@
-import { Duration } from "./Duration";
+import {Duration} from "time/Duration";
 
 export class Countdown {
   private started: number;

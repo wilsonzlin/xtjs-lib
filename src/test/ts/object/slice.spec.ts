@@ -1,6 +1,6 @@
 import {expect} from "chai";
 import "mocha";
-import {slice} from "../../../main/ts/object/slice";
+import {slice} from "object/slice";
 
 describe("slice", () => {
   it("should create a shallow copy when no range arguments are provided", () => {
@@ -11,7 +11,8 @@ describe("slice", () => {
       d: undefined,
       e: {
         e1: Math.PI,
-        e2: function () {},
+        e2: function () {
+        },
       },
       f: [1, 2, 3],
     };
@@ -32,7 +33,8 @@ describe("slice", () => {
       d: undefined,
       e: {
         e1: Math.PI,
-        e2: function () {},
+        e2: function () {
+        },
       },
       f: [1, 2, 3],
     };

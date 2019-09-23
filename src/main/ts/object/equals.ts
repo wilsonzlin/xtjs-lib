@@ -1,5 +1,5 @@
-import {sameKeys} from "./compare";
-import {subsetArray} from "../array/compare";
+import {subsetArray} from "array/compare";
+import {sameKeys} from "object/compare";
 
 export function shallowObjectEquals (a: any, b: any): boolean {
   return sameKeys(a, b) &&

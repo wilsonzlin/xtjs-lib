@@ -1,4 +1,4 @@
-import { compareNatively } from "./compareNatively";
+import {compareNatively} from "primitive/compareNatively";
 
 type Part = NumberPart | StringPart;
 

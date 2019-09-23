@@ -1,5 +1,5 @@
-import {Key, keys} from "./keys";
-import {Obj} from "./obj";
+import {Key, keys} from "object/keys";
+import {Obj} from "object/obj";
 
 export function keep<T extends Obj> (obj: T, ...exc: Key<T>[]): number {
   let toRemove = keys(obj).filter(k => !exc.includes(k));

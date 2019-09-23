@@ -1,6 +1,6 @@
+import {subsetArray, supersetArray} from "array/compare";
 import {expect} from "chai";
 import "mocha";
-import {subsetArray, supersetArray} from "array/compare";
 
 describe("subsetArray", () => {
   it("should return true if array is a subset of other", () => {

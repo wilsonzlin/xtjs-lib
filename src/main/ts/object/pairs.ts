@@ -1,6 +1,6 @@
-import {Key, keys} from "./keys";
-import {Value} from "./values";
-import {Obj} from "./obj";
+import {Key, keys} from "object/keys";
+import {Obj} from "object/obj";
+import {Value} from "object/values";
 
 export type Pair<T extends Obj> = [Key<T>, Value<T>];
 

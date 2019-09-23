@@ -1,6 +1,6 @@
-import {Key, keys} from "./keys";
-import {Value} from "./values";
-import {Obj} from "./obj";
+import {Key, keys} from "object/keys";
+import {Obj} from "object/obj";
+import {Value} from "object/values";
 
 export type Reducer<T extends Obj, R> = (result: R, val: Value<T>, key: Key<T>, obj: T) => R;
 

@@ -1,5 +1,5 @@
-import {pairs} from "./pairs";
-import {Callback, Obj} from "./obj";
+import {Callback, Obj} from "object/obj";
+import {pairs} from "object/pairs";
 
 export type Iterator<T extends Obj> = Callback<T, void>;
 

@@ -1,5 +1,5 @@
-import {Value} from "./values";
-import {Key} from "./keys";
+import {Key} from "object/keys";
+import {Value} from "object/values";
 
 export type Obj = {
   [key: string]: any;

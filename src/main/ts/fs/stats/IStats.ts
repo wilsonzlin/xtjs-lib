@@ -27,7 +27,7 @@ export interface IStats {
   created: number;
 }
 
-export function convertFromFS(stats: fs.Stats): IStats {
+export function convertFromFS (stats: fs.Stats): IStats {
   let normStats = Object.create(null);
 
   normStats.directory = stats.isDirectory();

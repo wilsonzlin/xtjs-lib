@@ -1,7 +1,7 @@
-import {pairs} from "./pairs";
-import {Key} from "./keys";
-import {Obj} from "./obj";
-import {hasKey} from "./has";
+import {hasKey} from "object/has";
+import {Key} from "object/keys";
+import {Obj} from "object/obj";
+import {pairs} from "object/pairs";
 
 export function update<T extends Obj, U extends Obj> (obj: T, upd: U): T & U {
   const updated = obj as (T & U);

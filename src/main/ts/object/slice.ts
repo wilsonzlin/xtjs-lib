@@ -1,5 +1,5 @@
-import {Key, keys} from "./keys";
-import {Obj} from "./obj";
+import {Key, keys} from "object/keys";
+import {Obj} from "object/obj";
 
 export type Partial<T extends Obj> = {
   [P in keyof T]?: T[P];

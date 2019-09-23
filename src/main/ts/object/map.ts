@@ -1,8 +1,8 @@
-import {Callback, Obj} from "./obj";
-import {Value} from "./values";
-import {Pair} from "./pairs";
-import {Key, keys} from "./keys";
-import {regular} from "./create";
+import {regular} from "object/create";
+import {Key, keys} from "object/keys";
+import {Callback, Obj} from "object/obj";
+import {Pair} from "object/pairs";
+import {Value} from "object/values";
 
 export type PairMapper<T extends Obj> = Callback<T, Pair<any>>;
 export type KeyMapper<T extends Obj> = Callback<T, Value<any>>;
