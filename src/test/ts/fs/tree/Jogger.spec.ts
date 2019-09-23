@@ -1,11 +1,11 @@
 import chai, {expect} from "chai";
 import "mocha";
-import {jogTree} from "../../main/ts/fs/tree/jogTree";
-import {jogList} from "../../main/ts/fs/tree/jogList";
-import {jogPaths} from "../../main/ts/fs/tree/jogPaths";
+import {jogTree} from "../../../../main/ts/fs/tree/jogTree";
+import {jogList} from "../../../../main/ts/fs/tree/jogList";
+import {jogPaths} from "../../../../main/ts/fs/tree/jogPaths";
 import chaiAsPromised = require("chai-as-promised");
-import { IStats } from "../../main/ts/fs/IStats";
-import { getStatsSync } from "../../main/ts/fs/stats/getStats";
+import { getStatsSync } from "../../../../main/ts/fs/stats/getStats";
+import { IStats } from "../../../../main/ts/fs/stats/IStats";
 
 chai.use(chaiAsPromised);
 
@@ -13,7 +13,7 @@ function getStatsOfPath (path: string): IStats {
   return getStatsSync({path});
 }
 
-const TEST_DIR = __dirname + "/../resources/tree";
+const TEST_DIR = __dirname + "/../../../resources/tree";
 
 const TREE = {
   a: {

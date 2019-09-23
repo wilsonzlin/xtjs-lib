@@ -1,11 +1,10 @@
-import {compareNaturally} from "../../../main/ts/cmp/natural";
 import {expect} from "chai";
 import "mocha";
-import {cryptoRandom01} from "crng";
-import _shuffle = require("shuffle-array");
+import {secureShuffle} from "array/shuffle";
+import {compareNaturally} from "primitive/compareNaturally";
 
 function shuffle<T> (a: Array<T>): Array<T> {
-  return _shuffle(a, {copy: true, rng: cryptoRandom01});
+  return secureShuffle(a.slice());
 }
 
 describe("compareNaturally", () => {

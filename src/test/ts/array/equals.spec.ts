@@ -1,11 +1,10 @@
 import {expect} from "chai";
 import "mocha";
-import {stringsArrayEquals, shallowArrayEquals} from "../../../main/ts/main";
-import {cryptoRandom01} from "crng";
-import _shuffle = require("shuffle-array");
+import {stringsArrayEquals} from "../../../main/ts/array/equals";
+import {secureShuffle} from "../../../main/ts/array/shuffle";
 
 function shuffle<T> (a: Array<T>): Array<T> {
-  return _shuffle(a, {copy: true, rng: cryptoRandom01});
+  return secureShuffle(a.slice());
 }
 
 describe("stringsArrayEquals", () => {

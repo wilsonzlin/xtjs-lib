@@ -1,6 +1,6 @@
-import { convertFromFS } from "../../main/ts/IStats";
 import { expect } from "chai";
 import "mocha";
+import { convertFromFS } from "../../../../main/ts/fs/stats/IStats";
 
 describe("convertFromFS", () => {
   it("should create an object of type IStats from an existing fs.Stats object with correctly copied values", () => {

@@ -5,7 +5,7 @@
   ],
   "scripts": {
     "build": "npm run clean && tsc && find bin/postbuild -type f | parallel '{}' \"$(realpath dist)\"",
-    "test": "mocha -r ts-node/register src/test/**/*.spec.ts",
+    "test": "mocha -r ts-node/register -r tsconfig-paths/register src/test/**/*.spec.ts",
     "prepublishOnly": "npm run test && npm run build",
     "clean": "rm -rf dist"
   },
@@ -113,14 +113,15 @@
   "homepage": "https://github.com/wilsonzlin/extlib#readme",
   "dependencies": {},
   "devDependencies": {
-    "@types/chai-as-promised": "^7.1.2",
     "@types/chai": "^4.2.3",
+    "@types/chai-as-promised": "^7.1.2",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.5",
-    "chai-as-promised": "^7.1.1",
     "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "mocha": "^6.2.0",
     "ts-node": "^8.4.1",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.6.3"
   }
 }

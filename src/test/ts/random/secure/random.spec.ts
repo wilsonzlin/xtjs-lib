@@ -1,11 +1,11 @@
 import {expect} from "chai";
 import "mocha";
-import {cryptoRandom01} from "../../../main/ts/random/01";
+import {cryptoRandom} from "random/secure/random";
 
-describe("cryptoRandom01", () => {
+describe("cryptoRandom", () => {
   it("should generate values in the range [0, 1)", () => {
     for (let i = 0; i < 1e5; i++) {
-      expect(cryptoRandom01())
+      expect(cryptoRandom())
         .at.least(0)
         .lessThan(1);
     }
@@ -24,7 +24,7 @@ describe("cryptoRandom01", () => {
     }
 
     for (let i = 0; i < amount; i++) {
-      slots[Math.floor(cryptoRandom01() * slotsCount)]++;
+      slots[Math.floor(cryptoRandom() * slotsCount)]++;
     }
 
     let minCount = +Infinity;

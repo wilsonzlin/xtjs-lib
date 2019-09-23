@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import "mocha";
-import { nullwrap } from "../../main/ts/nullwrap";
+import {nullwrap} from "../../../main/ts/null/nullwrap";
 
 function fnThatThrowsException(_: string, __: number): string {
   throw new Error();

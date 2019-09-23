@@ -1,6 +1,6 @@
-import {slice} from "../../main/ts/slice";
 import {expect} from "chai";
 import "mocha";
+import {slice} from "../../../main/ts/object/slice";
 
 describe("slice", () => {
   it("should create a shallow copy when no range arguments are provided", () => {

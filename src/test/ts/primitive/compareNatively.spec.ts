@@ -1,11 +1,10 @@
 import {expect} from "chai";
 import "mocha";
-import {compareNatively} from "../../../main/ts/cmp/native";
-import {cryptoRandom01} from "crng";
-import _shuffle = require("shuffle-array");
+import {secureShuffle} from "array/shuffle";
+import {compareNatively} from "primitive/compareNatively";
 
 function shuffle<T> (a: Array<T>): Array<T> {
-  return _shuffle(a, {copy: true, rng: cryptoRandom01});
+  return secureShuffle(a.slice());
 }
 
 describe("compareNatively", () => {
