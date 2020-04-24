@@ -5,15 +5,15 @@ export function errorMatches (error: any, errorMatch: ErrorMatch | undefined): b
     return true;
   }
 
-  let matchIsPrimitive = typeof errorMatch == "string" || typeof errorMatch == "number";
+  const matchIsPrimitive = typeof errorMatch == 'string' || typeof errorMatch == 'number';
 
-  let errorIsObject = !!error && typeof error == "object";
+  const errorIsObject = !!error && typeof error == 'object';
 
   if (errorIsObject && matchIsPrimitive) {
     return error.code === errorMatch;
   }
 
-  if (errorIsObject && typeof errorMatch == "function") {
+  if (errorIsObject && typeof errorMatch == 'function') {
     return error instanceof errorMatch;
   }
 

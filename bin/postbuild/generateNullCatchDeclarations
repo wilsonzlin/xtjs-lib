@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
-"use strict";
+'use strict';
 
-const fs = require("fs");
+const fs = require('fs');
 
 const DIST = process.argv[2];
 
-const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+const ALPHABET = 'abcdefghijklmnopqrstuvwxyz';
 
-function generateNullwrapFunctionDeclaration(n) {
+const generateNullCatchFunctionDeclaration = n => {
   if (!Number.isSafeInteger(n) || n < 1) {
     throw new SyntaxError(`Invalid amount`);
   }
@@ -17,28 +17,28 @@ function generateNullwrapFunctionDeclaration(n) {
     throw new ReferenceError(`Amount exceeds alphabet capacity`);
   }
 
-  let typeParams = Array(n).fill(0).map((_, i) => `T${i + 1}`).join(", ");
-  let newFnParams = Array(n).fill(0).map((_, i) => `${ALPHABET[i]}: T${i + 1}`).join(", ");
+  let typeParams = Array(n).fill(0).map((_, i) => `T${i + 1}`).join(', ');
+  let newFnParams = Array(n).fill(0).map((_, i) => `${ALPHABET[i]}: T${i + 1}`).join(', ');
 
   return `// This declaration was automatically generated
 export declare function nullwrap<${typeParams}, R>(realFn: (${newFnParams}) => R, errorMatch?: ErrorMatch): (${newFnParams}) => R | null;`;
-}
+};
 
-function generateNullwrapFunctionDeclarations(highest) {
+const generateNullCatchFunctionDeclarations = highest => {
   let generated = [];
 
   for (let n = 1; n <= highest; n++) {
-    generated.push(generateNullwrapFunctionDeclaration(n));
+    generated.push(generateNullCatchFunctionDeclaration(n));
   }
 
   return `import { ErrorMatch, errorMatches } from "./errorMatches";
 
-${generated.join("\n\n")}
+${generated.join('\n\n')}
 
 export declare function nullwrap<R>(realFn: (...args: any[]) => R, errorMatch?: ErrorMatch): (...args: any[]) => R | null;
 
 export declare function nullwrap(realFn: Function, errorMatch?: ErrorMatch): Function;
 `;
-}
+};
 
-fs.writeFileSync(DIST + "/null/nullwrap.d.ts", generateNullwrapFunctionDeclarations(26));
+fs.writeFileSync(`${DIST}/null/nullCatch.d.ts`, generateNullCatchFunctionDeclarations(26));

@@ -1,6 +1,6 @@
 import {expect} from "chai";
 import "mocha";
-import {nullwrap} from "null/nullwrap";
+import {nullwrap} from "null/nullCatch";
 
 function fnThatThrowsException (_: string, __: number): string {
   throw new Error();
@@ -22,7 +22,7 @@ function fnThatThrows42_31415 (_: string, __: number): string {
   };
 }
 
-describe("nullwrap", () => {
+describe("nullCatch", () => {
   it("should return a function that returns null instead of throwing an exception", () => {
     let wrapped = nullwrap(fnThatThrowsException);
     expect(wrapped("", 0)).to.be.null;

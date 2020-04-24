@@ -1,6 +1,6 @@
 import {ErrorMatch, errorMatches} from "error/errorMatches";
 
-export function nullwrap (realFn: Function, errorMatch?: ErrorMatch): Function {
+export function nullCatch (realFn: Function, errorMatch?: ErrorMatch): Function {
   return function (this: any) {
     try {
       return realFn.apply(this, arguments);
