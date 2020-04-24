@@ -41,4 +41,4 @@ export declare function nullwrap(realFn: Function, errorMatch?: ErrorMatch): Fun
 `;
 };
 
-fs.writeFileSync(`${DIST}/null/nullCatch.d.ts`, generateNullCatchFunctionDeclarations(26));
+fs.writeFileSync(`${DIST}/error/nullCatch.d.ts`, generateNullCatchFunctionDeclarations(26));
