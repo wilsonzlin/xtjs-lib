@@ -47,12 +47,12 @@ export class AsyncArray<T> {
     });
   }
 
-  async every (predicate: (val: T) => Promise<boolean>): Promise<boolean> {
+  async every (predicate: (val: T) => (boolean | Promise<boolean>)): Promise<boolean> {
     // Use .some for short-circuiting behaviour.
     return !(await this.some(async (val) => !(await predicate(val))));
   }
 
-  some (predicate: (val: T) => Promise<boolean>): Promise<boolean> {
+  some (predicate: (val: T) => (boolean | Promise<boolean>)): Promise<boolean> {
     return new Promise((resolve, reject) => {
       let remaining = this.elements.length;
       this.elements.forEach(async (val) => {
@@ -71,12 +71,18 @@ export class AsyncArray<T> {
     });
   }
 
-  map<M> (mapper: (val: T) => Promise<M>): AsyncArray<M> {
-    return this.next(mapper);
+  map<M> (mapper: (val: T) => (M | Promise<M>)): AsyncArray<M> {
+    return this.next(val => promisifyValue(mapper(val)));
   }
 
-  filter (predicate: (val: T) => Promise<boolean>): AsyncArray<T> {
+  filter (predicate: (val: T) => (boolean | Promise<boolean>)): AsyncArray<T> {
     return this.next(async (elem) => (await predicate(elem)) ? elem : FILTERED);
+  }
+
+  // Hack to allow filtering using a synchronous user-defined type guard.
+  // TypeScript does not allow asynchronous user-defined type guards currently.
+  filterType<R extends T> (predicate: (val: T) => val is R): AsyncArray<R> {
+    return this.filter(predicate) as any;
   }
 
   push (...vals: (T | Promise<T>)[]): number {
