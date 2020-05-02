@@ -38,13 +38,13 @@ export class AsyncArray<T> {
     return new AsyncArray<T>(this.elements.concat(...vals.map(val => Array.isArray(val) ? (val as any).map(promisifyValue) : promisifyValue(val))));
   }
 
-  forEach (iterator: (val: T) => void): void {
-    this.elements.forEach(async (val) => {
+  async forEach (iterator: (val: T) => (void | Promise<void>)): Promise<void> {
+    await Promise.all(this.elements.map(async (val) => {
       const resolved = await val;
       if (isNotFilteredElement(resolved)) {
-        iterator(resolved);
+        await iterator(resolved);
       }
-    });
+    }));
   }
 
   async every (predicate: (val: T) => (boolean | Promise<boolean>)): Promise<boolean> {
