@@ -1,7 +1,7 @@
-import {hasKey} from "object/has";
-import {Key} from "object/keys";
-import {Obj} from "object/obj";
-import {pairs} from "object/pairs";
+import {hasKey} from 'object/has';
+import {Key} from 'object/keys';
+import {Obj} from 'object/obj';
+import {pairs} from 'object/pairs';
 
 export function update<T extends Obj, U extends Obj> (obj: T, upd: U): T & U {
   const updated = obj as (T & U);
@@ -27,7 +27,15 @@ export function setIfExists<T extends Obj> (obj: T, key: Key<T>, value: any): bo
   return false;
 }
 
-export function setIfNotExists<T extends Obj> (obj: T, key: Key<T>, value: any): boolean {
+export function computeIfAbsent<T extends Obj> (obj: T, key: Key<T>, value: (k: Key<T>, obj: T) => any): boolean {
+  if (!hasKey(obj, key)) {
+    obj[key] = value(key, obj);
+    return true;
+  }
+  return false;
+}
+
+export function setIfAbsent<T extends Obj> (obj: T, key: Key<T>, value: any): boolean {
   if (!hasKey(obj, key)) {
     obj[key] = value;
     return true;
