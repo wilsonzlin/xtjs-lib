@@ -16,3 +16,5 @@ export const getStatsSync = ({path, resolve: resolveSymlinks = false}: IGetStats
 export const nullStat = asyncNullCatch(fs.stat, 'ENOENT');
 
 export const isFile = async (path: string): Promise<boolean> => !!(await nullStat(path))?.isFile();
+
+export const isDirectory = async (path: string): Promise<boolean> => !!(await nullStat(path))?.isDirectory();
