@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-const getExtPos = (name: string): number => name.lastIndexOf('.', name.lastIndexOf(path.sep) + 1);
+const getExtPos = (name: string): number => name.slice(name.lastIndexOf(path.sep) + 1).lastIndexOf('.');
 
 export const getExt = (name: string): string => {
   const lastDot = getExtPos(name);
