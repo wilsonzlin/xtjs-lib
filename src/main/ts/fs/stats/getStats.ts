@@ -1,4 +1,4 @@
-import {promises as fs} from 'fs';
+import fs from 'fs';
 import {convertFromFS, IStats} from 'fs/stats/IStats';
 import {asyncNullCatch} from '../../error/nullCatch';
 
@@ -8,7 +8,7 @@ export interface IGetStatsOptions {
 }
 
 export const getStats = ({path, resolve: resolveSymlinks = false}: IGetStatsOptions): Promise<IStats> =>
-  fs[resolveSymlinks ? 'stat' : 'lstat'](path).then(convertFromFS);
+  fs.promises[resolveSymlinks ? 'stat' : 'lstat'](path).then(convertFromFS);
 
 export const getStatsSync = ({path, resolve: resolveSymlinks = false}: IGetStatsOptions): IStats =>
   convertFromFS(fs[resolveSymlinks ? 'statSync' : 'lstatSync'](path));
