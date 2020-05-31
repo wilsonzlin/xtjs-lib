@@ -1,29 +1,18 @@
-import * as fs from "fs";
-import {convertFromFS, IStats} from "fs/stats/IStats";
+import {promises as fs} from 'fs';
+import {convertFromFS, IStats} from 'fs/stats/IStats';
+import {asyncNullCatch} from '../../error/nullCatch';
 
 export interface IGetStatsOptions {
   path: string;
   resolve?: boolean;
 }
 
-export function getStats ({path, resolve: resolveSymlinks = false}: IGetStatsOptions): Promise<IStats> {
-  return new Promise((resolve, reject) => {
-    fs[resolveSymlinks ? "stat" : "lstat"](path, (err, stats) => {
-      if (err) {
-        return reject(err);
-      }
+export const getStats = ({path, resolve: resolveSymlinks = false}: IGetStatsOptions): Promise<IStats> =>
+  fs[resolveSymlinks ? 'stat' : 'lstat'](path).then(convertFromFS);
 
-      let normStats = convertFromFS(stats);
+export const getStatsSync = ({path, resolve: resolveSymlinks = false}: IGetStatsOptions): IStats =>
+  convertFromFS(fs[resolveSymlinks ? 'statSync' : 'lstatSync'](path));
 
-      resolve(normStats);
-    });
-  });
-}
+export const nullStat = asyncNullCatch(fs.stat, 'ENOENT');
 
-export function getStatsSync ({path, resolve: resolveSymlinks = false}: IGetStatsOptions): IStats {
-  let stats = fs[resolveSymlinks ? "statSync" : "lstatSync"](path);
-
-  let normStats = convertFromFS(stats);
-
-  return normStats;
-}
+export const isFile = async (path: string): Promise<boolean> => !!(await nullStat(path))?.isFile();

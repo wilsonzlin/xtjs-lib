@@ -1,5 +1,5 @@
-import * as Path from "path";
+import {sep} from 'path';
 
-export const splitPathIntoComponents = (path: string): string[] => {
-  return path.replace(/^[\\\/]|[\\\/]$/g, "").split(Path.sep);
+export const splitPathIntoComponents = (path: string, separator: string | RegExp = sep): string[] => {
+  return path.split(separator).filter(c => c);
 };

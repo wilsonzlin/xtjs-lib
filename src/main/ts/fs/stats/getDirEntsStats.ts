@@ -1,7 +1,7 @@
-import {promises as fs} from "fs";
-import {getStats} from "fs/stats/getStats";
-import {IStats} from "fs/stats/IStats";
-import * as Path from "path";
+import {promises as fs} from 'fs';
+import {getStats} from 'fs/stats/getStats';
+import {IStats} from 'fs/stats/IStats';
+import * as Path from 'path';
 
 export interface IDirectoryEntry {
   name: string;

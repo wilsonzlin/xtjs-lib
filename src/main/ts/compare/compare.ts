@@ -63,6 +63,10 @@ export const compareProperty = <O, P extends keyof O> (prop: P, propComparator: 
   return (a, b) => propComparator(a[prop], b[prop]);
 };
 
+export const compareDerived = <O, D> (derivation: (val: O) => D, derivedComparator: Comparator<D>): Comparator<O> => {
+  return (a, b) => derivedComparator(derivation(a), derivation(b));
+};
+
 export const compareUsing = <T> (...comparators: Comparator<T>[]): Comparator<T> => {
   return (a, b) => comparators.reduce((result, comparator) => result || comparator(a, b), 0);
 };
