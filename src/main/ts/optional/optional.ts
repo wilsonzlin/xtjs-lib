@@ -1,3 +1,5 @@
+import {AssertionError} from '../assert/assert';
+
 export const exists = <V> (val: V | null | undefined): val is V => val != undefined;
 
 export const defined = <V> (val: V | undefined): val is V => val !== undefined;
@@ -13,3 +15,17 @@ export const ifDefined = <T> (val: T | undefined, fn: (val: T) => void) => {
 };
 
 export const definedOr = <V> (value: V | undefined, fallback: V): V => value === undefined ? fallback : value;
+
+export const assertExists = <V> (val: V | null | undefined, msg: string = 'Unexpected undefined or null'): V => {
+  if (val == undefined) {
+    throw new AssertionError(msg);
+  }
+  return val;
+};
+
+export const assertDefined = <V> (val: V | undefined, msg: string = 'Unexpected undefined'): V => {
+  if (val === undefined) {
+    throw new AssertionError(msg);
+  }
+  return val;
+};
