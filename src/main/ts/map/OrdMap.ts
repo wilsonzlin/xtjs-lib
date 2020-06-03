@@ -1,4 +1,4 @@
-import {transformIterator} from "iterator/transformIterator";
+import {map} from "iterator/transformIterator";
 
 export class OrdMap<K, V> extends Map<K, V> {
   // Cannot initialise here or in constructor, because native constructor (`super`)
@@ -33,7 +33,7 @@ export class OrdMap<K, V> extends Map<K, V> {
   }
 
   entries (): IterableIterator<[K, V]> {
-    return transformIterator(this.keys(), k => [k, this.get(k)] as [K, V]);
+    return map(this.keys(), k => [k, this.get(k)] as [K, V]);
   }
 
   keys (): IterableIterator<K> {
@@ -41,7 +41,7 @@ export class OrdMap<K, V> extends Map<K, V> {
   }
 
   values (): IterableIterator<V> {
-    return transformIterator(this.keys(), k => this.get(k) as V);
+    return map(this.keys(), k => this.get(k) as V);
   }
 
   clear (): void {

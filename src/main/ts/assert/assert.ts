@@ -1,11 +1,11 @@
-import {definedOr, mapDefined} from '../optional/optional';
+import {mapDefined} from '../optional/map';
 
 export class AssertionError extends Error {
 }
 
 export class UnreachableError extends AssertionError {
   constructor (val?: never, msg?: string) {
-    super(definedOr(msg, mapDefined(val, String)));
+    super(msg ?? mapDefined(val, String));
   }
 }
 
