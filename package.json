@@ -117,10 +117,12 @@
   "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.2.3",
+    "@types/chai-arrays": "^1.0.3",
     "@types/chai-as-promised": "^7.1.2",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.5",
     "chai": "^4.2.0",
+    "chai-arrays": "^2.0.0",
     "chai-as-promised": "^7.1.1",
     "mocha": "^6.2.0",
     "ts-node": "^8.4.1",
