@@ -22,8 +22,9 @@ const OUT_DIR = process.argv[2];
                 const fakeImport = firstArg.node.value;
                 const absImport = `${path.join(OUT_DIR, fakeImport)}.js`;
                 if (fs.existsSync(absImport)) {
+                  // Add `./` prefix in case importing from same directory.
                   // Node.js path.relative only works properly when first argument is directory.
-                  const relImport = path.relative(path.dirname(file.fullPath), absImport);
+                  const relImport = `./${path.relative(path.dirname(file.fullPath), absImport)}`;
                   firstArg.replaceWith(types.stringLiteral(relImport));
                 }
               }

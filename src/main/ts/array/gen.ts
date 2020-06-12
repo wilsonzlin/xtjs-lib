@@ -7,7 +7,7 @@ export const range = (from: number, to?: number, step?: number) => {
 export type ArrayElementProducer<T> = (index: number, array: T[]) => T;
 
 export const blk = <T> (of: number, producer: ArrayElementProducer<T>): T[] => {
-  return Array.from({length: of}, ((_, i: number, a: T[]) => producer(i, a)) as any);
+  return Array.from({length: of}, ((_: any, i: number, a: T[]) => producer(i, a)) as any);
 };
 
 export type SequentialArrayElementProducer<T> = (prev: T, index: number, array: T[]) => T;

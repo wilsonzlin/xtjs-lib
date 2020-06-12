@@ -1,6 +1,6 @@
 import fs from 'fs';
 import {convertFromFS, IStats} from 'fs/stats/IStats';
-import {asyncNullCatch} from '../../error/nullCatch';
+import {asyncNullCatch} from 'error/nullCatch';
 
 export interface IGetStatsOptions {
   path: string;
