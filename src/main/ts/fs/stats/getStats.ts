@@ -13,7 +13,7 @@ export const getStats = ({path, resolve: resolveSymlinks = false}: IGetStatsOpti
 export const getStatsSync = ({path, resolve: resolveSymlinks = false}: IGetStatsOptions): IStats =>
   convertFromFS(fs[resolveSymlinks ? 'statSync' : 'lstatSync'](path));
 
-export const nullStat = asyncNullCatch(fs.promises.stat.bind(fs.promises), 'ENOENT');
+export const nullStat = asyncNullCatch(fs.promises.stat, 'ENOENT');
 
 export const isFile = async (path: string): Promise<boolean> => !!(await nullStat(path))?.isFile();
 
