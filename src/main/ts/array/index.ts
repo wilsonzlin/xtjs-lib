@@ -7,6 +7,5 @@ export const assertIndexOf = (idx: number, msg: string = 'indexOf failed'): numb
   return idx;
 };
 
-export const mapIndexOf = <R> (idx: number, mapper: (validIdx: number) => R): R | undefined => {
-  return idx === -1 ? undefined : mapper(idx);
-};
+export const mapIndexOf = <R> (idx: number, mapper: (validIdx: number) => R): R | undefined =>
+  idx === -1 ? undefined : mapper(idx);
