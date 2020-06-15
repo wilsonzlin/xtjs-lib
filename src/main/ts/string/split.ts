@@ -5,3 +5,5 @@ export const segment = (str: string, n: number): string[] => {
   }
   return parts;
 };
+
+export const emptySplit = (str: string, split: string | RegExp, limit?: number): string[] => !str.length ? [] : str.split(split, limit);

@@ -1,5 +1,5 @@
 import {leftPad} from "string/pad";
-import {segment} from "string/segment";
+import {segment} from "string/split";
 
 export type RGBString = string;
 
