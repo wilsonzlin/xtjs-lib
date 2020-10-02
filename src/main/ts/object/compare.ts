@@ -1,5 +1,5 @@
 import {subsetArray, supersetArray} from "array/compare";
-import {stringsArrayEquals} from "array/equals";
+import {stringArrayEquals} from "array/equals";
 
 // Can't create compareKeys function as keys may not be
 // direct subsets/supersets of each other
@@ -7,7 +7,7 @@ export function sameKeys (a: any, b: any): boolean {
   let A = Object.keys(a);
   let B = Object.keys(b);
 
-  return stringsArrayEquals(A, B);
+  return stringArrayEquals(A, B);
 }
 
 export function subsetKeys (a: any, b: any): boolean {
