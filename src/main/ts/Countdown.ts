@@ -6,7 +6,7 @@ export default class Countdown {
   private timeoutID?: any = undefined;
   private readonly callbackQueue: Function[] = [];
 
-  constructor (durationMs: number) {
+  constructor(durationMs: number) {
     if (durationMs < 1) {
       throw new TypeError(`Invalid duration`);
     }
@@ -15,7 +15,7 @@ export default class Countdown {
     this.resume();
   }
 
-  resume (): this {
+  resume(): this {
     if (this.timeoutID !== undefined) {
       throw new TypeError(`Timer already running`);
     }
@@ -23,14 +23,19 @@ export default class Countdown {
       throw new TypeError(`Timer already complete`);
     }
 
-    this.timeoutID = setTimeout(() => {
-      this._complete();
-    }, this.paused === undefined ? this.durationMs : (this.started + this.durationMs - this.paused));
+    this.timeoutID = setTimeout(
+      () => {
+        this._complete();
+      },
+      this.paused === undefined
+        ? this.durationMs
+        : this.started + this.durationMs - this.paused
+    );
 
     return this;
   }
 
-  pause (): this {
+  pause(): this {
     if (this.timeoutID === undefined) {
       throw new TypeError(`Timer already paused`);
     }
@@ -45,7 +50,7 @@ export default class Countdown {
     return this;
   }
 
-  reset (): this {
+  reset(): this {
     if (this.complete) {
       throw new TypeError(`Timer already complete`);
     }
@@ -65,13 +70,13 @@ export default class Countdown {
     return this;
   }
 
-  then (callback: Function): this {
+  then(callback: Function): this {
     this.callbackQueue.push(callback);
     return this;
   }
 
-  private _complete (): void {
+  private _complete(): void {
     this.complete = true;
-    this.callbackQueue.forEach(c => c());
+    this.callbackQueue.forEach((c) => c());
   }
 }

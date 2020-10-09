@@ -1,7 +1,7 @@
 // Nulls are greater than all values of T.
-import Comparator from './Comparator';
+import Comparator from "./Comparator";
 
-export default <T> (comparator: Comparator<T>): Comparator<T | null> => {
+export default <T>(comparator: Comparator<T>): Comparator<T | null> => {
   return (a, b) => {
     if (a === null && b === null) {
       return 0;

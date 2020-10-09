@@ -1,9 +1,9 @@
-import {secureShuffle} from "array/shuffle";
-import {expect} from "chai";
+import { secureShuffle } from "array/shuffle";
+import { expect } from "chai";
 import "mocha";
-import {compareNatively} from "src/main/ts/nativeOrdering";
+import { compareNatively } from "src/main/ts/nativeOrdering";
 
-function shuffle<T> (a: Array<T>): Array<T> {
+function shuffle<T>(a: Array<T>): Array<T> {
   return secureShuffle(a.slice());
 }
 
@@ -22,7 +22,7 @@ describe("compareNatively", () => {
       "a2",
       "before",
       "zebra",
-      "\u{10FFFF}"
+      "\u{10FFFF}",
     ];
     let shuffled = shuffle(expected);
     expect(shuffled.sort(compareNatively)).to.deep.equal(expected);

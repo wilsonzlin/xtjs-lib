@@ -1,22 +1,22 @@
-import nativeOrdering from './nativeOrdering';
+import nativeOrdering from "./nativeOrdering";
 
 type NumberPart = {
   value: number;
   leadingZeros: number;
-}
+};
 
 type StringPart = {
   value: string;
-}
+};
 
 type Part = NumberPart | StringPart;
 
-const isNumberPart = (p: Part): p is NumberPart => 'leadingZeros' in p;
+const isNumberPart = (p: Part): p is NumberPart => "leadingZeros" in p;
 
 const digitRegExp = /^\d$/u;
 
 const lexNumber = (s: string, i: number): string => {
-  let raw = '';
+  let raw = "";
 
   while (i < s.length && digitRegExp.test(s[i])) {
     raw += s[i];
@@ -44,7 +44,6 @@ const tokenise = (s: string): Part[] => {
         leadingZeros: leadingZeros,
       } as NumberPart);
       i += rawNumber.length;
-
     } else {
       parts.push({
         value: c,
@@ -89,7 +88,10 @@ export default (a: string, b: string) => {
     if (aIsNum) {
       // Both are numbers
       // NOTE: The one with more leading zeros is before
-      const zerosCmp = nativeOrdering((unitA as NumberPart).leadingZeros, (unitB as NumberPart).leadingZeros);
+      const zerosCmp = nativeOrdering(
+        (unitA as NumberPart).leadingZeros,
+        (unitB as NumberPart).leadingZeros
+      );
       if (zerosCmp) {
         return zerosCmp * -1;
       }
@@ -97,4 +99,4 @@ export default (a: string, b: string) => {
   }
 
   return 0;
-}
+};

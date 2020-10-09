@@ -1,6 +1,6 @@
-import AssertionError from './AssertionError';
+import AssertionError from "./AssertionError";
 
-export default (chk: boolean, msg: string = 'Unexpected state'): void => {
+export default (chk: boolean, msg: string = "Unexpected state"): void => {
   if (!chk) {
     throw new AssertionError(msg);
   }

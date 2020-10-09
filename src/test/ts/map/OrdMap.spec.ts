@@ -1,5 +1,5 @@
-import {expect} from "chai";
-import {OrdMap} from "src/main/ts/OrderedMap";
+import { expect } from "chai";
+import { OrdMap } from "src/main/ts/OrderedMap";
 import "mocha";
 
 describe("OrdMap", () => {
@@ -8,12 +8,15 @@ describe("OrdMap", () => {
       ["b", 3],
       ["a", 1],
       [true, 4],
-      [function () {
-        console.log("hello");
-      }, () => {
-        console.error("bye");
-      }],
-      ["_", {a: console.log}],
+      [
+        function () {
+          console.log("hello");
+        },
+        () => {
+          console.error("bye");
+        },
+      ],
+      ["_", { a: console.log }],
       [3.14, Number.MAX_SAFE_INTEGER],
     ];
 
@@ -30,12 +33,15 @@ describe("OrdMap", () => {
       ["b", 3],
       ["a", 1],
       [true, 4],
-      [function () {
-        console.log("hello");
-      }, () => {
-        console.error("bye");
-      }],
-      ["_", {a: console.log}],
+      [
+        function () {
+          console.log("hello");
+        },
+        () => {
+          console.error("bye");
+        },
+      ],
+      ["_", { a: console.log }],
       [3.14, Number.MAX_SAFE_INTEGER],
     ];
 

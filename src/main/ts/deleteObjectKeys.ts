@@ -4,4 +4,4 @@ export default (obj: object, ...keys: string[]) => {
     count += delete obj[k] ? 1 : 0;
   }
   return count;
-}
+};

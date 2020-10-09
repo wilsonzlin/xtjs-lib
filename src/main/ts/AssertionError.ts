@@ -1,2 +1,1 @@
-export default class AssertionError extends Error {
-}
+export default class AssertionError extends Error {}

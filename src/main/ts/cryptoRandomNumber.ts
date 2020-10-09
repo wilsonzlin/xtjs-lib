@@ -1,4 +1,4 @@
-import * as crypto from 'crypto';
+import * as crypto from "crypto";
 
 export default () => {
   let float: number;
@@ -7,4 +7,4 @@ export default () => {
     float = new DataView(bytes.buffer).getFloat64(0);
   } while (!Number.isFinite(float));
   return float;
-}
+};

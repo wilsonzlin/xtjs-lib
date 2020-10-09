@@ -1,3 +1,4 @@
-import path from 'path';
+import path from "path";
 
-export default (p: string) => p.slice(p.lastIndexOf(path.sep) + 1).lastIndexOf('.');
+export default (p: string) =>
+  p.slice(p.lastIndexOf(path.sep) + 1).lastIndexOf(".");

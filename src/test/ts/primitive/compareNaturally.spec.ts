@@ -1,29 +1,21 @@
-import {secureShuffle} from "array/shuffle";
-import {expect} from "chai";
+import { secureShuffle } from "array/shuffle";
+import { expect } from "chai";
 import "mocha";
-import {compareNaturally} from "src/main/ts/naturalOrdering";
+import { compareNaturally } from "src/main/ts/naturalOrdering";
 
-function shuffle<T> (a: Array<T>): Array<T> {
+function shuffle<T>(a: Array<T>): Array<T> {
   return secureShuffle(a.slice());
 }
 
 describe("compareNaturally", () => {
   it("should order the greater amount of leading zeros first for numeric substrings with equal values", () => {
-    let expected = [
-      "0010",
-      "010",
-      "10",
-    ];
+    let expected = ["0010", "010", "10"];
     let shuffled = shuffle(expected);
     expect(shuffled.sort(compareNaturally)).to.deep.equal(expected);
   });
 
   it("should not consider decimal places", () => {
-    let expected = [
-      "1.01",
-      "1.1",
-      "1.09",
-    ];
+    let expected = ["1.01", "1.1", "1.09"];
     let shuffled = shuffle(expected);
     expect(shuffled.sort(compareNaturally)).to.deep.equal(expected);
   });

@@ -1,5 +1,5 @@
-import {expect} from "chai";
-import {convertFromFS} from "fs/stats/IStats";
+import { expect } from "chai";
+import { convertFromFS } from "fs/stats/IStats";
 import "mocha";
 
 describe("convertFromFS", () => {
@@ -29,7 +29,7 @@ describe("convertFromFS", () => {
       atime: new Date("2018-07-22T02:46:56.090Z"),
       mtime: new Date("2018-07-22T02:46:55.946Z"),
       ctime: new Date("2018-07-22T02:46:55.946Z"),
-      birthtime: new Date("2018-07-22T02:46:55.946Z ")
+      birthtime: new Date("2018-07-22T02:46:55.946Z "),
     };
 
     let expected = {

@@ -1,6 +1,6 @@
-import identity from './identity';
+import identity from "./identity";
 
-export default <T> (key: (val: T) => any = identity) => {
+export default <T>(key: (val: T) => any = identity) => {
   const seen = new Set();
   return (val: T) => {
     const k = key(val);

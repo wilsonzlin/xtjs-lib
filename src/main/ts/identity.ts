@@ -1,1 +1,1 @@
-export default <T> (val: T) => val;
+export default <T>(val: T) => val;

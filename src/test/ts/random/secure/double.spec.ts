@@ -1,6 +1,6 @@
-import {expect} from "chai";
+import { expect } from "chai";
 import "mocha";
-import {cryptoRandomNumber} from "src/main/ts/cryptoRandomNumber";
+import { cryptoRandomNumber } from "src/main/ts/cryptoRandomNumber";
 
 describe("cryptoRandomDouble", () => {
   it("should generate DP FP bit patterns that are not NaN or +/-Infinity", () => {

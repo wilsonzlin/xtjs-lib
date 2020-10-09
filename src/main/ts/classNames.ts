@@ -1,11 +1,20 @@
 type ConditionalClasses = {
-  [className: string]: boolean
+  [className: string]: boolean;
 };
 
-export default (...classes: (ConditionalClasses | string | string[] | false | null | undefined)[]) => {
+export default (
+  ...classes: (
+    | ConditionalClasses
+    | string
+    | string[]
+    | false
+    | null
+    | undefined
+  )[]
+) => {
   const classNames: string[] = [];
   for (const unit of classes) {
-    if (typeof unit == 'string') {
+    if (typeof unit == "string") {
       classNames.push(unit);
     } else if (Array.isArray(unit)) {
       classNames.push(...unit);
@@ -19,5 +28,5 @@ export default (...classes: (ConditionalClasses | string | string[] | false | nu
       }
     }
   }
-  return classNames.join(' ');
+  return classNames.join(" ");
 };

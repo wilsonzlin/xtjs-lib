@@ -1,1 +1,1 @@
-export default (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+export default (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

@@ -7,7 +7,11 @@ export default function* (from: number, to?: number, step?: number) {
     step = 1;
   }
 
-  for (let current = from; step < 0 ? current > to : current < to; current += step) {
+  for (
+    let current = from;
+    step < 0 ? current > to : current < to;
+    current += step
+  ) {
     yield current;
     current += step;
   }

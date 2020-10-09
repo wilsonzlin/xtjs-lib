@@ -1,4 +1,4 @@
-export default function* <T> (it: Iterable<T>, joiner: T) {
+export default function* <T>(it: Iterable<T>, joiner: T) {
   let first = true;
   for (const val of it) {
     if (!first) {
@@ -7,4 +7,4 @@ export default function* <T> (it: Iterable<T>, joiner: T) {
     first = false;
     yield val;
   }
-};
+}

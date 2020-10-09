@@ -1,13 +1,11 @@
-import {expect} from "chai";
+import { expect } from "chai";
 import "mocha";
-import {cryptoRandom} from "src/main/ts/cryptoRandomPortion";
+import { cryptoRandom } from "src/main/ts/cryptoRandomPortion";
 
 describe("cryptoRandom", () => {
   it("should generate values in the range [0, 1)", () => {
     for (let i = 0; i < 1e5; i++) {
-      expect(cryptoRandom())
-        .at.least(0)
-        .lessThan(1);
+      expect(cryptoRandom()).at.least(0).lessThan(1);
     }
   });
 
