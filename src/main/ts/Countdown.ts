@@ -1,19 +1,17 @@
-import {Duration} from 'time/Duration';
-
 export default class Countdown {
   private started: number;
   private paused?: number = undefined;
-  private readonly duration: number;
+  private readonly durationMs: number;
   private complete: boolean = false;
   private timeoutID?: any = undefined;
   private readonly callbackQueue: Function[] = [];
 
-  constructor (duration: Duration) {
-    if (duration < 1) {
+  constructor (durationMs: number) {
+    if (durationMs < 1) {
       throw new TypeError(`Invalid duration`);
     }
     this.started = Date.now();
-    this.duration = duration;
+    this.durationMs = durationMs;
     this.resume();
   }
 
@@ -27,7 +25,7 @@ export default class Countdown {
 
     this.timeoutID = setTimeout(() => {
       this._complete();
-    }, this.paused === undefined ? this.duration : (this.started + this.duration - this.paused));
+    }, this.paused === undefined ? this.durationMs : (this.started + this.durationMs - this.paused));
 
     return this;
   }
@@ -61,7 +59,7 @@ export default class Countdown {
       clearTimeout(this.timeoutID);
       this.timeoutID = setTimeout(() => {
         this._complete();
-      }, this.duration);
+      }, this.durationMs);
     }
 
     return this;

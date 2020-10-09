@@ -1,1 +1,1 @@
-export default <V> (value: V, cond: boolean | ((val: V) => boolean)) => (typeof cond == 'function' ? cond(value) : cond) ? value : undefined;
+export default <V> (value: V, cond: (value: V) => any) => cond(value) ? value : undefined;

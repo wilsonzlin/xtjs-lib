@@ -1,7 +1,0 @@
-{
-  "private": true,
-  "dependencies": {
-    "@babel/core": "^7.10.2",
-    "readdirp": "^3.4.0"
-  }
-}

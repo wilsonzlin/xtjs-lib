@@ -1,4 +1,4 @@
-import {concatBuffers} from 'buffer/concat';
+import {concatBuffers} from 'src/main/ts/concatBuffers';
 import chai, {expect} from 'chai';
 import 'mocha';
 import chaiArrays = require('chai-arrays');

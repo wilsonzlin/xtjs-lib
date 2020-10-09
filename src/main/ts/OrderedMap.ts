@@ -1,4 +1,4 @@
-import {map} from "iterator/map";
+import map from './map';
 
 export default class OrderedMap<K, V> extends Map<K, V> {
   // Cannot initialise here or in constructor, because native constructor (`super`)
