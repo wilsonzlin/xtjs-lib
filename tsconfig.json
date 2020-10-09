@@ -1,9 +1,9 @@
 {
   "include": [
-    "src/**/*.ts"
+    "ts/**/*.ts"
   ],
   "exclude": [
-    "src/**/*.spec.ts"
+    "ts/**/*.spec.ts"
   ],
   "compilerOptions": {
     "allowJs": false,

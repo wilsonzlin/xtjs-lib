@@ -4,13 +4,14 @@
   "version": "0.4.0",
   "main": "js/main.js",
   "files": [
-    "js/**"
+    "js/**",
+    "ts/**"
   ],
   "scripts": {
     "build": "npm run clean && tsc",
-    "format": "prettier --write src",
-    "test": "mocha -r ts-node/register src/**/*.spec.ts",
-    "prepublishOnly": "prettier --check src && npm run test && npm run build",
+    "format": "prettier --write ts",
+    "test": "mocha -r ts-node/register ts/**/*.spec.ts",
+    "prepublishOnly": "prettier --check ts && npm run test && npm run build",
     "clean": "rm -rf js"
   },
   "repository": {
@@ -18,7 +19,7 @@
     "url": "git+https://github.com/wilsonzlin/extlib.git"
   },
   "author": {
-    "email": "contact@wilsonl.in",
+    "email": "npm@wilsonl.in",
     "name": "Wilson Lin",
     "url": "https://wilsonl.in/"
   },
