@@ -1,6 +1,9 @@
 {
   "include": [
-    "src/main/ts/**/*.ts"
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts"
   ],
   "compilerOptions": {
     "allowJs": false,
