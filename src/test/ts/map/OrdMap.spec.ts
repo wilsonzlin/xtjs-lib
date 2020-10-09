@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {OrdMap} from "map/OrdMap";
+import {OrdMap} from "src/main/ts/OrderedMap";
 import "mocha";
 
 describe("OrdMap", () => {

@@ -1,6 +1,6 @@
 import {expect} from "chai";
 import "mocha";
-import {cryptoRandom} from "random/secure/random";
+import {cryptoRandom} from "src/main/ts/cryptoRandomPortion";
 
 describe("cryptoRandom", () => {
   it("should generate values in the range [0, 1)", () => {

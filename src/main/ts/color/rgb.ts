@@ -1,5 +1,5 @@
 import {leftPad} from "string/pad";
-import {segment} from "string/split";
+import {chunkString} from "chunks";
 
 export type RGBString = string;
 
@@ -73,7 +73,7 @@ export const fromHex = (str: string): RGBArray => {
   }
   const hex = match[1];
   const short = hex.length == 3;
-  const parts = segment(hex, short ? 1 : 2);
+  const parts = chunkString(hex, short ? 1 : 2);
   return parts.map(d => {
     let digit = Number.parseInt(d, 16);
     if (short) {

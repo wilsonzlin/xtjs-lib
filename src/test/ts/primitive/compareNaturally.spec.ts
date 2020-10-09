@@ -1,7 +1,7 @@
 import {secureShuffle} from "array/shuffle";
 import {expect} from "chai";
 import "mocha";
-import {compareNaturally} from "primitive/compareNaturally";
+import {compareNaturally} from "src/main/ts/naturalOrdering";
 
 function shuffle<T> (a: Array<T>): Array<T> {
   return secureShuffle(a.slice());

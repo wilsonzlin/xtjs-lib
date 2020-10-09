@@ -1,6 +1,6 @@
 import {expect} from "chai";
 import "mocha";
-import {cryptoRandomHex} from "random/secure/hex";
+import {cryptoRandomHex} from "src/main/ts/cryptoRandomHex";
 
 const HEXSTR_REGEX = /^[0-9a-f]+$/;
 
