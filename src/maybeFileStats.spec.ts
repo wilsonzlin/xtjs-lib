@@ -7,7 +7,9 @@ chai.use(chaiAsPromised);
 
 describe("maybeFileStats", () => {
   it("should resolve to null for non-existent files", () => {
-    return expect(maybeFileStats("./non.existent.file")).to.eventually.equal(undefined);
+    return expect(maybeFileStats("./non.existent.file")).to.eventually.equal(
+      undefined
+    );
   });
   it("should reject for errors other than ENOENT", () => {
     return expect(maybeFileStats("\0")).to.eventually.be.rejected;

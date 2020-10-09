@@ -9,15 +9,15 @@ describe("OrderedMap", () => {
       ["a", 1],
       [true, 4],
       [
-        function() {
+        function () {
           console.log("hello");
         },
         () => {
           console.error("bye");
-        }
+        },
       ],
       ["_", { a: console.log }],
-      [3.14, Number.MAX_SAFE_INTEGER]
+      [3.14, Number.MAX_SAFE_INTEGER],
     ];
 
     const map = new OrderedMap();
@@ -34,15 +34,15 @@ describe("OrderedMap", () => {
       ["a", 1],
       [true, 4],
       [
-        function() {
+        function () {
           console.log("hello");
         },
         () => {
           console.error("bye");
-        }
+        },
       ],
       ["_", { a: console.log }],
-      [3.14, Number.MAX_SAFE_INTEGER]
+      [3.14, Number.MAX_SAFE_INTEGER],
     ];
 
     const map = new OrderedMap<any, any>(expected);
@@ -54,12 +54,12 @@ describe("OrderedMap", () => {
     const values = [
       ["b", 3],
       ["a", 1],
-      ["b", 2]
+      ["b", 2],
     ];
 
     const expected = [
       ["b", 2],
-      ["a", 1]
+      ["a", 1],
     ];
 
     const map = new OrderedMap();

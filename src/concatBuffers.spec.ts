@@ -61,7 +61,7 @@ describe("concatBuffers", () => {
       0,
       0,
       0,
-      0
+      0,
     ]);
   });
 });

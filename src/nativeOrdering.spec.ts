@@ -18,7 +18,7 @@ describe("nativeOrdering", () => {
       "a2",
       "before",
       "zebra",
-      "\u{10FFFF}"
+      "\u{10FFFF}",
     ];
     const shuffled = cryptoShuffleArray(expected.slice());
     expect(shuffled.sort(nativeOrdering)).to.deep.equal(expected);

@@ -3,7 +3,7 @@ import "mocha";
 import cryptoShuffleArray from "./cryptoShuffleArray";
 import naturalOrdering from "./naturalOrdering";
 
-const shuffle = <T> (a: T[]): T[] => cryptoShuffleArray(a.slice());
+const shuffle = <T>(a: T[]): T[] => cryptoShuffleArray(a.slice());
 
 describe("naturalOrdering", () => {
   it("should order the greater amount of leading zeros first for numeric substrings with equal values", () => {
@@ -27,7 +27,7 @@ describe("naturalOrdering", () => {
       "a9999999999999999999999",
       "a_",
       "aa",
-      "a\u{10FFFF}"
+      "a\u{10FFFF}",
     ];
     const shuffled = shuffle(expected);
     expect(shuffled.sort(naturalOrdering)).to.deep.equal(expected);
@@ -57,7 +57,7 @@ describe("naturalOrdering", () => {
       "a2a101",
       "a2aa",
       "a10",
-      "a11"
+      "a11",
     ];
     const shuffled = shuffle(expected);
     expect(shuffled.sort(naturalOrdering)).to.deep.equal(expected);

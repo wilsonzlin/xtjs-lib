@@ -3,7 +3,7 @@ import "mocha";
 import cryptoShuffleArray from "./cryptoShuffleArray";
 import stringArrayEquals from "./stringArrayEquals";
 
-const shuffle = <T> (a: Array<T>): Array<T> => cryptoShuffleArray(a.slice());
+const shuffle = <T>(a: Array<T>): Array<T> => cryptoShuffleArray(a.slice());
 
 describe("stringArrayEquals", () => {
   it("should return true if both arrays have same strings", () => {

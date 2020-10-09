@@ -2,23 +2,23 @@ import { expect } from "chai";
 import "mocha";
 import errorWrapped from "./errorWrapped";
 
-function fnThatThrowsException (_: string, __: number): string {
+function fnThatThrowsException(_: string, __: number): string {
   throw new Error();
 }
 
-function fnThatNeverThrowsException (_: string, __: number): string {
+function fnThatNeverThrowsException(_: string, __: number): string {
   return "abcdefg";
 }
 
-function fnThatThrowsENOENT (_: string, __: number): string {
+function fnThatThrowsENOENT(_: string, __: number): string {
   throw {
-    code: "ENOENT"
+    code: "ENOENT",
   };
 }
 
-function fnThatThrows42_31415 (_: string, __: number): string {
+function fnThatThrows42_31415(_: string, __: number): string {
   throw {
-    code: 42.31415
+    code: 42.31415,
   };
 }
 
