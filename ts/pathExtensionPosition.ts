@@ -1,4 +1,6 @@
-import path from "path";
+import { sep } from "path";
 
-export default (p: string) =>
-  p.slice(p.lastIndexOf(path.sep) + 1).lastIndexOf(".");
+export default (path: string, separator: string = sep) => {
+  const lastSepPos = path.lastIndexOf(separator) + 1;
+  return lastSepPos + path.slice(lastSepPos).lastIndexOf(".");
+};
