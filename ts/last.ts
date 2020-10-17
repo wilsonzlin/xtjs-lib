@@ -1,1 +1,1 @@
-export default <T> (seq: ArrayLike<T>): T => seq[seq.length - 1];
+export default <T>(seq: ArrayLike<T>): T => seq[seq.length - 1];
