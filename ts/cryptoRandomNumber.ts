@@ -1,10 +1,4 @@
-import * as crypto from "crypto";
+import cryptoRandomPortionInclusive from "./cryptoRandomPortionInclusive";
 
-export default () => {
-  let float: number;
-  do {
-    const bytes = crypto.randomBytes(8);
-    float = new DataView(bytes.buffer).getFloat64(0);
-  } while (!Number.isFinite(float));
-  return float;
-};
+export default (min: number, max: number) =>
+  cryptoRandomPortionInclusive() * (max - min) + min;
