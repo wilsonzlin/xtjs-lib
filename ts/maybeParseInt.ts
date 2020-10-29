@@ -1,4 +1,6 @@
-import maybe from "./maybe";
+import filterValue from "./filterValue";
 
 export default (raw: string, base: number = 10): number | undefined =>
-  maybe(Number.parseInt(raw, base), (parsed) => Number.isSafeInteger(parsed));
+  filterValue(Number.parseInt(raw, base), (parsed) =>
+    Number.isSafeInteger(parsed)
+  );

@@ -1,4 +1,4 @@
-import maybe from "./maybe";
+import filterValue from "./filterValue";
 
 export default (raw: string) =>
-  maybe(Number.parseFloat(raw), (val) => Number.isFinite(val));
+  filterValue(Number.parseFloat(raw), (val) => Number.isFinite(val));
