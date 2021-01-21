@@ -1,5 +1,9 @@
 export default class Dict<K, V> {
-  private readonly map: Map<K, V> = new Map();
+  private readonly map: Map<K, V>;
+
+  constructor(entries?: Iterable<readonly [K, V]>) {
+    this.map = entries ? new Map(entries) : new Map();
+  }
 
   clear(): void {
     this.map.clear();
@@ -61,5 +65,9 @@ export default class Dict<K, V> {
 
   values(): Iterable<V> {
     return this.map.values();
+  }
+
+  [Symbol.iterator]() {
+    return this.entries();
   }
 }
