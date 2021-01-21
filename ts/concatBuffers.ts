@@ -11,7 +11,7 @@ type TypedArray =
   | BigInt64Array
   | BigUint64Array;
 
-export default (...buffers: (TypedArray | ArrayBuffer | number[])[]) => {
+export default (...buffers: (TypedArray | ArrayBufferLike | number[])[]) => {
   const size = buffers.reduce(
     (sum, buf) => sum + (Array.isArray(buf) ? buf.length : buf.byteLength),
     0
@@ -21,9 +21,7 @@ export default (...buffers: (TypedArray | ArrayBuffer | number[])[]) => {
   let offset = 0;
   for (const buf of buffers) {
     result.set(
-      new Uint8Array(
-        buf instanceof ArrayBuffer || Array.isArray(buf) ? buf : buf.buffer
-      ),
+      new Uint8Array(ArrayBuffer.isView(buf) ? buf.buffer : buf),
       offset
     );
     offset += Array.isArray(buf) ? buf.length : buf.byteLength;
