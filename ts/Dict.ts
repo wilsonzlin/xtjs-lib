@@ -1,4 +1,4 @@
-export default class Dict<K, V> {
+export default class Dict<K, V> implements Map<K, V> {
   private readonly map: Map<K, V>;
 
   constructor(entries?: Iterable<readonly [K, V]>) {
@@ -20,7 +20,7 @@ export default class Dict<K, V> {
     return this.map.has(key);
   }
 
-  entries(): Iterable<[K, V]> {
+  entries(): IterableIterator<[K, V]> {
     return this.map.entries();
   }
 
@@ -43,7 +43,7 @@ export default class Dict<K, V> {
     return !this.map.size;
   }
 
-  keys(): Iterable<K> {
+  keys(): IterableIterator<K> {
     return this.map.keys();
   }
 
@@ -59,15 +59,34 @@ export default class Dict<K, V> {
     return old;
   }
 
-  size() {
+  get size() {
     return this.map.size;
   }
 
-  values(): Iterable<V> {
+  values(): IterableIterator<V> {
     return this.map.values();
   }
 
   [Symbol.iterator]() {
     return this.entries();
+  }
+
+  readonly [Symbol.toStringTag] = "extlib.Dict";
+
+  delete(key: K): boolean {
+    return this.map.delete(key);
+  }
+
+  forEach(cb: (value: V, key: K, map: Map<K, V>) => void, thisArg?: any): void {
+    return this.map.forEach(cb, thisArg);
+  }
+
+  has(key: K): boolean {
+    return this.map.has(key);
+  }
+
+  set(key: K, value: V): this {
+    this.map.set(key, value);
+    return this;
   }
 }
