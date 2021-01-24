@@ -18,5 +18,5 @@ describe("cryptoRandomFloat", () => {
         .to.be.gte(Number.MIN_VALUE)
         .and.to.be.lte(Number.MAX_VALUE);
     }
-  });
+  }).timeout(5000);
 });
