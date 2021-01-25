@@ -14,4 +14,13 @@ describe("findAndRemove", () => {
     expect(findAndRemove(array, (val) => val === "5")).to.equal("5");
     expect(array).to.deep.equal([7, 8, "5", true, Math.PI, fn, false, ""]);
   });
+
+  it("should return a subtype when using a type predicate", () => {
+    const fn = () => void 0;
+    const array = ["5", 7, 8, "5", true, Math.PI, fn, false, ""];
+    const pred = (val: unknown): val is "5" => val === "5";
+    const val: "5" | undefined = findAndRemove(array, pred);
+    // NOTE: We aren't testing the type here; it should be tested when this file is compiled by TS.
+    expect(val).to.deep.equal("5");
+  });
 });
