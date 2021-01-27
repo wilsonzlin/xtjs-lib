@@ -53,6 +53,14 @@ export default class Dict<K, V> implements Map<K, V> {
     return old;
   }
 
+  putIfAbsentOrThrow(key: K, value: V): this {
+    if (this.map.has(key)) {
+      throw new ReferenceError(`Key already exists`);
+    }
+    this.map.set(key, value);
+    return this;
+  }
+
   remove(key: K): V | undefined {
     const old = this.map.get(key);
     this.map.delete(key);
