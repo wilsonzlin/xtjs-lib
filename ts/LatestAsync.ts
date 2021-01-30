@@ -4,7 +4,7 @@ export default class LatestAsync {
   readonly onlyLatest = <T>(promise: Promise<T>): Promise<T> =>
     new Promise((resolve, reject) => {
       const invokeId = ++this.currentInvokeId;
-      let error: any, result: T | undefined;
+      let error: any, result: any;
       promise
         .then(
           (r) => (result = r),
