@@ -1,7 +1,7 @@
 {
   "name": "extlib",
   "description": "Complementary extra standard library for JS/TS; type safe, no dependencies, modular imports",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "files": [
     "js/*",
     "ts/*"
