@@ -13,6 +13,5 @@ export default function* (from: number, to?: number, step?: number) {
     current += step
   ) {
     yield current;
-    current += step;
   }
 }
