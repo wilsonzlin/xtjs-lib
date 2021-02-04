@@ -1,8 +1,13 @@
 export default class Dict<K, V> implements Map<K, V> {
   private readonly map: Map<K, V>;
 
-  constructor(entries?: Iterable<readonly [K, V]>) {
-    this.map = entries ? new Map(entries) : new Map();
+  constructor(entriesOrMap?: Map<K, V> | Iterable<readonly [K, V]>) {
+    this.map =
+      entriesOrMap instanceof Map
+        ? entriesOrMap
+        : entriesOrMap
+        ? new Map(entriesOrMap)
+        : new Map();
   }
 
   clear(): void {
@@ -79,7 +84,7 @@ export default class Dict<K, V> implements Map<K, V> {
     return this.entries();
   }
 
-  readonly [Symbol.toStringTag] = "extlib.Dict";
+  readonly [Symbol.toStringTag]: string = "extlib.Dict";
 
   delete(key: K): boolean {
     return this.map.delete(key);
