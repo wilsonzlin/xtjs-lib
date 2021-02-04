@@ -10,6 +10,10 @@ export default class Dict<K, V> implements Map<K, V> {
         : new Map();
   }
 
+  clone(): Dict<K, V> {
+    return new Dict(this.entries());
+  }
+
   clear(): void {
     this.map.clear();
   }
