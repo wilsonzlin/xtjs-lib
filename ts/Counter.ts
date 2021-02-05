@@ -2,19 +2,31 @@ import Dict from "./Dict";
 import filter from "./filter";
 
 export default class Counter<V> {
-  private readonly counts: Dict<V, number>;
+  private readonly map: Dict<V, number>;
 
-  constructor(init?: Iterable<[V, number]>) {
-    this.counts = new Dict(init);
+  constructor(init?: Iterable<readonly [V, number]>) {
+    this.map = new Dict(init);
   }
 
   adjust(val: V, diff: number): this {
-    this.counts.put(val, this.counts.getOrDefault(val, 0) + diff);
+    this.map.put(val, this.map.getOrDefault(val, 0) + diff);
     return this;
   }
 
   entries(): Iterator<[V, number]> {
-    return filter(this.counts.entries(), ([_, count]) => count > 0);
+    return this.map.entries();
+  }
+
+  positiveEntries(): Iterator<[V, number]> {
+    return filter(this.map.entries(), ([_, count]) => count > 0);
+  }
+
+  values(): Iterator<V> {
+    return this.map.keys();
+  }
+
+  counts(): Iterator<number> {
+    return this.map.values();
   }
 
   increment(val: V): this {
@@ -26,11 +38,11 @@ export default class Counter<V> {
   }
 
   get(val: V): number {
-    return this.counts.getOrDefault(val, 0);
+    return this.map.getOrDefault(val, 0);
   }
 
   set(val: V, count: number): this {
-    this.counts.put(val, count);
+    this.map.put(val, count);
     return this;
   }
 }
