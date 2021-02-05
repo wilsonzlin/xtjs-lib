@@ -11,7 +11,7 @@ describe("cryptoRandomHex", () => {
       expect(str.length).to.equal(8 * 2);
       expect(str).to.match(HEXSTR_REGEX);
     }
-  });
+  }).timeout(60000);
 
   it("should generate hexadecimal strings with entropy bytes equal to provided argument", () => {
     for (let i = 0; i < 1e5; i++) {
@@ -29,5 +29,5 @@ describe("cryptoRandomHex", () => {
       const str = cryptoRandomHex(length);
       expect(str).to.equal("");
     }
-  });
+  }).timeout(60000);
 });

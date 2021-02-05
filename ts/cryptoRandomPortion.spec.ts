@@ -7,7 +7,7 @@ describe("cryptoRandomPortion", () => {
     for (let i = 0; i < 1e5; i++) {
       expect(cryptoRandomPortion()).at.least(0).lessThan(1);
     }
-  });
+  }).timeout(60000);
 
   it("should be reasonably random", () => {
     const slotsCount = 20;
@@ -45,5 +45,5 @@ describe("cryptoRandomPortion", () => {
     }
 
     expect(Math.abs(maxCount - minCount)).lessThan(threshold);
-  });
+  }).timeout(60000);
 });

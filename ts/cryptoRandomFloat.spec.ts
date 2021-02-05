@@ -9,7 +9,7 @@ describe("cryptoRandomFloat", () => {
       expect(number).to.not.be.NaN;
       expect(Number.isFinite(number)).to.be.true;
     }
-  });
+  }).timeout(60000);
 
   it("should generate numbers that are absolute between MIN_VALUE and MAX_VALUE (inclusive)", () => {
     for (let i = 0; i < 1e5; i++) {
@@ -18,5 +18,5 @@ describe("cryptoRandomFloat", () => {
         .to.be.gte(Number.MIN_VALUE)
         .and.to.be.lte(Number.MAX_VALUE);
     }
-  }).timeout(5000);
+  }).timeout(60000);
 });

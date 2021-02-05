@@ -7,7 +7,7 @@ describe("cryptoRandomInteger", () => {
     for (let i = 0; i < 1e5; i++) {
       expect(cryptoRandomInteger(-2, 4)).at.least(-2).at.most(4);
     }
-  });
+  }).timeout(60000);
 
   it("should be reasonably random", () => {
     const min = -2;
@@ -47,5 +47,5 @@ describe("cryptoRandomInteger", () => {
     }
 
     expect(Math.abs(maxCount - minCount)).lessThan(threshold);
-  });
+  }).timeout(60000);
 });
