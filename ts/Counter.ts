@@ -1,11 +1,20 @@
 import Dict from "./Dict";
+import filter from "./filter";
 
 export default class Counter<V> {
-  private readonly counts: Dict<V, number> = new Dict();
+  private readonly counts: Dict<V, number>;
+
+  constructor(init?: Iterable<[V, number]>) {
+    this.counts = new Dict(init);
+  }
 
   adjust(val: V, diff: number): this {
     this.counts.put(val, this.counts.getOrDefault(val, 0) + diff);
     return this;
+  }
+
+  entries(): Iterator<[V, number]> {
+    return filter(this.counts.entries(), ([_, count]) => count > 0);
   }
 
   increment(val: V): this {
