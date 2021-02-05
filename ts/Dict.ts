@@ -25,6 +25,18 @@ export default class Dict<K, V> implements Map<K, V> {
     return this.map.get(key)!;
   }
 
+  computeIf(
+    key: K,
+    pred: (value: V | undefined) => boolean,
+    provider: (key: K, value: V | undefined) => V
+  ): V {
+    const cur = this.get(key);
+    if (!pred(cur)) {
+      this.map.set(key, provider(key, cur));
+    }
+    return this.map.get(key)!;
+  }
+
   containsKey(key: K): boolean {
     return this.map.has(key);
   }
