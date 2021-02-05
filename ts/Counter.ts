@@ -13,19 +13,19 @@ export default class Counter<V> {
     return this;
   }
 
-  entries(): Iterator<[V, number]> {
+  entries() {
     return this.map.entries();
   }
 
-  positiveEntries(): Iterator<[V, number]> {
+  positiveEntries() {
     return filter(this.map.entries(), ([_, count]) => count > 0);
   }
 
-  values(): Iterator<V> {
+  values() {
     return this.map.keys();
   }
 
-  counts(): Iterator<number> {
+  counts() {
     return this.map.values();
   }
 
