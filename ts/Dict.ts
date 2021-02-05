@@ -31,7 +31,7 @@ export default class Dict<K, V> implements Map<K, V> {
     provider: (key: K, value: V | undefined) => V
   ): V {
     const cur = this.get(key);
-    if (!pred(cur)) {
+    if (pred(cur)) {
       this.map.set(key, provider(key, cur));
     }
     return this.map.get(key)!;
