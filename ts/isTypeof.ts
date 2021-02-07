@@ -11,9 +11,8 @@ export default <
     | "object"
 >(
   val: unknown,
-  type: T,
-  msg?: string
-): T extends "string"
+  type: T
+): val is T extends "string"
   ? string
   : T extends "number"
   ? number
@@ -25,9 +24,4 @@ export default <
   ? Function
   : T extends "object"
   ? null | object
-  : never => {
-  if (typeof val != type) {
-    throw new AssertionError(msg ?? "Value is not of the correct type");
-  }
-  return val as any;
-};
+  : never => typeof val == type;
