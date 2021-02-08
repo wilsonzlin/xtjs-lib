@@ -28,7 +28,9 @@ export default (
       // WARNING: Do not use `.buffer` for Node.js Buffer values, as per the doc:
       // "[.buffer] is not guaranteed to correspond exactly to the original Buffer.
       //  See the notes on buf.byteOffset for details."
-      new Uint8Array(ArrayBuffer.isView(buf) ? buf.buffer : buf),
+      new Uint8Array(
+        ArrayBuffer.isView(buf) && !Buffer.isBuffer(buf) ? buf.buffer : buf
+      ),
       offset
     );
     offset += Array.isArray(buf) ? buf.length : buf.byteLength;
