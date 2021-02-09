@@ -19,7 +19,8 @@ describe("concatBuffers", () => {
       new Int32Array(),
       new Int32Array([-1, -2, 0]),
       [],
-      Buffer.from([31, 42, 53])
+      Buffer.from([31, 42, 53]),
+      new Uint8Array(new Uint8Array([0, 1, 2, 3, 4]).buffer, 2, 2)
     );
 
     // WARNING: The byte order is platform dependent, but this test assumes LE!
@@ -66,6 +67,8 @@ describe("concatBuffers", () => {
       31,
       42,
       53,
+      2,
+      3,
     ]);
   });
 });

@@ -25,12 +25,9 @@ export default (
   let offset = 0;
   for (const buf of buffers) {
     result.set(
-      // WARNING: Do not use `.buffer` for Node.js Buffer values, as per the doc:
-      // "[.buffer] is not guaranteed to correspond exactly to the original Buffer.
-      //  See the notes on buf.byteOffset for details."
-      new Uint8Array(
-        ArrayBuffer.isView(buf) && !Buffer.isBuffer(buf) ? buf.buffer : buf
-      ),
+      ArrayBuffer.isView(buf)
+        ? new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength)
+        : new Uint8Array(buf),
       offset
     );
     offset += Array.isArray(buf) ? buf.length : buf.byteLength;
