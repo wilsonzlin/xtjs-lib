@@ -1,5 +1,4 @@
 import { expect } from "chai";
-import isSuperset from "./isSuperset";
 import isTypeof from "./isTypeof";
 
 describe("isTypeof", () => {
