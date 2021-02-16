@@ -49,9 +49,9 @@ export default class Dict<K, V> implements Map<K, V> {
     return this.map.get(key);
   }
 
-  getOrThrow(key: K): V {
+  getOrThrow(key: K, error?: () => Error): V {
     if (!this.map.has(key)) {
-      throw new ReferenceError("Key does not exist");
+      throw error?.() ?? new ReferenceError("Key does not exist");
     }
     return this.map.get(key)!;
   }
@@ -74,9 +74,9 @@ export default class Dict<K, V> implements Map<K, V> {
     return old;
   }
 
-  putIfAbsentOrThrow(key: K, value: V): this {
+  putIfAbsentOrThrow(key: K, value: V, error?: () => Error): this {
     if (this.map.has(key)) {
-      throw new ReferenceError(`Key already exists`);
+      throw error?.() ?? new ReferenceError(`Key already exists`);
     }
     this.map.set(key, value);
     return this;
