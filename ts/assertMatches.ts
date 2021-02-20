@@ -8,4 +8,5 @@ export default (
   if (!regex.test(val)) {
     throw new AssertionError(message);
   }
+  return val;
 };
