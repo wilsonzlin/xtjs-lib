@@ -7,7 +7,9 @@ export default () => {
   let locked = false;
   const pop = () => {
     const next = waiting.pop();
-    if (!next) return;
+    if (!next) {
+      return;
+    }
     locked = true;
     next({
       unlock() {
@@ -17,6 +19,9 @@ export default () => {
     });
   };
   return {
+    isLocked() {
+      return locked;
+    },
     lock() {
       return new Promise<MutexHandle>((resolve) => {
         waiting.push(resolve);
