@@ -5,8 +5,12 @@ type MutexHandle = {
 export default () => {
   const waiting: ((h: MutexHandle) => void)[] = [];
   let locked = false;
-  const pop = () => {
-    const next = waiting.pop();
+
+  const tryProgress = () => {
+    if (locked) {
+      return;
+    }
+    const next = waiting.shift();
     if (!next) {
       return;
     }
@@ -14,10 +18,11 @@ export default () => {
     next({
       unlock() {
         locked = false;
-        pop();
+        tryProgress();
       },
     });
   };
+
   return {
     isLocked() {
       return locked;
@@ -25,9 +30,7 @@ export default () => {
     lock() {
       return new Promise<MutexHandle>((resolve) => {
         waiting.push(resolve);
-        if (!locked) {
-          pop();
-        }
+        tryProgress();
       });
     },
   };
