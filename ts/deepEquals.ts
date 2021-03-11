@@ -1,4 +1,10 @@
+import every from "./every";
+
 export default function deepEquals(a: any, b: any): boolean {
+  if (a === b) {
+    return true;
+  }
+
   const typeA = typeof a;
   const typeB = typeof b;
 
@@ -10,23 +16,18 @@ export default function deepEquals(a: any, b: any): boolean {
   // undefined, null, strings, numbers, booleans, and functions
   // (although this function shouldn't be used to compare functions)
   if (a == null || typeA != "object") {
-    return a === b;
+    // We already know a !== b.
+    return false;
   }
 
-  if (typeof a.length == "number") {
-    return (
-      typeof b.length == "number" &&
-      a.length == b.length &&
-      Array.prototype.every.call(a, (v: any, i: number) => deepEquals(v, b[i]))
-    );
-  }
-
-  // Plain object
+  // This also works on arrays, but is inefficient. However, we shouldn't assume
+  // that just because it has a "length" property it's an array-like.
+  const keysA = new Set(Object.keys(a));
+  const keysB = new Set(Object.keys(b));
   return (
-    Object.getPrototypeOf(a) === Object.getPrototypeOf(b) &&
-    Object.keys(a).every(
-      (k) => Object.hasOwnProperty.call(a, k) && deepEquals(a[k], b[k])
-    ) &&
-    Object.keys(b).every((k) => Object.hasOwnProperty.call(b, k))
+    // WARNING: Object.keys([]) does not include "length" but [].hasOwnProperty("length") is true!
+    // Therefore, we use set member testing instead of hasOwnProperty.
+    every(keysA, (k) => keysB.has(k) && deepEquals(a[k], b[k])) &&
+    every(keysB, (k) => keysA.has(k))
   );
 }
