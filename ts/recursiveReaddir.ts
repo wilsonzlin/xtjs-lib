@@ -1,4 +1,4 @@
-import { join } from "path";
+import { join, sep } from "path";
 import { readdir } from "fs/promises";
 
 export default async function* recursiveReaddir(
@@ -10,9 +10,9 @@ export default async function* recursiveReaddir(
     const path = join(dir, ent.name);
     if (!filter || filter.test(path)) {
       if (ent.isDirectory()) {
-        yield* recursiveReaddir(path, filter, prefix + ent.name + "/");
+        yield* recursiveReaddir(path, filter, prefix + ent.name + sep);
       } else {
-        yield join(prefix + ent.name);
+        yield prefix + ent.name;
       }
     }
   }
