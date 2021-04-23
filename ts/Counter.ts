@@ -8,9 +8,10 @@ export default class Counter<V> {
     this.map = new Dict(init);
   }
 
-  adjust(val: V, diff: number): this {
-    this.map.put(val, this.map.getOrDefault(val, 0) + diff);
-    return this;
+  adjust(val: V, diff: number): number {
+    const newCount = this.map.getOrDefault(val, 0) + diff;
+    this.map.put(val, newCount);
+    return newCount;
   }
 
   entries() {
@@ -29,11 +30,11 @@ export default class Counter<V> {
     return this.map.values();
   }
 
-  increment(val: V): this {
+  increment(val: V): number {
     return this.adjust(val, 1);
   }
 
-  decrement(val: V): this {
+  decrement(val: V): number {
     return this.adjust(val, -1);
   }
 
