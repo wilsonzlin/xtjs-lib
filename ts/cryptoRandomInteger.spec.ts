@@ -12,10 +12,9 @@ describe("cryptoRandomInteger", () => {
   it("should be reasonably random", () => {
     const min = -2;
     const max = 4;
-    const slotsCount = max - min + 1;
-    const amount = 1e5;
+    const amount = 1e6;
 
-    const threshold = Math.round((amount / slotsCount) * 0.1);
+    const threshold = 1000;
 
     const slots: { [slot: number]: number } = Object.create(null);
 
@@ -24,7 +23,11 @@ describe("cryptoRandomInteger", () => {
     }
 
     for (let i = 0; i < amount; i++) {
-      slots[cryptoRandomInteger(-2, 4)]++;
+      const rnd = cryptoRandomInteger(min, max);
+      if (!Number.isSafeInteger(rnd) || rnd < min || rnd > max) {
+        throw new RangeError(`RNG generated out-of-range value: ${rnd}`);
+      }
+      slots[rnd]++;
     }
 
     let minCount = +Infinity;

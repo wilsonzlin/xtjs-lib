@@ -11,18 +11,18 @@ describe("cryptoRandomPortion", () => {
 
   it("should be reasonably random", () => {
     const slotsCount = 20;
-    const amount = 1e5;
+    const amount = 1e6;
 
-    const threshold = Math.round((amount / slotsCount) * 0.1);
+    const threshold = 1000;
 
-    const slots: { [slot: number]: number } = Object.create(null);
-
-    for (let slot = 0; slot < slotsCount; slot++) {
-      slots[slot] = 0;
-    }
+    const slots = Array(slotsCount).fill(0);
 
     for (let i = 0; i < amount; i++) {
-      slots[Math.floor(cryptoRandomPortion() * slotsCount)]++;
+      const rnd = cryptoRandomPortion();
+      if (rnd < 0 || rnd >= 1 || !Number.isFinite(rnd)) {
+        throw new RangeError(`RNG generated value outside range: ${rnd}`);
+      }
+      slots[Math.floor(rnd * slotsCount)]++;
     }
 
     let minCount = +Infinity;
