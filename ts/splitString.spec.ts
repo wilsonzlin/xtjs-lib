@@ -64,5 +64,42 @@ describe("splitString", () => {
       "",
       "",
     ]);
+
+    expect(
+      splitString("  a \t  b  c  \v\r   d   e \n", /\s+/, 0)
+    ).to.deep.equal([]);
+    expect(
+      splitString("  a \t  b  c  \v\r   d   e \n", /\s+/, 1)
+    ).to.deep.equal(["  a \t  b  c  \v\r   d   e \n"]);
+    expect(
+      splitString("  a \t  b  c  \v\r   d   e \n", /\s+/, 2)
+    ).to.deep.equal(["", "a \t  b  c  \v\r   d   e \n"]);
+    expect(
+      splitString("  a \t  b  c  \v\r   d   e \n", /\s+/, 3)
+    ).to.deep.equal(["", "a", "b  c  \v\r   d   e \n"]);
+    expect(
+      splitString("  a \t  b  c  \v\r   d   e \n", /\s+/, 4)
+    ).to.deep.equal(["", "a", "b", "c  \v\r   d   e \n"]);
+    expect(
+      splitString("  a \t  b  c  \v\r   d   e \n", /\s+/, 5)
+    ).to.deep.equal(["", "a", "b", "c", "d   e \n"]);
+    expect(
+      splitString("  a \t  b  c  \v\r   d   e \n", /\s+/, 6)
+    ).to.deep.equal(["", "a", "b", "c", "d", "e \n"]);
+    expect(
+      splitString("  a \t  b  c  \v\r   d   e \n", /\s+/, 7)
+    ).to.deep.equal(["", "a", "b", "c", "d", "e", ""]);
+    expect(
+      splitString("  a \t  b  c  \v\r   d   e \n", /\s+/, 8)
+    ).to.deep.equal(["", "a", "b", "c", "d", "e", ""]);
+    expect(splitString("  a \t  b  c  \v\r   d   e \n", /\s+/)).to.deep.equal([
+      "",
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "",
+    ]);
   });
 });
