@@ -2,10 +2,8 @@
  * Like the built in String.prototype.split function, with slight differences:
  * - If the string is empty, an empty array is returned.
  * - If a limit is provided, the last returned element will contain any
- *   leftover rem
- * @param str
- * @param split
- * @param limit
+ *   leftover characters. For example, `splitString("a.b.c.d.e", ".", 3)` will
+ *   return `["a", "b", "c.d.e"]`.
  */
 export default (
   str: string,
