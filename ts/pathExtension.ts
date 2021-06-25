@@ -6,4 +6,6 @@ import pathExtensionPosition from "./pathExtensionPosition";
  * If the file path has no extension, return undefined.
  */
 export default (path: string, sep?: string) =>
-  mapNonNegative(pathExtensionPosition(path, sep), (pos) => path.slice(pos + 1));
+  mapNonNegative(pathExtensionPosition(path, sep), (pos) =>
+    path.slice(pos + 1)
+  );
