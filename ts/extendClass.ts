@@ -11,12 +11,9 @@ export default <
   overrides: O & { constructor: C },
   staticOverrides: S
 ): C & S => {
-  const { constructor, ...prototype } = overrides;
-  const child = function (this: any) {
-    return constructor.apply(this, arguments as any);
-  };
+  const child = overrides.constructor;
   Object.assign(child, staticOverrides);
   Object.defineProperty(child, "name", { value: name });
-  child.prototype = Object.assign(Object.create(base.prototype), prototype);
+  child.prototype = Object.assign(Object.create(base.prototype), overrides);
   return child as any;
 };

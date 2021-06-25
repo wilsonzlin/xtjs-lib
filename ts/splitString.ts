@@ -1,3 +1,12 @@
+/**
+ * Like the built in String.prototype.split function, with slight differences:
+ * - If the string is empty, an empty array is returned.
+ * - If a limit is provided, the last returned element will contain any
+ *   leftover rem
+ * @param str
+ * @param split
+ * @param limit
+ */
 export default (
   str: string,
   split: string | RegExp,
