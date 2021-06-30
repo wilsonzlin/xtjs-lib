@@ -14,6 +14,8 @@ type Exec<Encoding extends string | Buffer> = {
   onStderr(onData: (chunk: Encoding) => void): Exec<Encoding>;
   onStdout(onData: (chunk: Encoding) => void): Exec<Encoding>;
   pidFile(path: string): Exec<Encoding>;
+  print(shouldPrintStdoutOrStderr: false): Exec<Encoding>;
+  print(shouldPrintStdout: boolean, shouldPrintStderr: boolean): Exec<Encoding>;
   printStderr(shouldPrint?: boolean): Exec<Encoding>;
   printStdout(shouldPrint?: boolean): Exec<Encoding>;
   stdin(data: ArrayBuffer | Readable | string | Uint8Array): Exec<Encoding>;
@@ -158,6 +160,14 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
     },
     pidFile(path) {
       pidFile = path;
+      return this;
+    },
+    print() {
+      if (arguments.length == 1) {
+        printStdout = printStderr = false;
+      } else {
+        [printStdout, printStderr] = arguments;
+      }
       return this;
     },
     printStderr(shouldPrint = true) {
