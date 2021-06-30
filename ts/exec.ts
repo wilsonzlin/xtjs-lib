@@ -36,8 +36,10 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
   let onStderr: Function | undefined;
   let onStdout: Function | undefined;
   let pidFile: string | undefined;
-  let printStderr = false;
-  let printStdout = false;
+  // print* are undefined by default to allow adaptive implicit config
+  // depending on run method and onStd*.
+  let printStderr: boolean | undefined;
+  let printStdout: boolean | undefined;
   let stdin: ArrayBuffer | Readable | number | string | Uint8Array | undefined;
   let throwOnBadStatus = true;
   let timeout: number | undefined;
@@ -145,10 +147,12 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
     },
     onStderr(onData) {
       onStderr = onData;
+      printStderr ??= false;
       return this;
     },
     onStdout(onData) {
       onStdout = onData;
+      printStdout ??= false;
       return this;
     },
     pidFile(path) {
@@ -185,12 +189,18 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
     },
 
     output(withStderr = false) {
+      printStdout ??= false;
+      printStderr ??= !withStderr;
       return run("data", withStderr);
     },
     status() {
+      printStdout ??= true;
+      printStderr ??= true;
       return run("status", false);
     },
     stream(withStderr = false) {
+      printStdout ??= false;
+      printStderr ??= !withStderr;
       return run("stream", withStderr);
     },
   };
