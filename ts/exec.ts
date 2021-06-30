@@ -41,6 +41,7 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
   let printStderr: boolean | undefined;
   let printStdout: boolean | undefined;
   let stdin: ArrayBuffer | Readable | number | string | Uint8Array | undefined;
+  // This is ignored if result type is status.
   let throwOnBadStatus = true;
   let timeout: number | undefined;
 
@@ -106,7 +107,7 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
       proc.on("error", reject);
       proc.on("exit", (code, signal) => {
         resultStream?.end();
-        if (throwOnBadStatus && (code || signal)) {
+        if (resultType != "status" && throwOnBadStatus && (code || signal)) {
           reject(new ExecError(code ?? undefined, signal ?? undefined));
         } else {
           if (resultData) {
