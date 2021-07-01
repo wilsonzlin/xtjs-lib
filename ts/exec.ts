@@ -21,6 +21,7 @@ type Exec<Encoding extends string | Buffer> = {
   stdin(data: ArrayBuffer | Readable | string | Uint8Array): Exec<Encoding>;
   text(encoding?: TextEncoding): Exec<string>;
   throwOnBadStatus(shouldThrow?: boolean): Exec<Encoding>;
+  throwOnSignal(shouldThrow?: boolean): Exec<Encoding>;
   timeout(ms: number): Exec<Encoding>;
   workingDir(dir: string): Exec<Encoding>;
 
@@ -46,6 +47,7 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
   let stdin: ArrayBuffer | Readable | number | string | Uint8Array | undefined;
   // This is ignored if result type is status.
   let throwOnBadStatus = true;
+  let throwOnSignal = true;
   let timeout: number | undefined;
 
   const run = (
@@ -110,8 +112,10 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
       proc.on("error", reject);
       proc.on("exit", (code, signal) => {
         resultStream?.end();
-        if (resultType != "status" && throwOnBadStatus && (code || signal)) {
-          reject(new ExecError(code ?? undefined, signal ?? undefined));
+        if (throwOnSignal && signal) {
+          reject(new ExecError(code ?? undefined, signal));
+        } else if (resultType != "status" && throwOnBadStatus && code) {
+          reject(new ExecError(code, signal ?? undefined));
         } else {
           if (resultData) {
             resolve(encoding ? resultData.join("") : Buffer.concat(resultData));
@@ -189,6 +193,10 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
     },
     throwOnBadStatus(shouldThrow = true) {
       throwOnBadStatus = shouldThrow;
+      return this;
+    },
+    throwOnSignal(shouldThrow = true) {
+      throwOnSignal = shouldThrow;
       return this;
     },
     timeout(ms) {
