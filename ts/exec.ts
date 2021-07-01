@@ -28,7 +28,7 @@ type Exec<Encoding extends string | Buffer> = {
   output(withStderr?: boolean): Promise<Encoding>;
   run(): Promise<void>;
   status(): Promise<number>;
-  stream(withStderr?: boolean): Promise<number> & Readable;
+  stream(withStderr?: boolean): { promise: Promise<number>; stream: Readable };
 };
 
 export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
@@ -70,19 +70,17 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
     }
     const resultStream = resultType == "stream" ? new PassThrough() : undefined;
     const promise = new Promise((resolve, reject) => {
-      if (stdin != undefined) {
-        if (isReadable(stdin)) {
-          pipeline(stdin, proc.stdin, (err) => {
-            if (err) {
-              // TODO Is any additional cleanup needed?
-              reject(err);
-            }
-          });
-        } else {
-          proc.stdin.write(stdin);
-          proc.stdin.end();
-        }
+      if (isReadable(stdin)) {
+        pipeline(stdin, proc.stdin, (err) => {
+          if (err) {
+            // TODO Is any additional cleanup needed?
+            reject(err);
+          }
+        });
       } else {
+        if (stdin) {
+          proc.stdin.write(stdin);
+        }
         proc.stdin.end();
       }
 
@@ -126,11 +124,10 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
       });
     });
     if (resultStream) {
-      return Object.assign(resultStream, {
-        then: Promise.prototype.then.bind(promise),
-        catch: Promise.prototype.catch.bind(promise),
-        finally: Promise.prototype.finally.bind(promise),
-      }) as any;
+      return {
+        stream: resultStream,
+        promise,
+      };
     }
     return promise as any;
   };
