@@ -25,6 +25,7 @@ type Exec<Encoding extends string | Buffer> = {
   workingDir(dir: string): Exec<Encoding>;
 
   output(withStderr?: boolean): Promise<Encoding>;
+  run(): Promise<void>;
   status(): Promise<number>;
   stream(withStderr?: boolean): Promise<number> & Readable;
 };
@@ -48,7 +49,7 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
   let timeout: number | undefined;
 
   const run = (
-    resultType: "status" | "data" | "stream",
+    resultType: "none" | "status" | "data" | "stream",
     resultStderr: boolean
   ) => {
     const proc = spawn(cmd, args.map(String), {
@@ -115,7 +116,7 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
           if (resultData) {
             resolve(encoding ? resultData.join("") : Buffer.concat(resultData));
           } else {
-            resolve(code ?? -1);
+            resolve(resultType != "none" ? code ?? -1 : undefined);
           }
         }
       });
@@ -203,6 +204,11 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
       printStdout ??= false;
       printStderr ??= !withStderr;
       return run("data", withStderr);
+    },
+    run() {
+      printStdout ??= true;
+      printStderr ??= true;
+      return run("none", false);
     },
     status() {
       printStdout ??= true;

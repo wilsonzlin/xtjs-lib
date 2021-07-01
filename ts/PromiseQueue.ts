@@ -3,6 +3,7 @@ type TaskState = {
   reject: Function;
   provider: () => Promise<any>;
 };
+
 export default class PromiseQueue {
   private readonly tasks: TaskState[] = [];
 
