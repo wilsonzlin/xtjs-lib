@@ -60,7 +60,7 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
       stdio: "pipe",
       timeout,
     });
-    if (pidFile !== undefined) {
+    if (pidFile != undefined) {
       // Attempt to write to file, but don't care if it fails.
       writeFile(pidFile, proc.pid.toString()).catch(() => void 0);
     }
@@ -114,12 +114,10 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
           reject(new ExecError(code ?? undefined, signal));
         } else if (resultType != "status" && throwOnBadStatus && code) {
           reject(new ExecError(code, signal ?? undefined));
+        } else if (resultData) {
+          resolve(encoding ? resultData.join("") : Buffer.concat(resultData));
         } else {
-          if (resultData) {
-            resolve(encoding ? resultData.join("") : Buffer.concat(resultData));
-          } else {
-            resolve(resultType != "none" ? code ?? -1 : undefined);
-          }
+          resolve(resultType != "none" ? code ?? -1 : undefined);
         }
       });
     });

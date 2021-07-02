@@ -1,8 +1,12 @@
-import { expect } from "chai";
+import chai, { expect } from "chai";
 import "mocha";
 import { EOL } from "os";
 import asyncTimeout from "./asyncTimeout";
 import exec from "./exec";
+import ExecError from "./ExecError";
+import chaiAsPromised = require("chai-as-promised");
+
+chai.use(chaiAsPromised);
 
 describe("exec", () => {
   it("should return only stdout as string when called with .text().output()", async () => {
@@ -47,4 +51,37 @@ describe("exec", () => {
     await asyncTimeout(1000);
     expect(onStdoutInvokeNo).to.equal(2);
   });
+
+  it("should work with multiple concurrent calls", async () => {
+    expect(
+      await Promise.all([
+        exec("/bin/true").status(),
+        exec("/bin/false").status(),
+        exec("head", "-c", 10, "/dev/zero").text().output(),
+        exec("head").stdin("abcdef").text().output(),
+        exec("printenv", "A").env("A", "b").text().output(),
+        exec("sleep", 1).run(),
+        exec("sleep", 2).run(),
+        exec("sleep", 4).run(),
+      ])
+    ).to.deep.equal([
+      0,
+      1,
+      "\0".repeat(10),
+      "abcdef",
+      "b\n",
+      undefined,
+      undefined,
+      undefined,
+    ]);
+  }).timeout(10000);
+
+  it("should throw an error if killOnStderr and throwOnSignal are both true", async () => {
+    await expect(
+      exec("node", "-e", "console.error('error')")
+        .killOnStderr()
+        .throwOnSignal()
+        .run()
+    ).to.eventually.be.rejectedWith(ExecError);
+  }).timeout(10000);
 });
