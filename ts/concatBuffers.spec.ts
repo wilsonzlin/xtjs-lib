@@ -7,7 +7,7 @@ chai.use(chaiArrays);
 
 describe("concatBuffers", () => {
   it("should concatenate underlying ArrayBuffer bytes of various typed arrays", () => {
-    const res = concatBuffers(
+    const res = concatBuffers([
       new Uint8Array([1, 2, 3]),
       new Uint8Array([4, 5, 6]),
       new ArrayBuffer(1),
@@ -20,8 +20,8 @@ describe("concatBuffers", () => {
       new Int32Array([-1, -2, 0]),
       [],
       Buffer.from([31, 42, 53]),
-      new Uint8Array(new Uint8Array([0, 1, 2, 3, 4]).buffer, 2, 2)
-    );
+      new Uint8Array(new Uint8Array([0, 1, 2, 3, 4]).buffer, 2, 2),
+    ]);
 
     // WARNING: The byte order is platform dependent, but this test assumes LE!
     expect([...new Uint8Array(res)]).to.be.equalTo([
