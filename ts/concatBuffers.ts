@@ -14,23 +14,21 @@ type TypedArray =
 // Node.js Buffer values are also JavaScript Uint8Array and TypedArray instances;
 // see https://nodejs.org/api/buffer.html#buffer_buffers_and_typedarrays.
 export default (
-  ...buffers: (TypedArray | ArrayBufferLike | number[])[]
-): Uint8Array => {
-  const size = buffers.reduce(
-    (sum, buf) => sum + (Array.isArray(buf) ? buf.length : buf.byteLength),
+  buffers: (TypedArray | ArrayBufferLike | ArrayLike<number>)[],
+  totalLength = buffers.reduce(
+    (sum, buf) => sum + ("byteLength" in buf ? buf.byteLength : buf.length),
     0
-  );
-  const result = new Uint8Array(size);
+  )
+): Uint8Array => {
+  const result = new Uint8Array(totalLength);
 
   let offset = 0;
   for (const buf of buffers) {
-    result.set(
-      ArrayBuffer.isView(buf)
-        ? new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength)
-        : new Uint8Array(buf),
-      offset
-    );
-    offset += Array.isArray(buf) ? buf.length : buf.byteLength;
+    const u8Buf = ArrayBuffer.isView(buf)
+      ? new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength)
+      : new Uint8Array(buf);
+    result.set(u8Buf, offset);
+    offset += u8Buf.byteLength;
   }
   return result;
 };
