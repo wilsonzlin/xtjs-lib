@@ -9,19 +9,17 @@ import chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 
 describe("exec", () => {
-  it("should return only stdout as string when called with .text().output()", async () => {
+  it("should return only stdout as string when called with .output()", async () => {
     expect(
       await exec(
         "node",
         "-e",
         `console.log("a"); console.error("b"); console.log("c");`
-      )
-        .text()
-        .output()
+      ).output()
     ).to.equal(["a", "c", ""].join(EOL));
   });
 
-  it("should return stdout and stderr interleaved as string when called with .text().output(true)", async () => {
+  it("should return stdout and stderr interleaved as string when called with .output(true)", async () => {
     expect(
       await exec(
         "node",
@@ -41,7 +39,6 @@ describe("exec", () => {
         "-e",
         `console.log("a"); console.error("b"); console.log("c");`
       )
-        .text()
         .printStdout(true)
         .onStdout((chunk) =>
           expect(chunk).to.equal((onStdoutInvokeNo++ == 0 ? "a" : "c") + EOL)
@@ -57,9 +54,9 @@ describe("exec", () => {
       await Promise.all([
         exec("/bin/true").status(),
         exec("/bin/false").status(),
-        exec("head", "-c", 10, "/dev/zero").text().output(),
-        exec("head").stdin("abcdef").text().output(),
-        exec("printenv", "A").env("A", "b").text().output(),
+        exec("head", "-c", 10, "/dev/zero").output(),
+        exec("head").stdin("abcdef").output(),
+        exec("printenv", "A").env("A", "b").output(),
         exec("sleep", 1).run(),
         exec("sleep", 2).run(),
         exec("sleep", 4).run(),

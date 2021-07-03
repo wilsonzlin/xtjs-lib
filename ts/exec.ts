@@ -9,6 +9,7 @@ type TextEncoding = "ascii" | "utf8" | "utf-8" | "utf16le" | "ucs2" | "ucs-2";
 type Exec<Encoding extends string | Buffer> = {
   additionalEnv(entries: Map<string, string | number>): Exec<Encoding>;
   additionalEnv(entries: { [name: string]: string | number }): Exec<Encoding>;
+  binary(): Exec<Buffer>;
   env(name: string, value: string | number): Exec<Encoding>;
   killOnStderr(shouldKill?: boolean | NodeJS.Signals): Exec<Encoding>;
   onStderr(onData: (chunk: Encoding) => void): Exec<Encoding>;
@@ -31,11 +32,11 @@ type Exec<Encoding extends string | Buffer> = {
   stream(withStderr?: boolean): { promise: Promise<number>; stream: Readable };
 };
 
-export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
+export default (cmd: string, ...args: (string | number)[]): Exec<string> => {
   const env: { [name: string]: string } = Object.create(null);
   Object.assign(env, process.env);
   let cwd: string | undefined;
-  let encoding: TextEncoding | undefined;
+  let encoding: TextEncoding | undefined = "utf8";
   let killOnStderr: NodeJS.Signals | undefined;
   let onStderr: Function | undefined;
   let onStdout: Function | undefined;
@@ -138,6 +139,10 @@ export default (cmd: string, ...args: (string | number)[]): Exec<Buffer> => {
         env[k] = v.toString();
       }
       return this;
+    },
+    binary() {
+      encoding = undefined;
+      return this as any;
     },
     env(name, value) {
       env[name] = value.toString();
