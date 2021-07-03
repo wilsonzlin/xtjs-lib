@@ -109,7 +109,10 @@ export default (cmd: string, ...args: (string | number)[]): Exec<string> => {
       });
 
       proc.on("error", reject);
-      proc.on("exit", (code, signal) => {
+      // WARNING: Listen to "close", not "exit". "exit" can be emitted before
+      // stdio streams are closed, causing hard-to-debug race conditions where
+      // stdout/stderr data is missing.
+      proc.on("close", (code, signal) => {
         resultStream?.end();
         if (throwOnSignal && signal) {
           reject(new ExecError(code ?? undefined, signal));
