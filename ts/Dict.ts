@@ -107,7 +107,7 @@ export default class Dict<K, V> implements Map<K, V> {
     return this.entries();
   }
 
-  readonly [Symbol.toStringTag]: string = "extlib.Dict";
+  readonly [Symbol.toStringTag]: string = "xtjs-lib.Dict";
 
   delete(key: K): boolean {
     return this.map.delete(key);

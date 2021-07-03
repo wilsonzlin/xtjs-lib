@@ -17,7 +17,7 @@ export default class StructuralMap<K extends Key, V> implements Map<K, V> {
   private readonly map = new Map<HashCode, Pair<K, V>[]>();
   private _size = 0;
 
-  readonly [Symbol.toStringTag]: string = "extlib.StructuralMap";
+  readonly [Symbol.toStringTag]: string = "xtjs-lib.StructuralMap";
 
   get size(): number {
     return this._size;
