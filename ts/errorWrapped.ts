@@ -9,7 +9,7 @@ export default <R, F extends (...args: any[]) => R>(
     try {
       return realFn.apply(this, args);
     } catch (error) {
-      if (!errorMatch || errorMatches(error, errorMatch)) {
+      if (errorMatch == undefined || errorMatches(error, errorMatch)) {
         return undefined;
       }
       throw error;

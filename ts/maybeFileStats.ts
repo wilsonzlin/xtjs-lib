@@ -1,4 +1,25 @@
-import fs from "fs";
-import asyncErrorWrapped from "./asyncErrorWrapped";
+import { BigIntStats, Stats } from "fs";
+import { lstat, stat } from "fs/promises";
 
-export default asyncErrorWrapped(fs.promises.stat, "ENOENT");
+export default async <Bigint extends boolean = false>(
+  path: string,
+  opts?: {
+    bigint?: Bigint;
+    lstat?: boolean;
+  }
+): Promise<undefined | (Bigint extends true ? BigIntStats : Stats)> => {
+  try {
+    const stats = await (opts?.lstat ? lstat : stat)(path, {
+      bigint: opts?.bigint,
+    });
+    if (!stats.isFile() && !stats.isSymbolicLink()) {
+      return undefined;
+    }
+    return stats as any;
+  } catch (e) {
+    if (e.code === "ENOENT") {
+      return undefined;
+    }
+    throw e;
+  }
+};

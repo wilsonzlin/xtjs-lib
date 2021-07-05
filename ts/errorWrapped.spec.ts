@@ -46,7 +46,5 @@ describe("errorWrapped", () => {
   it("should return a function that still throws an exception when it doesn't match the provided matcher", () => {
     const wrapped = errorWrapped(fnThatThrowsException, "ENOENT");
     expect(() => wrapped("", 0)).to.throw();
-
-    expect(() => wrapped("", 0)).to.throw();
   });
 });

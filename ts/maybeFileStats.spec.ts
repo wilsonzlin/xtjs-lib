@@ -6,14 +6,20 @@ import chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 
 describe("maybeFileStats", () => {
-  it("should resolve to null for non-existent files", () => {
+  it("should resolve to undefined for non-existent files", () => {
     return expect(maybeFileStats("./non.existent.file")).to.eventually.equal(
       undefined
     );
   });
+
+  it("should resolve to undefined for folders", () => {
+    return expect(maybeFileStats(__dirname)).to.eventually.equal(undefined);
+  });
+
   it("should reject for errors other than ENOENT", () => {
     return expect(maybeFileStats("\0")).to.eventually.be.rejected;
   });
+
   it("should resolve to a Stats object for an existing file", () => {
     return expect(maybeFileStats(__filename)).to.eventually.deep.equal(
       statSync(__filename)
