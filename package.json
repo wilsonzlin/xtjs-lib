@@ -3,8 +3,7 @@
   "description": "Complementary extra standard library for JS/TS; type safe, no dependencies, modular imports",
   "version": "0.20.0",
   "files": [
-    "js/*",
-    "ts/*"
+    "js/*"
   ],
   "scripts": {
     "build": "npm run clean && tsc",
