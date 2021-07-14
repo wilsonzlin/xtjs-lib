@@ -9,4 +9,4 @@ export default async <Bigint extends boolean = false>(
     bigint?: Bigint;
     lstat?: boolean;
   }
-) => filterValue(await maybeStats<Bigint>(path, opts), (s) => s?.isFile());
+) => filterValue(await maybeStats<Bigint>(path, opts), (s) => s?.isDirectory());
