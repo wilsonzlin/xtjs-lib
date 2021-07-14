@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { mkdir, readFile, writeFile } from "fs/promises";
 import "mocha";
 import { join } from "path";
-import createTarAchive from "./createTarAchive";
+import createTarAchive from "./createTarArchive";
 import cryptoRandomHex from "./cryptoRandomHex";
 import encodeUtf8 from "./encodeUtf8";
 import exec from "./exec";
