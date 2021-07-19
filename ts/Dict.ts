@@ -1,4 +1,5 @@
 export default class Dict<K, V> implements Map<K, V> {
+  readonly [Symbol.toStringTag]: string = "xtjs-lib.Dict";
   private readonly map: Map<K, V>;
 
   constructor(entriesOrMap?: Map<K, V> | Iterable<readonly [K, V]>) {
@@ -8,6 +9,10 @@ export default class Dict<K, V> implements Map<K, V> {
         : entriesOrMap
         ? new Map(entriesOrMap)
         : new Map();
+  }
+
+  get size() {
+    return this.map.size;
   }
 
   clone(): Dict<K, V> {
@@ -95,10 +100,6 @@ export default class Dict<K, V> implements Map<K, V> {
     return old;
   }
 
-  get size() {
-    return this.map.size;
-  }
-
   values(): IterableIterator<V> {
     return this.map.values();
   }
@@ -106,8 +107,6 @@ export default class Dict<K, V> implements Map<K, V> {
   [Symbol.iterator]() {
     return this.entries();
   }
-
-  readonly [Symbol.toStringTag]: string = "xtjs-lib.Dict";
 
   delete(key: K): boolean {
     return this.map.delete(key);

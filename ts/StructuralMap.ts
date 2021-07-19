@@ -14,10 +14,10 @@ class Pair<K extends Key, V> {
 const EMPTY_ARRAY: any[] = [];
 
 export default class StructuralMap<K extends Key, V> implements Map<K, V> {
-  private readonly map = new Map<HashCode, Pair<K, V>[]>();
-  private _size = 0;
-
   readonly [Symbol.toStringTag]: string = "xtjs-lib.StructuralMap";
+  private readonly map = new Map<HashCode, Pair<K, V>[]>();
+
+  private _size = 0;
 
   get size(): number {
     return this._size;
@@ -36,7 +36,9 @@ export default class StructuralMap<K extends Key, V> implements Map<K, V> {
     const hc = key.hashCode();
     const pairs = this.map.get(hc) ?? EMPTY_ARRAY;
     const deleted = findAndRemove(pairs, (p) => key.equals(p.key));
-    if (deleted) this._size--;
+    if (deleted) {
+      this._size--;
+    }
     return !!deleted;
   }
 

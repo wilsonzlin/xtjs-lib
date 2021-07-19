@@ -1,6 +1,6 @@
-import chunks from "./chunks";
-import chai, { expect } from "chai";
+import { expect } from "chai";
 import "mocha";
+import chunks from "./chunks";
 
 describe("chunks", () => {
   it("should chunk", () => {

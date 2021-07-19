@@ -1,5 +1,5 @@
-import { join, sep } from "path";
 import { readdir } from "fs/promises";
+import { join, sep } from "path";
 
 const DEFAULT_IGNORED_ERRORS = ["EACCES", "ENOENT", "ENOTDIR"];
 

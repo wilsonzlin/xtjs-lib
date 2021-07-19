@@ -1,6 +1,6 @@
+import filterValue from "./filterValue";
 import isEmpty from "./isEmpty";
 import mapDefined from "./mapDefined";
-import filterValue from "./filterValue";
 
 export default <C extends { length: number } | { size: number }, R>(
   collection: C,

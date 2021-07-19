@@ -17,7 +17,9 @@ export default <V>(it: Iterator<V>, consumers: number): Iterator<V>[] => {
         return {
           next() {
             const bufRes = buffer.shift();
-            if (bufRes) return bufRes;
+            if (bufRes) {
+              return bufRes;
+            }
             fill();
             return buffer.shift()!;
           },

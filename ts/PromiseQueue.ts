@@ -6,11 +6,17 @@ type TaskState = {
 
 export default class PromiseQueue {
   private readonly tasks: TaskState[] = [];
+  private active = 0;
 
   // Don't use os.cpus().length as default as this class could be used in a browser.
   constructor(private readonly concurrency: number) {}
 
-  private active = 0;
+  add = <T>(provider: () => Promise<T>) =>
+    new Promise<T>((resolve, reject) => {
+      this.tasks.push({ resolve, reject, provider });
+      this._start();
+    });
+
   private _start = () => {
     let t: TaskState;
     if (this.active >= this.concurrency || !(t = this.tasks.shift()!)) {
@@ -27,10 +33,4 @@ export default class PromiseQueue {
         this._start();
       });
   };
-
-  add = <T>(provider: () => Promise<T>) =>
-    new Promise<T>((resolve, reject) => {
-      this.tasks.push({ resolve, reject, provider });
-      this._start();
-    });
 }

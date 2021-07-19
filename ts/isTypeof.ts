@@ -1,5 +1,3 @@
-import AssertionError from "./AssertionError";
-
 export default <
   T extends
     | "string"

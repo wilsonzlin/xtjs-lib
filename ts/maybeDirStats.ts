@@ -1,5 +1,3 @@
-import { BigIntStats, Stats } from "fs";
-import { lstat, stat } from "fs/promises";
 import filterValue from "./filterValue";
 import maybeStats from "./maybeStats";
 
