@@ -1,4 +1,3 @@
-import maybeFileStats from "./maybeFileStats";
+import maybeDirStats from "./maybeDirStats";
 
-export default async (path: string) =>
-  !!(await maybeFileStats(path))?.isDirectory();
+export default async (path: string) => !!(await maybeDirStats(path));
