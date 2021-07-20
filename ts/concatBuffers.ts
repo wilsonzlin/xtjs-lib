@@ -1,20 +1,7 @@
-type TypedArray =
-  | Uint8Array
-  | Uint8ClampedArray
-  | Uint16Array
-  | Uint32Array
-  | Int8Array
-  | Int16Array
-  | Int32Array
-  | Float32Array
-  | Float64Array
-  | BigInt64Array
-  | BigUint64Array;
-
 // Node.js Buffer values are also JavaScript Uint8Array and TypedArray instances;
 // see https://nodejs.org/api/buffer.html#buffer_buffers_and_typedarrays.
 export default (
-  buffers: (TypedArray | ArrayBufferLike | ArrayLike<number>)[],
+  buffers: (ArrayBufferView | ArrayBufferLike | ArrayLike<number>)[],
   totalLength = buffers.reduce(
     (sum, buf) => sum + ("byteLength" in buf ? buf.byteLength : buf.length),
     0
