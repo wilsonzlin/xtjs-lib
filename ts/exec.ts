@@ -17,7 +17,7 @@ type Exec<Encoding extends string | Buffer> = {
   pidFile(path: string): Exec<Encoding>;
   print(shouldPrintStdoutOrStderr: false): Exec<Encoding>;
   print(shouldPrintStdout: boolean, shouldPrintStderr: boolean): Exec<Encoding>;
-  printCmdline(shouldPrintCmdline: boolean): Exec<Encoding>;
+  printCmdline(shouldPrintCmdline?: boolean): Exec<Encoding>;
   printStderr(shouldPrint?: boolean): Exec<Encoding>;
   printStdout(shouldPrint?: boolean): Exec<Encoding>;
   stdin(data: ArrayBuffer | Readable | string | Uint8Array): Exec<Encoding>;
