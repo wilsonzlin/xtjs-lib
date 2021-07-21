@@ -17,6 +17,7 @@ type Exec<Encoding extends string | Buffer> = {
   pidFile(path: string): Exec<Encoding>;
   print(shouldPrintStdoutOrStderr: false): Exec<Encoding>;
   print(shouldPrintStdout: boolean, shouldPrintStderr: boolean): Exec<Encoding>;
+  printCmdline(shouldPrintCmdline: boolean): Exec<Encoding>;
   printStderr(shouldPrint?: boolean): Exec<Encoding>;
   printStdout(shouldPrint?: boolean): Exec<Encoding>;
   stdin(data: ArrayBuffer | Readable | string | Uint8Array): Exec<Encoding>;
@@ -41,7 +42,8 @@ export default (cmd: string, ...args: (string | number)[]): Exec<string> => {
   let onStderr: Function | undefined;
   let onStdout: Function | undefined;
   let pidFile: string | undefined;
-  // print* are undefined by default to allow adaptive implicit config
+  let printCmdline = false;
+  // printStd* are undefined by default to allow adaptive implicit config
   // depending on run method and onStd*.
   let printStderr: boolean | undefined;
   let printStdout: boolean | undefined;
@@ -55,6 +57,9 @@ export default (cmd: string, ...args: (string | number)[]): Exec<string> => {
     resultType: "none" | "status" | "data" | "stream",
     resultStderr: boolean
   ) => {
+    if (printCmdline) {
+      console.debug("+", ...args);
+    }
     const proc = spawn(cmd, args.map(String), {
       cwd,
       env,
@@ -176,6 +181,10 @@ export default (cmd: string, ...args: (string | number)[]): Exec<string> => {
       } else {
         [printStdout, printStderr] = arguments;
       }
+      return this;
+    },
+    printCmdline(shouldPrintCmdline = true) {
+      printCmdline = shouldPrintCmdline;
       return this;
     },
     printStderr(shouldPrint = true) {
