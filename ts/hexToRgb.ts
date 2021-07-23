@@ -1,4 +1,4 @@
-import chunks from "./chunks";
+import slices from "./slices";
 
 const HexString = new RegExp("^#([0-9a-f]{3}|[0-9a-f]{6})$", "i");
 
@@ -9,7 +9,7 @@ export default (str: string) => {
   }
   const hex = match[1];
   const short = hex.length == 3;
-  const parts = chunks(hex, short ? 1 : 2);
+  const parts = slices(hex, short ? 1 : 2);
   return parts.map((d) => {
     let digit = Number.parseInt(d, 16);
     if (short) {
