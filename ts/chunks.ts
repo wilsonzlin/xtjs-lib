@@ -1,10 +1,11 @@
-export default <T>(
-  sliceable: { slice: (start: number, end: number) => T; length: number },
-  n: number
-): T[] => {
-  const chunks = [];
-  for (let offset = 0; offset < sliceable.length; ) {
-    chunks.push(sliceable.slice(offset, (offset += n)));
+export default <T>(vals: ArrayLike<T>, n: number): T[][] => {
+  const chunks: T[][] = [];
+  for (let offset = 0; offset < vals.length; ) {
+    const chunk: T[] = [];
+    for (let i = 0; i < n && offset < vals.length; i++, offset++) {
+      chunk.push(vals[offset]);
+    }
+    chunks.push(chunk);
   }
   return chunks;
 };
