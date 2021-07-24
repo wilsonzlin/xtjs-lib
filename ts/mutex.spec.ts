@@ -1,11 +1,12 @@
 import { expect } from "chai";
 import asyncTimeout from "./asyncTimeout";
+import Mutex from "./mutex";
 import mutex from "./mutex";
 import repeatedGenerator from "./repeatedGenerator";
 
 describe("mutex", () => {
   it("should block until unlocked", async () => {
-    const mut = mutex();
+    const mut = new Mutex();
     let c = 0;
     const asyncs = Promise.all(
       repeatedGenerator(3, async () => {
