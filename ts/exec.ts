@@ -66,10 +66,12 @@ export default (cmd: string, ...args: (string | number)[]): Exec<string> => {
       stdio: "pipe",
       timeout,
     });
-    if (pidFile != undefined) {
-      // Attempt to write to file, but don't care if it fails.
-      writeFile(pidFile, proc.pid.toString()).catch(() => void 0);
-    }
+    proc.once("spawn", () => {
+      if (pidFile != undefined && proc.pid !== undefined) {
+        // Attempt to write to file, but don't care if it fails.
+        writeFile(pidFile, proc.pid.toString()).catch(() => void 0);
+      }
+    });
     if (encoding != undefined) {
       proc.stdout.setEncoding(encoding);
       proc.stderr.setEncoding(encoding);
