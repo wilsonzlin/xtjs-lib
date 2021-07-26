@@ -90,7 +90,10 @@ export default (
         })
       );
 
-      b.set(encodeUtf8(checksum.toString(8).padStart(8, "0")), offsets.chksum);
+      b.set(
+        encodeUtf8(`${checksum.toString(8).padStart(6, "0")}\0 `),
+        offsets.chksum
+      );
       b.set(f.content, BLKSIZE);
 
       return b;
