@@ -79,11 +79,7 @@ export default class Dict<K, V> implements Map<K, V> {
     return old;
   }
 
-  putIfAbsentOrThrow(
-    key: K,
-    value: V,
-    error?: (key: K, value: V) => Error
-  ): this {
+  putIfAbsentOrThrow(key: K, value: V, error?: (key: K, value: V) => Error): V {
     if (this.map.has(key)) {
       throw (
         error?.(key, this.map.get(key)!) ??
@@ -91,7 +87,7 @@ export default class Dict<K, V> implements Map<K, V> {
       );
     }
     this.map.set(key, value);
-    return this;
+    return value;
   }
 
   remove(key: K): V | undefined {
