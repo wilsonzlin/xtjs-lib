@@ -1,35 +1,42 @@
 import { expect } from "chai";
 import "mocha";
 import cryptoShuffleArray from "./cryptoShuffleArray";
-import sortByNaturalOrdering from "./sortByNaturalOrdering";
-import naturalOrdering from "./sortByNaturalOrdering";
+import naturalOrdering from "./naturalOrdering";
+import propertyComparator from "./propertyComparator";
 import tokeniseForNaturalOrdering from "./tokeniseForNaturalOrdering";
 
 const shuffle = <T>(a: T[]): T[] => cryptoShuffleArray(a.slice());
 
+// Use .map so that tokenisation only occurs once per value, instead of on each comparator call.
+const sort = (vals: string[]) =>
+  vals
+    .map((str) => ({ str, tokens: tokeniseForNaturalOrdering(str) }))
+    .sort(propertyComparator("tokens", naturalOrdering))
+    .map(({ str }) => str);
+
 describe("naturalOrdering", () => {
   it("should order the greater amount of leading zeros first for numeric substrings with equal values", () => {
     const expected = ["0010", "010", "10"];
-    const shuffled = shuffle(expected).map(tokeniseForNaturalOrdering);
-    expect(sortByNaturalOrdering(shuffled)).to.deep.equal(expected);
+    const shuffled = shuffle(expected);
+    expect(sort(shuffled)).to.deep.equal(expected);
   });
 
   it("should not consider decimal places", () => {
     const expected = ["1.01", "1.1", "1.09"];
-    const shuffled = shuffle(expected).map(tokeniseForNaturalOrdering);
-    expect(sortByNaturalOrdering(shuffled)).to.deep.equal(expected);
+    const shuffled = shuffle(expected);
+    expect(sort(shuffled)).to.deep.equal(expected);
   });
 
   it("should only consider alphabetic characters case-insensitively", () => {
     const expected = ["a  a", "aB", "a\t, C", "A-cc"];
-    const shuffled = shuffle(expected).map(tokeniseForNaturalOrdering);
-    expect(sortByNaturalOrdering(shuffled)).to.deep.equal(expected);
+    const shuffled = shuffle(expected);
+    expect(sort(shuffled)).to.deep.equal(expected);
   });
 
   it("should not collapse separated numbers", () => {
     const expected = ["x 01", "x 1", "x 1-3", "X-12"];
-    const shuffled = shuffle(expected).map(tokeniseForNaturalOrdering);
-    expect(sortByNaturalOrdering(shuffled)).to.deep.equal(expected);
+    const shuffled = shuffle(expected);
+    expect(sort(shuffled)).to.deep.equal(expected);
   });
 
   it("should order numbers before other characters", () => {
@@ -48,8 +55,8 @@ describe("naturalOrdering", () => {
       "Aa",
       "aa",
     ];
-    const shuffled = shuffle(expected).map(tokeniseForNaturalOrdering);
-    expect(sortByNaturalOrdering(shuffled)).to.deep.equal(expected);
+    const shuffled = shuffle(expected);
+    expect(sort(shuffled)).to.deep.equal(expected);
   });
 
   it("should compare using original substring of last segment only if all segments are equal", () => {
@@ -63,8 +70,8 @@ describe("naturalOrdering", () => {
       "???123Aa_A",
       "123Aa_a",
     ];
-    const shuffled = shuffle(expected).map(tokeniseForNaturalOrdering);
-    expect(sortByNaturalOrdering(shuffled)).to.deep.equal(expected);
+    const shuffled = shuffle(expected);
+    expect(sort(shuffled)).to.deep.equal(expected);
   });
 
   it("should sort strings using numerical order", () => {
@@ -93,7 +100,7 @@ describe("naturalOrdering", () => {
       "a10",
       "a11",
     ];
-    const shuffled = shuffle(expected).map(tokeniseForNaturalOrdering);
-    expect(sortByNaturalOrdering(shuffled)).to.deep.equal(expected);
+    const shuffled = shuffle(expected);
+    expect(sort(shuffled)).to.deep.equal(expected);
   });
 });

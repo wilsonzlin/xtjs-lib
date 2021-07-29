@@ -1,12 +1,12 @@
-export type TokenisedForNaturalOrdering = {
+export type NaturalOrderingTokens = {
   // For a string segment, the tiebreaker is the original substring (i.e. without any removed characters and in original case).
   // For a number segment, the tiebreaker is the number of leading zeros.
-  tokens: { segment: string | bigint; tiebreaker: string | bigint }[];
-  string: string;
-};
+  segment: string | bigint;
+  tiebreaker: string | bigint;
+}[];
 
 // Check tests for details on how this works.
-export default (string: string): TokenisedForNaturalOrdering => {
+export default (string: string): NaturalOrderingTokens => {
   const tokens = [];
   let segment: bigint | string = "";
   let tiebreaker: bigint | string = "";
@@ -41,5 +41,5 @@ export default (string: string): TokenisedForNaturalOrdering => {
   if (segment !== "") {
     tokens.push({ segment, tiebreaker });
   }
-  return { tokens, string };
+  return tokens;
 };
