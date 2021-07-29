@@ -1,4 +1,4 @@
-type SortablePrimitive = number | string | boolean;
+type SortablePrimitive = number | string | boolean | bigint;
 
 export default <T extends SortablePrimitive>(a: T, b: T) => {
   if (a < b) {
