@@ -122,9 +122,9 @@ export default (cmd: string, ...args: (string | number)[]): Exec<string> => {
       proc.on("close", (code, signal) => {
         resultStream?.end();
         if (throwOnSignal && signal) {
-          reject(new ExecError(code ?? undefined, signal));
+          reject(new ExecError(cmd, code ?? undefined, signal));
         } else if (resultType != "status" && throwOnBadStatus && code) {
-          reject(new ExecError(code, signal ?? undefined));
+          reject(new ExecError(cmd, code, signal ?? undefined));
         } else if (resultData) {
           resolve(encoding ? resultData.join("") : Buffer.concat(resultData));
         } else {
