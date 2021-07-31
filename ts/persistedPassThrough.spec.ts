@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import { readFile } from "fs/promises";
 import { PassThrough } from "stream";
 import asyncTimeout from "./asyncTimeout";
 import cryptoRandomHex from "./cryptoRandomHex";
@@ -49,5 +50,8 @@ describe("persistedPassThrough", () => {
     up.write(bytes(10));
     up.end();
     await downs;
+    expect([...(await readFile(path))]).to.deep.equal([
+      ...numberGenerator(0, END + 1),
+    ]);
   }).timeout(60000);
 });
