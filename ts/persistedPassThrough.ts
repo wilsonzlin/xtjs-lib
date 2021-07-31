@@ -34,7 +34,8 @@ export default async (
       const chunkEnd = chunkStart + chunk.byteLength - 1;
       while (true) {
         try {
-          await persistence.write(chunk);
+          // Provide offset in case previous errors changed fh position.
+          await persistence.write(chunk, chunkStart);
           break;
         } catch (e) {
           if (!(await onChunkWriteError?.(e))) {
