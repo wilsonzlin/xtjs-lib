@@ -4,11 +4,17 @@ import { PassThrough, Readable, Writable } from "stream";
 import assertState from "./assertState";
 import rangeIntersection from "./rangeIntersection";
 
-export default async (
-  upstream: Readable,
-  persistencePath: string,
-  onChunkWriteError?: (err: Error) => Promise<boolean>
-) => {
+export default async ({
+  upstream,
+  persistencePath,
+  onPersisted,
+  onChunkWriteError,
+}: {
+  upstream: Readable;
+  persistencePath: string;
+  onPersisted?: (stats: { size: number }) => void;
+  onChunkWriteError?: (err: Error) => Promise<boolean>;
+}) => {
   const downstreams: {
     stream: Writable;
     // Offset of the next byte yet to be received.
@@ -66,6 +72,7 @@ export default async (
       }
     }
     ended = true;
+    onPersisted?.({ size: next });
     for (const d of downstreams) {
       d.initialised.then(() => d.stream.end());
     }

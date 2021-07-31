@@ -14,7 +14,10 @@ describe("persistedPassThrough", () => {
     const END = 10;
     const up = new PassThrough();
     const path = `/tmp/extlib-persistedpassthrough-test-${cryptoRandomHex(16)}`;
-    const pt = await persistedPassThrough(up, path);
+    const pt = await persistedPassThrough({
+      upstream: up,
+      persistencePath: path,
+    });
     const downs = Promise.all(
       ([
         [0],
