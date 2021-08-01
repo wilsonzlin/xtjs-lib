@@ -6,6 +6,7 @@ describe("deepEquals", () => {
   it("should return true if same primitive value regardless of argument order", () => {
     for (const [a, b] of [
       [1, 1],
+      [NaN, NaN],
       [0, -0],
       [null, null],
       [undefined, undefined],
@@ -17,7 +18,6 @@ describe("deepEquals", () => {
 
     for (const [a, b] of [
       [1, 2],
-      [NaN, NaN],
       [0, "0"],
       [0, ""],
       [null, undefined],
@@ -49,10 +49,7 @@ describe("deepEquals", () => {
         [3, 5, 8],
         [3, 5, 8],
       ],
-      // Double comma intentional.
-      [["a", "b", , "c"], { 0: "a", 1: "b", 3: "c" }],
       [[1], [1]],
-      [[, , , , ,], {}],
       // prettier-ignore
       [
         {a: 1, b: [2, [3, 4, {5: [6]}]], c: {7: true, 8: {9: {10: null}}}},
@@ -71,6 +68,9 @@ describe("deepEquals", () => {
         [3, 5],
         [3, 5, 8],
       ],
+      // Double comma intentional.
+      [["a", "b", , "c"], { 0: "a", 1: "b", 3: "c" }],
+      [[, , , , ,], {}],
       // Triple comma intentional.
       [[, , ,], { length: 3 }],
       // prettier-ignore

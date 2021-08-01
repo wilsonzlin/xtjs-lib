@@ -1,33 +1,62 @@
-import every from "./every";
-
-export default function deepEquals(a: any, b: any): boolean {
-  if (a === b) {
-    return true;
+const dualCmp = <T>(
+  chk: (val: unknown) => val is T,
+  add: (a: T, b: T) => boolean
+) => (a: unknown, b: unknown) => {
+  if (chk(a) || chk(b)) {
+    return chk(a) && chk(b) && add(a, b);
   }
+  return undefined;
+};
 
-  const typeA = typeof a;
-  const typeB = typeof b;
+const arrayEq = dualCmp(
+  Array.isArray,
+  (a, b) => a.length === b.length && a.every((val, i) => deepEquals(val, b[i]))
+);
 
-  if (typeA != typeB) {
-    return false;
-  }
+const bufferEq =
+  typeof Buffer == "function"
+    ? dualCmp(Buffer.isBuffer, (a, b) => a.equals(b))
+    : undefined;
 
-  // This handles direct comparisons between
-  // undefined, null, strings, numbers, booleans, and functions
-  // (although this function shouldn't be used to compare functions)
-  if (a == null || typeA != "object") {
-    // We already know a !== b.
-    return false;
-  }
+const nanEq = dualCmp(
+  // Do typeof check as isNaN returns true for non-number values.
+  (val): val is number => typeof val == "number" && isNaN(val),
+  () => true
+);
 
-  // This also works on arrays, but is inefficient. However, we shouldn't assume
-  // that just because it has a "length" property it's an array-like.
-  const keysA = new Set(Object.keys(a));
+const primEq = dualCmp(
+  (
+    val
+  ): val is
+    | bigint
+    | boolean
+    | Function
+    | null
+    | number
+    | string
+    | symbol
+    | undefined => typeof val != "object" || val == null,
+  (a, b) => a === b
+);
+
+const propsEq = (a: object, b: object) => {
+  const keysA = Object.keys(a);
   const keysB = new Set(Object.keys(b));
   return (
+    keysA.length === keysB.size &&
     // WARNING: Object.keys([]) does not include "length" but [].hasOwnProperty("length") is true!
     // Therefore, we use set member testing instead of hasOwnProperty.
-    every(keysA, (k) => keysB.has(k) && deepEquals(a[k], b[k])) &&
-    every(keysB, (k) => keysA.has(k))
+    keysA.every((k) => keysB.has(k) && deepEquals(a[k], b[k]))
+  );
+};
+
+export default function deepEquals(a: any, b: any): boolean {
+  // Check for NaN first as primitive checking will establish that NaN !== NaN.
+  return (
+    nanEq(a, b) ??
+    primEq(a, b) ??
+    arrayEq(a, b) ??
+    bufferEq?.(a, b) ??
+    propsEq(a, b)
   );
 }
