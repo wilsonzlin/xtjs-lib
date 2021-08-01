@@ -5,3 +5,5 @@ const encodeBase64 =
           "base64"
         )
     : (data: Uint8Array) => btoa(String.fromCharCode(...data));
+
+export default encodeBase64;

@@ -1,3 +1,5 @@
+import decodeBase64 from "./decodeBase64";
+
 export default (raw: string) => {
   raw = raw.trim();
   const headerMatch = /^-----BEGIN ([^-]+)-----[\r\n]/.exec(raw);
