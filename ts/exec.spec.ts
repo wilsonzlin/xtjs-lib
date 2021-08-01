@@ -20,6 +20,7 @@ describe("exec", () => {
   });
 
   it("should return stdout and stderr interleaved as string when called with .output(true)", async () => {
+    // TODO This suffers from race conditions and ordering cannot be guaranteed.
     expect(
       await exec(
         "node",
