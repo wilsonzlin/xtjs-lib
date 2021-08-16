@@ -1,6 +1,7 @@
 import chai, { expect } from "chai";
 import "mocha";
 import { EOL } from "os";
+import { PassThrough } from "stream";
 import asyncTimeout from "./asyncTimeout";
 import exec from "./exec";
 import ExecError from "./ExecError";
@@ -9,6 +10,58 @@ import chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 
 describe("exec", () => {
+  it("writes string stream to stdin and reads stdout correctly", async () => {
+    const stdin = new PassThrough();
+    stdin.write("a");
+    stdin.write("b");
+    stdin.write("cde");
+    const outPromise = exec("cat").stdin(stdin).output();
+    stdin.write("fg");
+    stdin.end();
+    expect(await outPromise).to.equal("abcdefg");
+  });
+
+  it("writes Buffer stream to stdin and reads stdout correctly", async () => {
+    const stdin = new PassThrough();
+    stdin.write(Buffer.from([0, 1]));
+    stdin.write(Buffer.from([2]));
+    const outPromise = exec("cat").stdin(stdin).output();
+    stdin.write(Buffer.from([3, 4]));
+    stdin.write(Buffer.from(Buffer.from([5])));
+    stdin.end();
+    expect(await outPromise).to.equal(
+      Buffer.from([0, 1, 2, 3, 4, 5]).toString()
+    );
+  });
+
+  it("writes string to stdin and reads stdout correctly", async () => {
+    const outPromise = exec("cat").stdin("hello").output();
+    expect(await outPromise).to.equal("hello");
+  });
+
+  it("writes bytes to stdin and reads stdout correctly", async () => {
+    const bytes = [0, 1, 2, 128, 150, 177, 200, 247, 255];
+    const outPromise = exec(
+      "node",
+      "-e",
+      "process.stdout.write(fs.readFileSync(0))"
+    )
+      .stdin(new Uint8Array(bytes))
+      .output();
+    expect(await outPromise).to.equal(Buffer.from(bytes).toString());
+  });
+
+  it("writes bytes to stdin and receives status correctly", async () => {
+    const outPromise = exec(
+      "sh",
+      "-c",
+      'bytes="$(cat)"; if [ "$bytes" = "!-E" ]; then exit 23; fi'
+    )
+      .stdin(new Uint8Array([33, 45, 69]))
+      .status();
+    expect(await outPromise).to.equal(23);
+  });
+
   it("should return only stdout as string when called with .output()", async () => {
     expect(
       await exec(

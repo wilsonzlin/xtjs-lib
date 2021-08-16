@@ -8,7 +8,7 @@ export default class Counter<V> {
     this.map = new Dict(init);
   }
 
-  adjust(val: V, diff: number): number {
+  adjust(val: V, diff: number) {
     const newCount = this.map.getOrDefault(val, 0) + diff;
     this.map.put(val, newCount);
     return newCount;
@@ -30,20 +30,24 @@ export default class Counter<V> {
     return this.map.values();
   }
 
-  increment(val: V): number {
+  increment(val: V) {
     return this.adjust(val, 1);
   }
 
-  decrement(val: V): number {
+  decrement(val: V) {
     return this.adjust(val, -1);
   }
 
-  get(val: V): number {
+  get(val: V) {
     return this.map.getOrDefault(val, 0);
   }
 
-  set(val: V, count: number): this {
+  set(val: V, count: number) {
     this.map.put(val, count);
     return this;
+  }
+
+  [Symbol.iterator]() {
+    return this.map[Symbol.iterator]();
   }
 }
