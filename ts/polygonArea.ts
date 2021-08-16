@@ -1,5 +1,5 @@
 // https://en.wikipedia.org/wiki/Shoelace_formula
-export default (points: [number, number][]) => {
+export default (points: ReadonlyArray<readonly [number, number]>) => {
   let red = 0;
   let blue = 0;
   for (let i = 0; i < points.length; i++) {
