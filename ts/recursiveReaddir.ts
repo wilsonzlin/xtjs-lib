@@ -5,7 +5,12 @@ const DEFAULT_IGNORED_ERRORS = ["EACCES", "ENOENT", "ENOTDIR"];
 
 export default async function* recursiveReaddir(
   dir: string,
-  filter?: RegExp,
+  filter?: (f: {
+    file: string;
+    path: string;
+    isDirectory: () => boolean;
+    isFile: () => boolean;
+  }) => boolean,
   prefix: string = "",
   options?: {
     ignoredReaddirErrors?: string[];
@@ -25,7 +30,15 @@ export default async function* recursiveReaddir(
 
   for (const ent of ents) {
     const path = join(dir, ent.name);
-    if (!filter || filter.test(path)) {
+    if (
+      !filter ||
+      filter({
+        file: ent.name,
+        isDirectory: () => ent.isDirectory(),
+        isFile: () => ent.isFile(),
+        path,
+      })
+    ) {
       if (ent.isDirectory()) {
         yield* recursiveReaddir(path, filter, prefix + ent.name + sep, options);
       } else {
