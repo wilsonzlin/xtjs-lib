@@ -2,7 +2,7 @@ import randomInteger from "./randomInteger";
 
 export default <T>(
   array: T[],
-  rng: (min: number, max: number) => number = randomInteger
+  rng: (minInc: number, maxInc: number) => number = randomInteger
 ): T[] => {
   for (let i = 0; i < array.length - 1; i++) {
     const j = rng(i, array.length - 1);
