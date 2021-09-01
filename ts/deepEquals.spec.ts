@@ -21,6 +21,8 @@ describe("deepEquals", () => {
       [0, "0"],
       [0, ""],
       [null, undefined],
+      [null, {}],
+      [{}, undefined],
       [true, false],
       [true, 1],
       [false, 0],
