@@ -27,10 +27,13 @@ type Exec<Encoding extends string | Buffer> = {
   timeout(ms: number): Exec<Encoding>;
   workingDir(dir: string): Exec<Encoding>;
 
-  output(withStderr?: boolean): Promise<Encoding>;
+  output(withStderr?: boolean, withStdout?: boolean): Promise<Encoding>;
   run(): Promise<void>;
   status(): Promise<number>;
-  stream(withStderr?: boolean): { promise: Promise<number>; stream: Readable };
+  stream(
+    withStderr?: boolean,
+    withStdout?: boolean
+  ): { promise: Promise<number>; stream: Readable };
 };
 
 export default (cmd: string, ...args: (string | number)[]): Exec<string> => {
@@ -55,7 +58,8 @@ export default (cmd: string, ...args: (string | number)[]): Exec<string> => {
 
   const run = (
     resultType: "none" | "status" | "data" | "stream",
-    resultStderr: boolean
+    collectStdout: boolean,
+    collectStderr: boolean
   ) => {
     if (printCmdline) {
       console.debug("+", ...args);
@@ -101,7 +105,7 @@ export default (cmd: string, ...args: (string | number)[]): Exec<string> => {
         if (killOnStderr != undefined) {
           proc.kill(killOnStderr);
         }
-        if (resultStderr) {
+        if (collectStderr) {
           resultStream?.write(chunk);
           resultData?.push(chunk);
         }
@@ -111,8 +115,10 @@ export default (cmd: string, ...args: (string | number)[]): Exec<string> => {
           process.stdout.write(chunk);
         }
         onStdout?.(chunk);
-        resultStream?.write(chunk);
-        resultData?.push(chunk);
+        if (collectStdout) {
+          resultStream?.write(chunk);
+          resultData?.push(chunk);
+        }
       });
 
       proc.on("error", reject);
@@ -222,25 +228,25 @@ export default (cmd: string, ...args: (string | number)[]): Exec<string> => {
       return this;
     },
 
-    output(withStderr = false) {
-      printStdout ??= false;
+    output(withStderr = false, withStdout = true) {
+      printStdout ??= !withStdout;
       printStderr ??= !withStderr;
-      return run("data", withStderr);
+      return run("data", withStdout, withStderr);
     },
     run() {
       printStdout ??= true;
       printStderr ??= true;
-      return run("none", false);
+      return run("none", false, false);
     },
     status() {
       printStdout ??= true;
       printStderr ??= true;
-      return run("status", false);
+      return run("status", false, false);
     },
-    stream(withStderr = false) {
-      printStdout ??= false;
+    stream(withStderr = false, withStdout = true) {
+      printStdout ??= !withStdout;
       printStderr ??= !withStderr;
-      return run("stream", withStderr);
+      return run("stream", withStdout, withStderr);
     },
   };
 };
