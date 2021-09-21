@@ -17,6 +17,10 @@ export default class PromiseQueue {
       this._start();
     });
 
+  clear = () => {
+    this.tasks.splice(0);
+  };
+
   private _start = () => {
     let t: TaskState;
     if (this.active >= this.concurrency || !(t = this.tasks.shift()!)) {
