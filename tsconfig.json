@@ -28,6 +28,7 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "useUnknownInCatchVariables": false
   }
 }
