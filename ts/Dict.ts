@@ -1,14 +1,16 @@
+import isMapLike from "./isMapLike";
+
 export default class Dict<K, V> implements Map<K, V> {
   readonly [Symbol.toStringTag]: string = "xtjs-lib.Dict";
   private readonly map: Map<K, V>;
 
-  constructor(entriesOrMap?: Map<K, V> | Iterable<readonly [K, V]>) {
-    this.map =
-      entriesOrMap instanceof Map
-        ? entriesOrMap
-        : entriesOrMap
-        ? new Map(entriesOrMap)
-        : new Map();
+  // Allow Map-like objects so we can wrap StructuralMap instances and other objects that implement the Map interface.
+  constructor(entriesOrMap?: Map<K, V> | Iterable<[K, V]>) {
+    this.map = isMapLike(entriesOrMap)
+      ? entriesOrMap
+      : entriesOrMap
+      ? new Map(entriesOrMap)
+      : new Map();
   }
 
   get size() {
