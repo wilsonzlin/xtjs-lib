@@ -4,7 +4,7 @@ import filter from "./filter";
 export default class Counter<V> {
   private readonly map: Dict<V, number>;
 
-  constructor(init?: Iterable<readonly [V, number]>) {
+  constructor(init?: Iterable<[V, number]>) {
     this.map = new Dict(init);
   }
 
