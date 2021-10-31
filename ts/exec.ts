@@ -90,7 +90,7 @@ export default (cmd: string, ...args: (string | number)[]): Exec<string> => {
           }
         });
       } else {
-        if (stdin) {
+        if (stdin != undefined) {
           proc.stdin.write(stdin);
         }
         proc.stdin.end();
