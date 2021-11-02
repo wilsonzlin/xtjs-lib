@@ -5,7 +5,7 @@ export default class Dict<K, V> implements Map<K, V> {
   private readonly map: Map<K, V>;
 
   // Allow Map-like objects so we can wrap StructuralMap instances and other objects that implement the Map interface.
-  constructor(entriesOrMap?: Map<K, V> | Iterable<[K, V]>) {
+  constructor(entriesOrMap?: Map<K, V> | Iterable<readonly [K, V]>) {
     this.map = isMapLike(entriesOrMap)
       ? entriesOrMap
       : entriesOrMap
