@@ -3,7 +3,7 @@ import mapDefined from "./mapDefined";
 import mapExists from "./mapExists";
 
 export default (params: {
-  [name: string]: string | number | null | undefined;
+  [name: string]: string | number | bigint | null | undefined;
 }) =>
   mapDefined(
     filterValue(
