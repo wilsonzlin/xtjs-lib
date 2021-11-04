@@ -19,18 +19,20 @@ describe("persistedPassThrough", () => {
       persistencePath: path,
     });
     const downs = Promise.all(
-      ([
-        [0],
-        [100, 7],
-        [200, 5, 10],
-        [200, 0, 20],
-        [500, 1, 8],
-        [400, undefined, undefined],
-        [300, 3],
-        [150, 6],
-        [900, 10],
-        [1100, 11],
-      ] as const).map(async ([delay, start, end]) => {
+      (
+        [
+          [0],
+          [100, 7],
+          [200, 5, 10],
+          [200, 0, 20],
+          [500, 1, 8],
+          [400, undefined, undefined],
+          [300, 3],
+          [150, 6],
+          [900, 10],
+          [1100, 11],
+        ] as const
+      ).map(async ([delay, start, end]) => {
         await asyncTimeout(delay);
         const d = pt.downstream(start, end);
         expect([...(await readBufferStream(d))]).to.deep.equal([

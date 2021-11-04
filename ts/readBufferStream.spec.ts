@@ -21,16 +21,7 @@ describe("readBufferStream", () => {
     await asyncTimeout(20);
     stream.end(Buffer.from([9]));
     expect([...(await outPromise)]).to.deep.equal([
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
     ]);
   }).timeout(10000);
 
@@ -45,22 +36,7 @@ describe("readBufferStream", () => {
     stream.write("\x0f");
     stream.end();
     expect([...(await outPromise)]).to.deep.equal([
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
     ]);
   });
 });

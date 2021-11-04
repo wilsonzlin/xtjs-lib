@@ -9,22 +9,19 @@ export default <V>(it: Iterator<V>, consumers: number): Iterator<V>[] => {
     }
   };
   return [
-    ...repeatedGenerator(
-      consumers,
-      (): Iterator<V> => {
-        const buffer: IteratorResult<V>[] = [];
-        buffers.push(buffer);
-        return {
-          next() {
-            const bufRes = buffer.shift();
-            if (bufRes) {
-              return bufRes;
-            }
-            fill();
-            return buffer.shift()!;
-          },
-        };
-      }
-    ),
+    ...repeatedGenerator(consumers, (): Iterator<V> => {
+      const buffer: IteratorResult<V>[] = [];
+      buffers.push(buffer);
+      return {
+        next() {
+          const bufRes = buffer.shift();
+          if (bufRes) {
+            return bufRes;
+          }
+          fill();
+          return buffer.shift()!;
+        },
+      };
+    }),
   ];
 };
