@@ -1,13 +1,13 @@
 import chai, { expect } from "chai";
 import "mocha";
-import concatBuffers from "./concatBuffers";
+import concatBytes from "./concatBytes";
 import chaiArrays = require("chai-arrays");
 
 chai.use(chaiArrays);
 
-describe("concatBuffers", () => {
+describe("concatBytes", () => {
   it("should concatenate underlying ArrayBuffer bytes of various typed arrays", () => {
-    const res = concatBuffers([
+    const res = concatBytes([
       new Uint8Array([1, 2, 3]),
       new Uint8Array([4, 5, 6]),
       new ArrayBuffer(1),
