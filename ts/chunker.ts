@@ -1,32 +1,54 @@
+import assertExists from "./assertExists";
+import assertState from "./assertState";
 import concatBuffers from "./concatBuffers";
 
 // Takes in Uint8Array instances of various lengths and outputs Uint8Array instances of a fixed length.
-export class Chunker {
+export default class Chunker {
   private readonly buf = Array<Uint8Array>();
   private bufSize = 0;
 
   constructor(readonly size: number) {}
 
-  push(bytes: Uint8Array) {
-    const byteCount = bytes.byteLength;
-    if (this.bufSize + byteCount < this.size) {
-      this.buf.push(bytes);
-      this.bufSize += byteCount;
-      return undefined;
-    }
+  private takeChunk() {
+    const parts = [];
+    let partLen = 0;
+    let res;
+    while (true) {}
+  }
 
-    const rem = this.bufSize + byteCount - this.size;
-    // If `rem` is 0 then `.slice(x, -0)` will result in an EMPTY buffer because -0 === 0.
-    this.buf.push(!rem ? bytes : bytes.slice(0, -rem));
-    const data = concatBuffers(this.buf.splice(0), this.size);
-    // If `rem` is 0 then `.slice(-0)` will result in the FULL buffer because -0 === 0 (i.e. not sliced at all).
-    if (!rem) {
-      this.bufSize = 0;
-    } else {
-      this.buf.push(bytes.slice(-rem));
-      this.bufSize = rem;
+  *push(bytes: Uint8Array) {
+    const byteCount = bytes.byteLength;
+    this.buf.push(bytes);
+    this.bufSize += byteCount;
+
+    const parts = [];
+    let partLen = 0;
+    while (this.bufSize >= this.size - partLen) {
+      const part = assertExists(this.buf[0]);
+      // How many bytes would be remaining if we added the first Uint8Array in the buffer.
+      const rem = partLen + part.byteLength - this.size;
+      if (rem <= 0) {
+        // If rem < 0: adding this Uint8Array would still not be enough, so add this part and continue the loop.
+        // If rem == 0: adding this Uint8Array would be exactly enough for a single chunk.
+        parts.push(part);
+        partLen += part.byteLength;
+        this.buf.shift();
+        this.bufSize -= part.byteLength;
+        if (rem == 0) {
+          yield concatBuffers(parts.splice(0), partLen);
+          partLen = 0;
+        }
+      } else {
+        const partPart = part.slice(0, -rem);
+        parts.push(partPart);
+        yield concatBuffers(parts.splice(0), this.size);
+        this.bufSize -= partPart.byteLength;
+        this.buf[0] = part.slice(-rem);
+        partLen = 0;
+      }
     }
-    return data;
+    assertState(!parts.length);
+    assertState(partLen === 0);
   }
 
   takeRemaining() {

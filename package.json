@@ -8,7 +8,7 @@
   "scripts": {
     "build": "npm run clean && tsc",
     "format": "prettier --write ts",
-    "test": "mocha -r ts-node/register ts/**/*.spec.ts",
+    "test": "mocha -r ts-node/register ${TEST:-ts/**/*.spec.ts}",
     "prepublishOnly": "prettier --check ts && npm run test && npm run build",
     "clean": "rm -rf js"
   },
