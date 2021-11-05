@@ -16,7 +16,7 @@ export default class Chunker {
     while (true) {}
   }
 
-  *push(bytes: Uint8Array): Generator<Uint8Array, void, never> {
+  *push(bytes: Uint8Array): Generator<Uint8Array, void, unknown> {
     const byteCount = bytes.byteLength;
     this.buf.push(bytes);
     this.bufSize += byteCount;
