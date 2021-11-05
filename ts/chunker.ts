@@ -16,7 +16,7 @@ export default class Chunker {
     while (true) {}
   }
 
-  *push(bytes: Uint8Array) {
+  *push(bytes: Uint8Array): Generator<Uint8Array, void, never> {
     const byteCount = bytes.byteLength;
     this.buf.push(bytes);
     this.bufSize += byteCount;
@@ -49,6 +49,7 @@ export default class Chunker {
     }
     assertState(!parts.length);
     assertState(partLen === 0);
+    return;
   }
 
   takeRemaining() {
