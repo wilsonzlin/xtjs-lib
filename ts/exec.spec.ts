@@ -73,12 +73,12 @@ describe("exec", () => {
   });
 
   it("should return stdout and stderr interleaved as string when called with .output(true)", async () => {
-    // TODO This suffers from race conditions and ordering cannot be guaranteed.
     expect(
       await exec(
         "node",
         "-e",
-        `console.log("a"); console.error("b"); console.log("c");`
+        // Use setTimeout to prevent race conditions.
+        `console.log("a"); setTimeout(() => console.error("b"), 500); setTimeout(() => console.log("c"), 1000);`
       )
         .text()
         .output(true)
@@ -106,8 +106,10 @@ describe("exec", () => {
   it("should work with multiple concurrent calls", async () => {
     expect(
       await Promise.all([
-        exec("/bin/true").status(),
-        exec("/bin/false").status(),
+        // Can't use /bin/true because it doesn't exist on macOS.
+        exec("bash", "-c", "exit 0").status(),
+        // Can't use /bin/false because it doesn't exist on macOS.
+        exec("bash", "-c", "exit 2").status(),
         exec("head", "-c", 10, "/dev/zero").output(),
         exec("head").stdin("abcdef").output(),
         exec("printenv", "A").env("A", "b").output(),
@@ -117,7 +119,7 @@ describe("exec", () => {
       ])
     ).to.deep.equal([
       0,
-      1,
+      2,
       "\0".repeat(10),
       "abcdef",
       "b\n",
