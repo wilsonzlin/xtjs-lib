@@ -3,31 +3,19 @@ type MutexHandle = {
 };
 
 export default class Mutex {
-  private readonly waiting: ((h: MutexHandle) => void)[] = [];
-  private locked = false;
-
-  private readonly tryProgress = () => {
-    if (this.locked) {
-      return;
-    }
-    const next = this.waiting.shift();
-    if (!next) {
-      return;
-    }
-    this.locked = true;
-    next({
-      unlock: () => {
-        this.locked = false;
-        this.tryProgress();
-      },
-    });
-  };
-
-  readonly isLocked = () => this.locked;
+  private chain: Promise<void> = Promise.resolve();
 
   readonly lock = () =>
     new Promise<MutexHandle>((resolve) => {
-      this.waiting.push(resolve);
-      this.tryProgress();
+      let unlock: () => void;
+      const oldChain = this.chain;
+      this.chain = new Promise<void>((resolve) => {
+        unlock = resolve;
+      });
+      oldChain.then(() =>
+        resolve({
+          unlock,
+        })
+      );
     });
 }
