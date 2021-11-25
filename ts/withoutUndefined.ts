@@ -1,7 +1,7 @@
 import deleteUndefined from "./deleteUndefined";
 
 type WithoutUndefined<T extends {}> = {
-  [prop in keyof T]: T[prop] extends undefined ? never : T[prop];
+  [prop in keyof T]: T[prop] extends infer U | undefined ? U : T[prop];
 };
 
 export default <T extends {}>(obj: T): WithoutUndefined<T> => {
