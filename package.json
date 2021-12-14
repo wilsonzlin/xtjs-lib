@@ -1,7 +1,7 @@
 {
   "name": "@xtjs/lib",
   "description": "Complementary extra standard library for JS/TS; type safe, no dependencies, modular imports",
-  "version": "0.39.3",
+  "version": "0.39.4",
   "files": [
     "js/*"
   ],
