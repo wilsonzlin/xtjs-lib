@@ -1,6 +1,6 @@
-const DEFAULT_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567".split("");
+import { BASE32_ALPHABET_DEFAULT } from "./base32";
 
-export default (bytes: Uint8Array, alphabet = DEFAULT_ALPHABET) => {
+export default (bytes: Uint8Array, alphabet = BASE32_ALPHABET_DEFAULT) => {
   const A = alphabet;
   const out = [];
   const b = (i: number) => bytes[i] ?? 0;
