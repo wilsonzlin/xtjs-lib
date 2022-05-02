@@ -1,6 +1,7 @@
-const A = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567".split("");
+const DEFAULT_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567".split("");
 
-export default (bytes: Uint8Array) => {
+export default (bytes: Uint8Array, alphabet = DEFAULT_ALPHABET) => {
+  const A = alphabet;
   const out = [];
   const b = (i: number) => bytes[i] ?? 0;
   const p = (i: number) => (i < bytes.byteLength ? undefined : "=");
