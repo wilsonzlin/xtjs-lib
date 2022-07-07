@@ -67,7 +67,16 @@ export declare type LinkedListNode<T> = Omit<
 >;
 export const LinkedListNode = ValueNode;
 
-export default class LinkedList<T> {
+function assertIsValueNode<T>(
+  n: DummyTailNode<T> | ValueNode<T>
+): asserts n is ValueNode<T> {
+  assertState(
+    n.type === NodeType.List,
+    `LinkedList node is of type ${n.type} (expected NodeType.List)`
+  );
+}
+
+export default class LinkedList<T> implements Iterable<T> {
   // For simplicity, use dummy nodes.
   private head: DummyHeadNode<T>;
   private tail: DummyTailNode<T>;
@@ -77,6 +86,19 @@ export default class LinkedList<T> {
     this.tail = { type: NodeType.DummyTail } as any;
     this.head.next = this.tail;
     this.tail.prev = this.head;
+  }
+
+  *[Symbol.iterator]() {
+    let n = this.head.next;
+    while (n !== this.tail) {
+      assertIsValueNode(n);
+      yield n.getValue();
+      n = n.next;
+    }
+  }
+
+  isEmpty() {
+    return !this.getHead();
   }
 
   append(val: T): ValueNode<T> {
