@@ -1,8 +1,9 @@
+import maybeParseInteger from "./maybeParseInteger";
+
 export default (raw: string, base = 10): number => {
-  // Use a regex test as it's stricter than Number.parseInt.
-  if (!/^[0-9]+$/.test(raw)) {
+  const parsed = maybeParseInteger(raw, base);
+  if (parsed === undefined) {
     throw new TypeError(`Invalid integer`);
   }
-  const parsed = Number.parseInt(raw, base);
   return parsed;
 };
