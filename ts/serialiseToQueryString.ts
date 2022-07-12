@@ -3,15 +3,25 @@ import mapDefined from "./mapDefined";
 import mapExists from "./mapExists";
 
 export default (params: {
-  [name: string]: string | number | bigint | null | undefined;
-}) =>
-  mapDefined(
-    filterValue(
-      Object.entries(params)
-        .map(([n, v]) => [n, mapExists(v, String)] as const)
-        .filter((p): p is [string, string] => p[1] != undefined),
-      (p) => p.length > 0
-    ),
-    (p) =>
-      "?" + p.map((pair) => pair.map(encodeURIComponent).join("=")).join("&")
-  ) ?? "";
+  [name: string]: string | number | bigint | boolean | null | undefined;
+}) => {
+  const pairs = Array<[string] | [string, string]>();
+  for (const [n, v] of Object.entries(params)) {
+    if (v == null) {
+      continue;
+    }
+    if (typeof v == "boolean") {
+      if (!v) {
+        continue;
+      }
+      pairs.push([n]);
+      continue;
+    }
+    pairs.push([n, String(v)]);
+  }
+
+  if (!pairs.length) {
+    return "";
+  }
+  return "?" + pairs.map((p) => p.map(encodeURIComponent).join("=")).join("&");
+};
