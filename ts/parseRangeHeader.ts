@@ -11,9 +11,8 @@ export default (rangeHeaderValue: string) => {
   const end = mapExists(rangeParts[2], (p) => Number.parseInt(p, 10));
   if (
     !Number.isSafeInteger(start) ||
-    !Number.isSafeInteger(end) ||
     start < 0 ||
-    (end != undefined && (end < 0 || start > end))
+    (end != undefined && (!Number.isSafeInteger(end) || end < 0 || start > end))
   ) {
     return undefined;
   }
