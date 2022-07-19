@@ -17,10 +17,14 @@ describe("createTarArchive", () => {
       createTarAchive([
         { name: "a.txt", content: encodeUtf8("abc") },
         { name: "73.xbm/gz", content: encodeUtf8("123") },
+        { name: Array(128).fill("a").join("/"), content: encodeUtf8("456") },
       ])
     );
     await exec("tar", "-xf", outTar, "-C", outDir).run();
     expect(await readFile(join(outDir, "a.txt"), "utf8")).to.equal("abc");
     expect(await readFile(join(outDir, "73.xbm/gz"), "utf8")).to.equal("123");
+    expect(
+      await readFile(join(outDir, Array(128).fill("a").join("/")), "utf8")
+    ).to.equal("456");
   }).timeout(1000);
 });

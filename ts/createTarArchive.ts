@@ -1,6 +1,7 @@
 import concatBuffers from "./concatBuffers";
 import encodeUtf8 from "./encodeUtf8";
 import { roundUp } from "./roundUp";
+import splitString from "./splitString";
 import sum from "./sum";
 
 // Implementation derived from https://github.com/porsager/tarts
@@ -51,6 +52,22 @@ export default (
   concatBuffers(
     files.map((f) => {
       // TODO Check file name length after encoding.
+      // TODO Other separators?
+      const nameSuffixParts = splitString(f.name, "/");
+      const namePrefixParts = [];
+      let namePrefixCharCount = 0;
+      while (
+        nameSuffixParts.length > 1 &&
+        namePrefixCharCount +
+          (namePrefixParts.length ? 1 : 0) +
+          nameSuffixParts[0].length <=
+          155
+      ) {
+        const p = nameSuffixParts.shift()!;
+        namePrefixCharCount += (namePrefixParts.length ? 1 : 0) + p.length;
+        namePrefixParts.push(p);
+      }
+
       const entry: {
         [name: string]: string | number;
       } = {
@@ -60,7 +77,8 @@ export default (
         magic: "ustar",
         mode: f.mode ?? 0o777,
         mtime: Math.floor((f.mtime ?? new Date()).getTime() / 1000),
-        name: f.name,
+        name: nameSuffixParts.join("/"),
+        prefix: namePrefixParts.join("/"),
         size: f.content.byteLength,
         typeflag: f.typeflag ?? "0",
         uid: f.uid ?? 0,
