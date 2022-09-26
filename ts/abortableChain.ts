@@ -14,7 +14,7 @@ type AbortableChainStage<I, ExecAddProps> = {
 };
 
 type ManagedAbortableChainStageExecAddProps = {
-  abort: () => void;
+  abort: (reason?: any) => void;
 };
 
 export default class AbortableChain implements AbortableChainStage<void, {}> {
@@ -65,7 +65,7 @@ export class ManagedAbortableChain extends AbortableChain {
       then: (f, r) => promise.then(f, r),
       catch: (r) => promise.catch(r),
       finally: (n) => promise.finally(n),
-      abort: () => this.controller.abort(),
+      abort: (reason?: any) => this.controller.abort(reason),
     };
     return res;
   }
