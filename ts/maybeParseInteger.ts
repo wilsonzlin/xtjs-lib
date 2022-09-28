@@ -1,5 +1,3 @@
-import filterValue from "./filterValue";
-
 export default (raw: string, base: number = 10): number | undefined => {
   // Use a regex test as it's stricter than Number.parseInt.
   if (!/^-?[0-9]+$/.test(raw)) {

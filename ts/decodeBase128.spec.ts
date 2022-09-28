@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import "mocha";
-import encodeBase128 from "./encodeBase128";
 import decodeBase128 from "./decodeBase128";
+import encodeBase128 from "./encodeBase128";
 
 const b = (...bytes: number[]) => new Uint8Array(bytes);
 

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import "mocha";
-import asyncTimeout from "./asyncTimeout";
 import arrayFromAsyncIterable from "./arrayFromAsyncIterable";
+import asyncTimeout from "./asyncTimeout";
 import raceAsyncIterables from "./raceAsyncIterables";
 
 describe("raceAsyncIterables", () => {

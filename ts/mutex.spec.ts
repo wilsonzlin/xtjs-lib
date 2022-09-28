@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import asyncTimeout from "./asyncTimeout";
 import Mutex from "./mutex";
-import mutex from "./mutex";
 import repeatedGenerator from "./repeatedGenerator";
 
 describe("mutex", () => {
