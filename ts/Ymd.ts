@@ -3,6 +3,7 @@ import assertState from "./assertState";
 // TODO Is this always true?
 const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
 
+// We can't name this Date as it conflicts with the builtin type.
 export default class Ymd {
   // Always use UTC for _dt:
   // - Consistency.
