@@ -31,21 +31,32 @@ export default class Ymd {
 
   // Ymd instances don't have timezones, but this uses the date in the local time zone (instead of something like UTC).
   static nowLocal() {
-    const now = new Date();
-    return Ymd.fromObject({
-      day: now.getDate(),
-      month: now.getMonth() + 1,
-      year: now.getFullYear(),
-    });
+    return Ymd.fromDateLocal(new Date());
+  }
+
+  static nowUTC() {
+    return Ymd.fromDateUTC(new Date());
   }
 
   static fromDaysSinceEpoch(days: number) {
     return new Ymd(new Date(days * MILLISECONDS_IN_DAY));
   }
 
-  // We use the UTC methods on `this._dt`, so if we take a `Date` explicitly mention `UTC` so that it's made aware we'll use its values in UTC time.
   static fromDateUTC(date: Date) {
-    return new Ymd(date);
+    // We can't just `new Ymd(date)` as the constructor will assert time components are zero.
+    return Ymd.fromObject({
+      day: date.getUTCDate(),
+      month: date.getUTCMonth() + 1,
+      year: date.getUTCFullYear(),
+    });
+  }
+
+  static fromDateLocal(date: Date) {
+    return Ymd.fromObject({
+      day: date.getDate(),
+      month: date.getMonth() + 1,
+      year: date.getFullYear(),
+    });
   }
 
   static fromObject(obj: { year: number; month: number; day: number }) {
@@ -92,30 +103,6 @@ export default class Ymd {
     });
   }
 
-  withUTCTime({
-    hour,
-    minute,
-    second,
-    millisecond,
-  }: {
-    hour?: number;
-    minute?: number;
-    second?: number;
-    millisecond?: number;
-  } = {}) {
-    return new Date(
-      Date.UTC(
-        this._dt.getUTCFullYear(),
-        this._dt.getUTCMonth(),
-        this._dt.getUTCDate(),
-        hour,
-        minute,
-        second,
-        millisecond
-      )
-    );
-  }
-
   compareTo(other: Ymd) {
     return (
       this.year - other.year || this.month - other.month || this.day - other.day
@@ -143,14 +130,20 @@ export default class Ymd {
 
   toISO() {
     return [
-      this._dt.getUTCFullYear().toString().padStart(4, "0"),
-      (this._dt.getUTCMonth() + 1).toString().padStart(2, "0"),
-      this._dt.getUTCDate().toString().padStart(2, "0"),
+      this.year.toString().padStart(4, "0"),
+      this.month.toString().padStart(2, "0"),
+      this.day.toString().padStart(2, "0"),
     ].join("-");
   }
 
-  toDate(hour = 0, minute = 0, second = 0, ms = 0) {
+  toDateLocal(hour = 0, minute = 0, second = 0, ms = 0) {
     return new Date(this.year, this.month, this.day, hour, minute, second, ms);
+  }
+
+  toDateUTC(hour = 0, minute = 0, second = 0, ms = 0) {
+    return new Date(
+      Date.UTC(this.year, this.month, this.day, hour, minute, second, ms)
+    );
   }
 
   valueOf() {
