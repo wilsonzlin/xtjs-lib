@@ -43,6 +43,11 @@ export default class Ymd {
     return new Ymd(new Date(days * MILLISECONDS_IN_DAY));
   }
 
+  // We use the UTC methods on `this._dt`, so if we take a `Date` explicitly mention `UTC` so that it's made aware we'll use its values in UTC time.
+  static fromDateUTC(date: Date) {
+    return new Ymd(date);
+  }
+
   static fromObject(obj: { year: number; month: number; day: number }) {
     return new Ymd(new Date(Date.UTC(obj.year, obj.month - 1, obj.day)));
   }
@@ -142,6 +147,10 @@ export default class Ymd {
       (this._dt.getUTCMonth() + 1).toString().padStart(2, "0"),
       this._dt.getUTCDate().toString().padStart(2, "0"),
     ].join("-");
+  }
+
+  toDate(hour = 0, minute = 0, second = 0, ms = 0) {
+    return new Date(this.year, this.month, this.day, hour, minute, second, ms);
   }
 
   valueOf() {
