@@ -137,12 +137,20 @@ export default class Ymd {
   }
 
   toDateLocal(hour = 0, minute = 0, second = 0, ms = 0) {
-    return new Date(this.year, this.month, this.day, hour, minute, second, ms);
+    return new Date(
+      this.year,
+      this.month - 1,
+      this.day,
+      hour,
+      minute,
+      second,
+      ms
+    );
   }
 
   toDateUTC(hour = 0, minute = 0, second = 0, ms = 0) {
     return new Date(
-      Date.UTC(this.year, this.month, this.day, hour, minute, second, ms)
+      Date.UTC(this.year, this.month - 1, this.day, hour, minute, second, ms)
     );
   }
 
