@@ -8,6 +8,14 @@ export default class Counter<V> {
     this.map = new Dict(init);
   }
 
+  static count<T, K>(elems: Iterable<T>, key: (val: T) => K) {
+    const counter = new Counter<K>();
+    for (const elem of elems) {
+      counter.increment(key(elem));
+    }
+    return counter;
+  }
+
   adjust(val: V, diff: number) {
     const newCount = this.map.getOrDefault(val, 0) + diff;
     this.map.put(val, newCount);
