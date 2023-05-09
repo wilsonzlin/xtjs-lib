@@ -1,6 +1,9 @@
 import AssertionError from "./AssertionError";
 
-export default <V>(arr: V[], msg: string = "More than one"): [] | [V] => {
+export default <V>(
+  arr: readonly V[],
+  msg: string = "More than one"
+): [] | [V] => {
   if (arr.length > 1) {
     throw new AssertionError(msg);
   }
