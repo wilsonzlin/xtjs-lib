@@ -2,7 +2,6 @@ import { Duplex } from "node:stream";
 
 const assertIsBytes = (chunk: unknown, encoding: unknown) => {
   if (encoding !== "buffer" || !Buffer.isBuffer(chunk)) {
-    console.error("Assertion failure: not bytes");
     throw new TypeError(`Expected bytes`);
   }
 };
