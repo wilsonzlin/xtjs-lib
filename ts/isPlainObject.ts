@@ -1,4 +1,4 @@
-export default (obj: unknown): obj is object => {
+export default (obj: unknown) => {
   if (typeof obj != "object" || !obj) {
     return false;
   }
