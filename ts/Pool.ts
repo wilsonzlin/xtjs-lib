@@ -44,7 +44,8 @@ export default class Pool<T> {
     }
   }
 
-  registerNewItem(item: T) {
+  registerNewItem(item_: T) {
+    const item = item_ as any;
     assertState(
       !!item && typeof item == "object",
       `Pools can only take objects (got ${describeType(item)})`
@@ -61,7 +62,8 @@ export default class Pool<T> {
     item[this.itemStatePropSymbol] = state;
   }
 
-  deregisterItem(item: T) {
+  deregisterItem(item_: T) {
+    const item = item_ as any;
     if (this.itemStatePropSymbol in item) {
       const state = this.getStateOfItem(item);
       state.node.detach();
