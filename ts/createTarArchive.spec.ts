@@ -9,7 +9,8 @@ import exec from "./exec";
 
 describe("createTarArchive", () => {
   it("should create valid .tar files", async () => {
-    const outDir = `/tmp/test.${cryptoRandomHex()}`;
+    // Don't use /tmp as it doesn't exist on Windows, but tmpdir() (i.e. `C:\...`) won't work in Cygwin/MSYS2 Bash.
+    const outDir = `.test.${cryptoRandomHex()}`;
     const outTar = `${outDir}.tar`;
     await mkdir(outDir);
     await writeFile(

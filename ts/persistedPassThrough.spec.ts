@@ -13,7 +13,8 @@ describe("persistedPassThrough", () => {
   it("should pass correct data through", async () => {
     const END = 10;
     const up = new PassThrough();
-    const path = `/tmp/extlib-persistedpassthrough-test-${cryptoRandomHex(16)}`;
+    // Don't use /tmp as it doesn't exist on Windows, but tmpdir() (i.e. `C:\...`) won't work in Cygwin/MSYS2 Bash.
+    const path = `.test.persistedpassthrough-${cryptoRandomHex(16)}`;
     const pt = await persistedPassThrough({
       upstream: up,
       persistencePath: path,

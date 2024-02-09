@@ -1,6 +1,5 @@
 import chai, { expect } from "chai";
 import "mocha";
-import { EOL } from "os";
 import { PassThrough } from "stream";
 import asyncTimeout from "./asyncTimeout";
 import exec from "./exec";
@@ -69,7 +68,7 @@ describe("exec", () => {
         "-e",
         `console.log("a"); console.error("b"); console.log("c");`
       ).output()
-    ).to.equal(["a", "c", ""].join(EOL));
+    ).to.equal(["a", "c", ""].join("\n"));
   });
 
   it("should return stdout and stderr interleaved as string when called with .output(true)", async () => {
@@ -82,7 +81,7 @@ describe("exec", () => {
       )
         .text()
         .output(true)
-    ).to.equal(["a", "b", "c", ""].join(EOL));
+    ).to.equal(["a", "b", "c", ""].join("\n"));
   });
 
   it("should call onStdout when a handler is provided, even when printing or collecting output of stdout", async () => {
@@ -95,10 +94,10 @@ describe("exec", () => {
       )
         .printStdout(true)
         .onStdout((chunk) =>
-          expect(chunk).to.equal((onStdoutInvokeNo++ == 0 ? "a" : "c") + EOL)
+          expect(chunk).to.equal((onStdoutInvokeNo++ == 0 ? "a" : "c") + "\n")
         )
         .output()
-    ).to.equal(["a", "c", ""].join(EOL));
+    ).to.equal(["a", "c", ""].join("\n"));
     await asyncTimeout(1000);
     expect(onStdoutInvokeNo).to.equal(2);
   });
