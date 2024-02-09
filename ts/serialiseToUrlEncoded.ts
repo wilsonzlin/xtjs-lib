@@ -1,21 +1,30 @@
+type Scalar = string | number | bigint | boolean | null | undefined;
+
 export type UrlEncodedParams = {
-  [name: string]: string | number | bigint | boolean | null | undefined;
+  [name: string]: Scalar | Array<Scalar>;
 };
 
 export default (params: UrlEncodedParams) => {
   const pairs = Array<[string] | [string, string]>();
-  for (const [n, v] of Object.entries(params)) {
+  const handleScalar = (n: string, v: Scalar) => {
     if (v == null) {
-      continue;
+      return;
     }
     if (typeof v == "boolean") {
       if (!v) {
-        continue;
+        return;
       }
       pairs.push([n]);
-      continue;
+      return;
     }
     pairs.push([n, String(v)]);
+  };
+  for (const [n, v] of Object.entries(params)) {
+    if (Array.isArray(v)) {
+      v.forEach((v) => handleScalar(n, v));
+    } else {
+      handleScalar(n, v);
+    }
   }
   return pairs.map((p) => p.map(encodeURIComponent).join("=")).join("&");
 };
