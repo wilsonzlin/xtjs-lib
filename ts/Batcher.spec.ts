@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import asyncTimeout from "./asyncTimeout";
-import { Batcher } from "./Batcher";
+import Batcher from "./Batcher";
 
 describe("Batcher", () => {
   it("should batch", async () => {

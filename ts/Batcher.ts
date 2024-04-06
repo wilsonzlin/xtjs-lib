@@ -1,6 +1,6 @@
 import assertState from "./assertState";
 
-export class Batcher<T, R> {
+export default class Batcher<T, R> {
   private readonly q = Array<{
     resolve: (r: R) => void;
     input: T;
