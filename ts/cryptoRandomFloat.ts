@@ -1,10 +1,9 @@
-import * as crypto from "crypto";
-
 export default () => {
   let float: number;
   do {
-    const bytes = crypto.randomBytes(8);
-    float = new DataView(bytes.buffer).getFloat64(0);
+    const buf = new Uint8Array(8);
+    globalThis.crypto.getRandomValues(buf);
+    float = new Float64Array(buf.buffer, buf.byteOffset, 1)[0];
   } while (!Number.isFinite(float));
   return float;
 };
