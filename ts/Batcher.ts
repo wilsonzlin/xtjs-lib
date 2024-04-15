@@ -19,7 +19,10 @@ export default class Batcher<T, R> {
     }
     this.flushing = true;
     while (this.q.length) {
-      const dq = this.q.splice(0, this.maxBatchSize);
+      // https://stackoverflow.com/a/48421425/6249022
+      const dq = this.maxBatchSize
+        ? this.q.splice(0, this.maxBatchSize)
+        : this.q.splice(0);
       const outputs = await this.fn(dq.map((e) => e.input));
       assertState(outputs.length === dq.length);
       for (const [i, out] of outputs.entries()) {
