@@ -7,7 +7,10 @@ export default class Batcher<T, R> {
   }>();
   private flushing = false;
 
-  constructor(private readonly fn: (vals: T[]) => Promise<R[]>) {}
+  constructor(
+    private readonly fn: (vals: T[]) => Promise<R[]>,
+    private readonly maxBatchSize?: number
+  ) {}
 
   private async maybeFlush() {
     // We don't need to batch by timers (e.g. debounce), as if there is a lot of activity, it will be efficient because the subsequent batches will be optimally sized, and if there isn't, then it doesn't matter. OTOH, using a timer is far more complex and subtle.
@@ -16,7 +19,7 @@ export default class Batcher<T, R> {
     }
     this.flushing = true;
     while (this.q.length) {
-      const dq = this.q.splice(0);
+      const dq = this.q.splice(0, this.maxBatchSize);
       const outputs = await this.fn(dq.map((e) => e.input));
       assertState(outputs.length === dq.length);
       for (const [i, out] of outputs.entries()) {
