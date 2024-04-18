@@ -4,7 +4,7 @@ type TaskState = {
   provider: () => Promise<any>;
 };
 
-export default class PromiseQueue {
+export default class Semaphore {
   private readonly tasks: TaskState[] = [];
   private active = 0;
 

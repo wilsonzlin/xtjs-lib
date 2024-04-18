@@ -1,11 +1,11 @@
 import { expect } from "chai";
 import "mocha";
 import asyncTimeout from "./asyncTimeout";
-import PromiseQueue from "./PromiseQueue";
+import Semaphore from "./Semaphore";
 
-describe("PromiseQueue", () => {
+describe("Semaphore", () => {
   it("should call producers concurrently under max limit", async () => {
-    const queue = new PromiseQueue(3);
+    const queue = new Semaphore(3);
     let x = 0;
     queue.add(() => asyncTimeout(1000).then(() => x++));
     queue.add(() => asyncTimeout(1000).then(() => x++));
@@ -22,7 +22,7 @@ describe("PromiseQueue", () => {
 
   it("should resolve Promise when task is dequeued and fulfilled", async () => {
     const DUMMY = {};
-    const queue = new PromiseQueue(3);
+    const queue = new Semaphore(3);
     let x = 0;
     const prom = queue.add(() => asyncTimeout(1000).then(() => x++));
     expect(x).to.equal(0);
