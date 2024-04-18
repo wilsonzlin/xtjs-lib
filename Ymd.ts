@@ -109,7 +109,7 @@ export default class Ymd {
     );
   }
 
-  equals(other: unknown) {
+  equals(other: any) {
     if (typeof other != "object" || !other) {
       return false;
     }

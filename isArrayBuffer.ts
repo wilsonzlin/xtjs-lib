@@ -5,4 +5,4 @@ export default (val: unknown): val is ArrayBuffer =>
   !!val &&
   (val instanceof ArrayBuffer ||
     (val.constructor?.name === "ArrayBuffer" &&
-      typeof val["byteLength"] == "number"));
+      typeof (val as ArrayBuffer)["byteLength"] == "number"));

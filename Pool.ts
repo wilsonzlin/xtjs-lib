@@ -17,7 +17,7 @@ export default class Pool<T> {
 
   private getStateOfItem(item: T): PoolItemState<T> {
     return assertExists(
-      item[this.itemStatePropSymbol],
+      (item as any)[this.itemStatePropSymbol],
       "Item was never registered in this pool"
     );
   }
