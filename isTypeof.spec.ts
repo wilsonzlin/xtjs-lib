@@ -31,8 +31,8 @@ describe("isTypeof", () => {
     expect(isTypeof(Function.prototype.prototype, "undefined")).to.equal(true);
     expect(isTypeof(undefined, "undefined")).to.equal(true);
     expect(isTypeof(void 0, "undefined")).to.equal(true);
-    expect(isTypeof([]["contains"], "undefined")).to.equal(true);
-    expect(isTypeof(""["leftPad"], "undefined")).to.equal(true);
+    expect(isTypeof(([] as any)["contains"], "undefined")).to.equal(true);
+    expect(isTypeof(("" as any)["leftPad"], "undefined")).to.equal(true);
     expect(isTypeof(0n, "bigint")).to.equal(true);
   });
 });

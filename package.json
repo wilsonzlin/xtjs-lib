@@ -11,7 +11,7 @@
     "format": "prettier --write *.ts",
     "test": "mocha -r ts-node/register",
     "test-all": "npm run test -- '*.spec.ts'",
-    "prepublishOnly": "prettier --check ts && npm run test-all && npm run build",
+    "prepublishOnly": "prettier --check *.ts && npm run test-all && npm run build",
     "clean": "rm -f *.js"
   },
   "repository": {
