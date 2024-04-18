@@ -3,15 +3,16 @@
   "description": "Complementary extra standard library for JS/TS; type safe, no dependencies, modular imports",
   "version": "0.56.2",
   "files": [
-    "js/*"
+    "*.js",
+    "*.ts"
   ],
   "scripts": {
     "build": "npm run clean && tsc",
-    "format": "prettier --write ts",
+    "format": "prettier --write *.ts",
     "test": "mocha -r ts-node/register",
-    "test-all": "npm run test -- 'ts/*.spec.ts'",
+    "test-all": "npm run test -- '*.spec.ts'",
     "prepublishOnly": "prettier --check ts && npm run test-all && npm run build",
-    "clean": "rm -rf js"
+    "clean": "rm -f *.js"
   },
   "repository": {
     "type": "git",
