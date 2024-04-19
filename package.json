@@ -8,11 +8,11 @@
   ],
   "scripts": {
     "build": "npm run clean && tsc",
+    "clean": "rm -rf *.js .test.*",
     "format": "prettier --write *.ts",
-    "test": "mocha -r ts-node/register",
-    "test-all": "npm run test -- '*.spec.ts'",
     "prepublishOnly": "prettier --check *.ts && npm run test-all && npm run build",
-    "clean": "rm -f *.js"
+    "test": "mocha -r ts-node/register",
+    "test-all": "npm run test -- '*.spec.ts'"
   },
   "repository": {
     "type": "git",
