@@ -20,6 +20,9 @@ export default class Batcher<T, R> {
       // We don't need to batch by timers (e.g. debounce), as if there is a lot of activity, it will be efficient because the subsequent batches will be optimally sized, and if there isn't, then it doesn't matter. OTOH, using a timer is far more complex and subtle.
       // Intentionally do not wait for Promise.
       void this.concurrency.add(async () => {
+        if (!this.q.length) {
+          return;
+        }
         // https://stackoverflow.com/a/48421425/6249022
         const dq = this.maxBatchSize
           ? this.q.splice(0, this.maxBatchSize)
